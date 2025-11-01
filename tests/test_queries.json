@@ -1,0 +1,483 @@
+{
+  "metadata": {
+    "description": "Synthetic complex test queries for Watermelon Documentation Assistant",
+    "total_queries": 30,
+    "query_types": ["multi-topic", "procedural", "conceptual", "troubleshooting", "integration"],
+    "complexity_levels": ["medium", "high", "very_high"],
+    "created_date": "2024-11-01"
+  },
+  "queries": [
+    {
+      "id": 1,
+      "query": "How do I create a no-code block on Watermelon platform and process it for Autonomous Functional Testing?",
+      "type": "multi-topic_procedural",
+      "complexity": "high",
+      "topics": ["no-code blocks", "autonomous functional testing", "workflow creation"],
+      "expected_components": [
+        "What are no-code blocks",
+        "Steps to create a no-code block",
+        "What is Autonomous Functional Testing",
+        "How to connect blocks to testing framework"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 2,
+      "query": "What are the integration steps for MS Teams and how do I configure automated responses with chatbots?",
+      "type": "multi-topic_integration",
+      "complexity": "high",
+      "topics": ["MS Teams integration", "chatbots", "automated responses", "configuration"],
+      "expected_components": [
+        "MS Teams integration prerequisites",
+        "Step-by-step integration guide",
+        "Chatbot configuration options",
+        "Automated response setup"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 3,
+      "query": "How do I set up WhatsApp Business API integration, create conversation flows, and implement message templates?",
+      "type": "multi-topic_integration",
+      "complexity": "very_high",
+      "topics": ["WhatsApp Business API", "conversation flows", "message templates", "integration"],
+      "expected_components": [
+        "WhatsApp Business API setup",
+        "Conversation flow designer usage",
+        "Message template creation",
+        "Template approval process"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 4,
+      "query": "What's the difference between triggered messages and scheduled broadcasts, and how do I set them up?",
+      "type": "conceptual_procedural",
+      "complexity": "medium",
+      "topics": ["triggered messages", "scheduled broadcasts", "messaging"],
+      "expected_components": [
+        "Definition of triggered messages",
+        "Definition of scheduled broadcasts",
+        "Key differences",
+        "Setup instructions for both"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 5,
+      "query": "How do I create custom attributes for contacts, use them in conversation flows, and set up personalized messaging?",
+      "type": "multi-topic_procedural",
+      "complexity": "high",
+      "topics": ["custom attributes", "contact management", "conversation flows", "personalization"],
+      "expected_components": [
+        "Creating custom attributes",
+        "Using attributes in flows",
+        "Personalization syntax",
+        "Best practices"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 6,
+      "query": "What are the steps to implement live chat handover from chatbot to human agent and how do I configure routing rules?",
+      "type": "multi-topic_procedural",
+      "complexity": "high",
+      "topics": ["chatbot", "live chat", "handover", "routing", "agent assignment"],
+      "expected_components": [
+        "Chatbot to human handover process",
+        "Routing rule configuration",
+        "Agent assignment logic",
+        "Handover triggers"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 7,
+      "query": "How do I create and manage tags for conversations, use them for filtering, and set up automated tagging rules?",
+      "type": "multi-topic_procedural",
+      "complexity": "medium",
+      "topics": ["tags", "conversation management", "filtering", "automation"],
+      "expected_components": [
+        "Tag creation",
+        "Manual tagging process",
+        "Filter usage",
+        "Automated tagging setup"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 8,
+      "query": "What's the process for integrating Shopify, syncing product catalogs, and enabling order tracking in conversations?",
+      "type": "multi-topic_integration",
+      "complexity": "very_high",
+      "topics": ["Shopify integration", "product catalog", "order tracking", "e-commerce"],
+      "expected_components": [
+        "Shopify integration steps",
+        "Product catalog sync",
+        "Order tracking setup",
+        "Conversation integration"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 9,
+      "query": "How do I set up multi-language support, create translations for chatbot responses, and configure language detection?",
+      "type": "multi-topic_procedural",
+      "complexity": "high",
+      "topics": ["multilingual support", "translations", "language detection", "chatbot"],
+      "expected_components": [
+        "Enabling multi-language support",
+        "Translation management",
+        "Language detection configuration",
+        "Fallback language setup"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 10,
+      "query": "What are the different analytics dashboards available, how do I create custom reports, and export data for external analysis?",
+      "type": "multi-topic_conceptual",
+      "complexity": "medium",
+      "topics": ["analytics", "dashboards", "reports", "data export"],
+      "expected_components": [
+        "Available dashboard types",
+        "Custom report creation",
+        "Data export options",
+        "Metrics explanations"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 11,
+      "query": "How do I implement CSAT surveys in conversations, analyze feedback, and trigger automated follow-ups based on ratings?",
+      "type": "multi-topic_procedural",
+      "complexity": "high",
+      "topics": ["CSAT surveys", "feedback", "analytics", "automation", "follow-ups"],
+      "expected_components": [
+        "CSAT survey setup",
+        "Feedback collection",
+        "Rating analysis",
+        "Automated follow-up configuration"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 12,
+      "query": "What's the process for setting up webhooks, handling incoming data, and triggering actions based on external events?",
+      "type": "multi-topic_technical",
+      "complexity": "very_high",
+      "topics": ["webhooks", "API", "integrations", "automation", "events"],
+      "expected_components": [
+        "Webhook configuration",
+        "Data handling",
+        "Event triggers",
+        "Action setup",
+        "Error handling"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 13,
+      "query": "How do I create conditional logic in conversation flows, use variables, and implement branching based on user inputs?",
+      "type": "multi-topic_procedural",
+      "complexity": "high",
+      "topics": ["conversation flows", "conditional logic", "variables", "branching"],
+      "expected_components": [
+        "Conditional logic syntax",
+        "Variable usage",
+        "Branching options",
+        "User input validation"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 14,
+      "query": "What are the security features for conversation data, how do I enable encryption, and configure access control for team members?",
+      "type": "multi-topic_security",
+      "complexity": "high",
+      "topics": ["security", "encryption", "access control", "permissions", "data protection"],
+      "expected_components": [
+        "Security features overview",
+        "Encryption setup",
+        "Access control configuration",
+        "Permission management"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 15,
+      "query": "How do I set up SLA policies, configure escalation rules, and monitor compliance across conversations?",
+      "type": "multi-topic_procedural",
+      "complexity": "high",
+      "topics": ["SLA", "escalation", "monitoring", "compliance"],
+      "expected_components": [
+        "SLA policy creation",
+        "Escalation rule setup",
+        "Compliance monitoring",
+        "Reporting"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 16,
+      "query": "What's the process for creating a customer support ticketing system with Watermelon, including ticket assignment and status tracking?",
+      "type": "multi-topic_procedural",
+      "complexity": "very_high",
+      "topics": ["ticketing system", "support workflow", "assignment", "status tracking"],
+      "expected_components": [
+        "Ticketing system setup",
+        "Ticket creation process",
+        "Assignment rules",
+        "Status tracking configuration"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 17,
+      "query": "How do I integrate Facebook Messenger, set up quick replies, and implement persistent menu options?",
+      "type": "multi-topic_integration",
+      "complexity": "high",
+      "topics": ["Facebook Messenger", "quick replies", "persistent menu", "integration"],
+      "expected_components": [
+        "Facebook Messenger integration",
+        "Quick reply configuration",
+        "Persistent menu setup",
+        "Best practices"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 18,
+      "query": "What are the options for sentiment analysis in conversations and how do I use it to prioritize urgent customer inquiries?",
+      "type": "multi-topic_conceptual",
+      "complexity": "medium",
+      "topics": ["sentiment analysis", "AI features", "prioritization", "conversation management"],
+      "expected_components": [
+        "Sentiment analysis features",
+        "Configuration options",
+        "Prioritization rules",
+        "Usage in workflows"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 19,
+      "query": "How do I create drip campaigns, schedule messages across multiple channels, and track engagement metrics?",
+      "type": "multi-topic_procedural",
+      "complexity": "high",
+      "topics": ["drip campaigns", "scheduling", "multi-channel", "analytics"],
+      "expected_components": [
+        "Drip campaign creation",
+        "Message scheduling",
+        "Multi-channel setup",
+        "Engagement tracking"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 20,
+      "query": "What's the process for setting up A/B testing for chatbot responses, measuring performance, and implementing winning variations?",
+      "type": "multi-topic_experimental",
+      "complexity": "very_high",
+      "topics": ["A/B testing", "chatbot optimization", "analytics", "experimentation"],
+      "expected_components": [
+        "A/B test setup",
+        "Response variations",
+        "Performance metrics",
+        "Implementation process"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 21,
+      "query": "How do I configure business hours, set up out-of-office messages, and implement different workflows for different time periods?",
+      "type": "multi-topic_procedural",
+      "complexity": "medium",
+      "topics": ["business hours", "out-of-office", "workflows", "scheduling"],
+      "expected_components": [
+        "Business hours configuration",
+        "Out-of-office message setup",
+        "Time-based workflows",
+        "Timezone handling"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 22,
+      "query": "What are the API rate limits, how do I handle errors, and implement retry logic for failed requests?",
+      "type": "multi-topic_technical",
+      "complexity": "high",
+      "topics": ["API", "rate limits", "error handling", "retry logic", "best practices"],
+      "expected_components": [
+        "API rate limit specifications",
+        "Error handling strategies",
+        "Retry logic implementation",
+        "Best practices"
+      ],
+      "requires_images": false,
+      "requires_steps": true
+    },
+    {
+      "id": 23,
+      "query": "How do I create lead qualification workflows, score contacts based on engagement, and trigger sales notifications?",
+      "type": "multi-topic_procedural",
+      "complexity": "very_high",
+      "topics": ["lead qualification", "scoring", "workflows", "notifications", "sales automation"],
+      "expected_components": [
+        "Lead qualification workflow setup",
+        "Contact scoring system",
+        "Engagement tracking",
+        "Sales notification triggers"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 24,
+      "query": "What's the process for bulk importing contacts, mapping custom fields, and avoiding duplicates?",
+      "type": "multi-topic_procedural",
+      "complexity": "medium",
+      "topics": ["contact import", "data mapping", "duplicate handling", "data management"],
+      "expected_components": [
+        "Bulk import process",
+        "Field mapping",
+        "Duplicate detection",
+        "Validation rules"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 25,
+      "query": "How do I set up conversation assignment rules based on skills, implement load balancing, and handle agent unavailability?",
+      "type": "multi-topic_procedural",
+      "complexity": "high",
+      "topics": ["assignment rules", "skills", "load balancing", "agent management", "routing"],
+      "expected_components": [
+        "Skills-based routing setup",
+        "Assignment rule creation",
+        "Load balancing configuration",
+        "Unavailability handling"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 26,
+      "query": "What are the options for integrating CRM systems like Salesforce or HubSpot, syncing contact data, and tracking conversation history?",
+      "type": "multi-topic_integration",
+      "complexity": "very_high",
+      "topics": ["CRM integration", "Salesforce", "HubSpot", "data sync", "conversation history"],
+      "expected_components": [
+        "CRM integration options",
+        "Salesforce integration steps",
+        "HubSpot integration steps",
+        "Data sync configuration",
+        "History tracking"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 27,
+      "query": "How do I create interactive buttons and carousels in chatbot responses, handle button clicks, and track user interactions?",
+      "type": "multi-topic_procedural",
+      "complexity": "high",
+      "topics": ["interactive messages", "buttons", "carousels", "chatbot", "analytics"],
+      "expected_components": [
+        "Button creation",
+        "Carousel setup",
+        "Click handling",
+        "Interaction tracking"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 28,
+      "query": "What's the process for setting up conversation queues, implementing priority routing, and monitoring queue metrics?",
+      "type": "multi-topic_procedural",
+      "complexity": "high",
+      "topics": ["conversation queues", "priority routing", "metrics", "monitoring"],
+      "expected_components": [
+        "Queue setup",
+        "Priority configuration",
+        "Routing rules",
+        "Metrics monitoring"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 29,
+      "query": "How do I implement knowledge base integration, enable self-service options, and track article performance?",
+      "type": "multi-topic_procedural",
+      "complexity": "high",
+      "topics": ["knowledge base", "self-service", "integration", "analytics"],
+      "expected_components": [
+        "Knowledge base setup",
+        "Self-service configuration",
+        "Article integration",
+        "Performance tracking"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    {
+      "id": 30,
+      "query": "What are the disaster recovery options, how do I backup conversation data, and restore data in case of system failure?",
+      "type": "multi-topic_security",
+      "complexity": "high",
+      "topics": ["disaster recovery", "backup", "data restoration", "system reliability"],
+      "expected_components": [
+        "Disaster recovery options",
+        "Backup configuration",
+        "Restoration process",
+        "Data integrity verification"
+      ],
+      "requires_images": false,
+      "requires_steps": true
+    }
+  ],
+  "evaluation_criteria": {
+    "retrieval_quality": {
+      "precision_at_5": "Percentage of relevant chunks in top 5 results",
+      "mrr": "Mean Reciprocal Rank of first relevant result",
+      "coverage": "Percentage of required topics covered in retrieved results"
+    },
+    "generation_quality": {
+      "completeness": "All expected components addressed in response",
+      "accuracy": "Factual correctness of information",
+      "formatting": "Proper use of headings, bullets, code blocks",
+      "citations": "Proper citation of sources",
+      "coherence": "Logical flow and connection between topics"
+    },
+    "complex_query_handling": {
+      "decomposition_accuracy": "Correct identification of sub-topics",
+      "topic_integration": "Proper integration of multiple topics in response",
+      "context_preservation": "Maintained context across topics",
+      "step_ordering": "Logical ordering of procedural steps"
+    }
+  }
+}

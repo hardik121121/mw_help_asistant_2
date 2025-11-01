@@ -1,0 +1,61 @@
+# Core Document Processing
+docling>=1.0.0  # Advanced PDF processing with structure preservation
+Pillow>=10.0.0  # Image processing
+pypdf>=3.0.0  # PDF utilities (docling dependency)
+
+# Text Processing & Chunking
+langchain>=0.1.0  # Text splitting and document processing
+langchain-community>=0.0.20  # Community integrations
+langchain-text-splitters>=0.0.1  # Advanced text splitters
+tiktoken>=0.5.0  # Token counting for OpenAI models
+
+# Embeddings & Vector Store
+openai>=1.12.0  # OpenAI API for embeddings and query understanding
+pinecone-client>=3.0.0  # Vector database
+sentence-transformers>=2.3.0  # Local embeddings (backup/experimentation)
+
+# Retrieval & Ranking
+rank-bm25>=0.2.0  # BM25 keyword search
+cohere>=4.0.0  # Re-ranking API
+
+# LLM & Generation
+groq>=0.4.0  # Groq API for Llama 3.3 70B
+
+# Web Interface
+streamlit>=1.29.0  # Web UI
+streamlit-chat>=0.1.1  # Chat interface components
+
+# Data Processing
+numpy>=1.26.0  # Numerical operations
+pandas>=2.1.0  # Data manipulation
+tqdm>=4.66.0  # Progress bars
+
+# Configuration & Environment
+python-dotenv>=1.0.0  # Environment variable management
+pydantic>=2.0.0  # Data validation
+pyyaml>=6.0.0  # YAML configuration files
+
+# Testing & Evaluation
+pytest>=7.4.0  # Testing framework
+pytest-asyncio>=0.21.0  # Async testing
+ragas>=0.1.0  # RAG evaluation metrics
+
+# Development & Code Quality
+black>=23.0.0  # Code formatting
+flake8>=6.0.0  # Linting
+mypy>=1.0.0  # Type checking
+
+# Utilities
+requests>=2.31.0  # HTTP requests
+python-dateutil>=2.8.0  # Date utilities
+jsonschema>=4.0.0  # JSON validation
+
+# Logging & Monitoring
+loguru>=0.7.0  # Better logging
+tenacity>=8.2.0  # Retry logic
+
+# Optional but recommended
+ipython>=8.0.0  # Interactive Python shell for debugging
+jupyter>=1.0.0  # Notebook support for experimentation
+matplotlib>=3.8.0  # Visualization for evaluation
+seaborn>=0.13.0  # Statistical visualization

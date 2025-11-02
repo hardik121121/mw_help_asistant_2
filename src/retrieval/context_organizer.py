@@ -223,9 +223,11 @@ class ContextOrganizer:
         Sort chunks for optimal reading flow.
 
         Strategy:
-        1. Group by top-level section
-        2. Within section, sort by page number
-        3. Within page, sort by heading level
+        1. PRIORITIZE boosted chunks (exact keyword matches) FIRST
+        2. Group by top-level section
+        3. Within section, sort by score (descending)
+        4. Within score tier, sort by page number
+        5. Within page, sort by heading level
 
         Args:
             chunks: Chunk list
@@ -238,13 +240,20 @@ class ContextOrganizer:
             heading_path = metadata.get('heading_path', [])
             page_start = metadata.get('page_start', 0)
             heading_level = metadata.get('heading_level', 0)
+            score = chunk.get('score', 0)
+            is_boosted = chunk.get('boosted', False)
 
-            # Primary: top-level section
+            # Primary: boosted chunks FIRST (exact matches)
+            # Use 0 for boosted (sorts first), 1 for non-boosted
+            boost_priority = 0 if is_boosted else 1
+
+            # Secondary: score (negative for descending order)
+            # Tertiary: top-level section
             section = heading_path[0] if heading_path else ""
 
-            # Secondary: page number
-            # Tertiary: heading level (shallower first)
-            return (section, page_start, heading_level)
+            # Quaternary: page number
+            # Quinary: heading level (shallower first)
+            return (boost_priority, -score, section, page_start, heading_level)
 
         sorted_chunks = sorted(chunks, key=sort_key)
         return sorted_chunks

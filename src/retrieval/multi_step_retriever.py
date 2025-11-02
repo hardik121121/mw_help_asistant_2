@@ -214,8 +214,11 @@ class MultiStepRetriever:
 
         logger.info(f"     Hybrid search: {len(results)} results")
 
-        # Rerank if enabled
-        if self.use_reranking and self.reranker and results:
+        # Check if query has strong exact matches (skip reranking if yes)
+        has_exact_match = self._has_strong_keyword_match(query, results[:10])
+
+        # Rerank if enabled AND no strong exact matches
+        if self.use_reranking and self.reranker and results and not has_exact_match:
             results = self.reranker.rerank(
                 query=query,
                 documents=results,
@@ -223,6 +226,140 @@ class MultiStepRetriever:
                 enforce_diversity=True
             )
             logger.info(f"     After reranking: {len(results)} results")
+        elif has_exact_match:
+            logger.info(f"     ⚡ Skipping reranking - strong exact matches found")
+            results = results[:10]  # Just take top 10 from hybrid search
+        else:
+            results = results[:10]  # No reranking, just limit
+
+        # Apply keyword boosting to ensure exact matches rank first
+        results = self._apply_keyword_boosting(query, results)
+
+        return results
+
+    def _has_strong_keyword_match(self,
+                                   query: str,
+                                   top_results: List[Dict],
+                                   threshold: int = 1) -> bool:
+        """
+        Check if top results have strong exact keyword matches.
+
+        This determines whether to skip reranking and use hybrid search directly.
+
+        Args:
+            query: Original query
+            top_results: Top results from hybrid search
+            threshold: Minimum number of exact matches to consider "strong"
+
+        Returns:
+            True if strong exact matches found in top results
+        """
+        # Extract important terms from query
+        import re
+        # Match capitalized multi-word terms or specific integration names
+        integration_names = ['ms teams', 'microsoft teams', 'shopify', 'slack', 'jira',
+                            'servicenow', 'okta', 'active directory', 'azure']
+
+        query_lower = query.lower()
+
+        # Check if query contains specific integration names
+        matched_integration = None
+        for name in integration_names:
+            if name in query_lower:
+                matched_integration = name
+                break
+
+        if not matched_integration:
+            return False
+
+        # Check if top results have this integration in headings
+        exact_matches = 0
+        for result in top_results[:5]:  # Check top 5 results
+            metadata = result.get('metadata', {})
+            heading_path = metadata.get('heading_path', [])
+            heading_text = ' '.join(heading_path).lower()
+
+            if matched_integration in heading_text:
+                exact_matches += 1
+
+        has_match = exact_matches >= threshold
+        if has_match:
+            logger.info(f"     🎯 Found {exact_matches} exact matches for '{matched_integration}' in top 5")
+
+        return has_match
+
+    def _apply_keyword_boosting(self,
+                               query: str,
+                               results: List[Dict],
+                               boost_factor: float = 10.0) -> List[Dict]:
+        """
+        Boost scores for chunks with exact keyword matches.
+
+        This helps preserve exact matches (e.g., "MS Teams Integration")
+        before reranking, preventing the reranker from demoting them.
+
+        Args:
+            query: Original query text
+            results: Hybrid search results
+            boost_factor: Multiplier for exact matches (default 2.0)
+
+        Returns:
+            Results with boosted scores for exact matches
+        """
+        # Extract important keywords from query
+        query_lower = query.lower()
+
+        # Extract multi-word phrases (e.g., "MS Teams", "Shopify integration")
+        import re
+        # Match capitalized terms or common tech names
+        important_phrases = re.findall(r'\b(?:[A-Z][a-z]*\s*)+|shopify|slack|teams|jira|servicenow', query)
+        important_phrases = [p.strip().lower() for p in important_phrases if len(p.strip()) > 2]
+
+        # Also extract individual significant keywords (3+ chars, not common words)
+        common_words = {'how', 'what', 'when', 'where', 'the', 'and', 'for', 'with', 'integration', 'set', 'setup'}
+        keywords = [w.lower() for w in query.split() if len(w) >= 3 and w.lower() not in common_words]
+
+        all_terms = important_phrases + keywords
+
+        if not all_terms:
+            return results
+
+        logger.info(f"     Keyword boosting for terms: {all_terms[:5]}")
+
+        boosted_count = 0
+        for result in results:
+            metadata = result.get('metadata', {})
+
+            # Check heading path for exact matches
+            heading_path = metadata.get('heading_path', [])
+            heading_text = ' '.join(heading_path).lower()
+
+            # Check content for exact matches
+            content = result.get('content', '').lower()
+
+            # Check for matches
+            match_found = False
+            for term in all_terms:
+                if term in heading_text or term in content[:200]:  # Check first 200 chars
+                    match_found = True
+                    break
+
+            # Boost score if match found
+            if match_found:
+                original_score = result.get('score', 0)
+                result['score'] = original_score * boost_factor
+                result['boosted'] = True
+                boosted_count += 1
+
+                # Log significant boosts
+                if boosted_count <= 3:
+                    chunk_id = result.get('chunk_id', 'unknown')
+                    logger.info(f"       ⬆️ Boosted {chunk_id}: {original_score:.4f} → {result['score']:.4f}")
+
+        if boosted_count > 0:
+            logger.info(f"     Boosted {boosted_count} chunks with keyword matches")
+            # Re-sort by boosted scores
+            results = sorted(results, key=lambda x: x.get('score', 0), reverse=True)
 
         return results
 

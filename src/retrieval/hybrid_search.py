@@ -72,10 +72,31 @@ class HybridSearch:
                 for chunk in chunks_with_embeddings
                 if 'embedding' in chunk
             }
+
+            # CRITICAL: Create chunk_id to content mapping
+            # Pinecone metadata doesn't include content (to save space)
+            # So we need to map chunk_id -> full chunk data including content
+            self.chunk_content_map = {
+                chunk['metadata']['chunk_id']: chunk.get('content', '')
+                for chunk in chunks_with_embeddings
+            }
+
+            # CRITICAL: Create chunk_id to full metadata mapping
+            # Pinecone metadata is reduced (image_paths list → first_image_path, etc.)
+            # We need the full metadata including all image_paths
+            self.chunk_metadata_map = {
+                chunk['metadata']['chunk_id']: chunk.get('metadata', {})
+                for chunk in chunks_with_embeddings
+            }
+
             logger.info(f"Loaded {len(self.chunk_embeddings)} chunk embeddings")
+            logger.info(f"Loaded {len(self.chunk_content_map)} chunk contents")
+            logger.info(f"Loaded {len(self.chunk_metadata_map)} full metadata entries")
         else:
             logger.warning(f"Embeddings file not found, vector search will rely on Pinecone only")
             self.chunk_embeddings = {}
+            self.chunk_content_map = {}
+            self.chunk_metadata_map = {}
 
         logger.info("✅ HybridSearch initialized")
 
@@ -177,11 +198,28 @@ class HybridSearch:
         # Format results
         formatted_results = []
         for match in results.matches:
+            chunk_id = match.id
+
+            # CRITICAL FIX: Get content from our chunk_content_map
+            # Pinecone metadata doesn't include content (40KB limit)
+            content = self.chunk_content_map.get(chunk_id, '')
+
+            if not content:
+                logger.warning(f"No content found for chunk_id: {chunk_id}")
+
+            # CRITICAL FIX: Get full metadata from our chunk_metadata_map
+            # Pinecone metadata is reduced (image_paths list → first_image_path, etc.)
+            full_metadata = self.chunk_metadata_map.get(chunk_id, {})
+
+            # Merge Pinecone metadata with full metadata, preferring full metadata
+            # This ensures we get complete image_paths lists and other full fields
+            merged_metadata = {**match.metadata, **full_metadata}
+
             formatted_results.append({
-                'chunk_id': match.id,
+                'chunk_id': chunk_id,
                 'score': float(match.score),
-                'metadata': match.metadata,
-                'content': match.metadata.get('content', ''),
+                'metadata': merged_metadata,  # ✅ Now using full metadata with complete image_paths
+                'content': content,  # ✅ Now using actual content from our mapping
                 'source': 'vector'
             })
 

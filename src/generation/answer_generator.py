@@ -214,9 +214,11 @@ Based on the following documentation from Watermelon, provide a comprehensive an
 
 {context_text}
 
-Instructions:
-- Answer the question thoroughly
-- Use information from all relevant sections above
+IMPORTANT Instructions:
+- **PRIORITIZE the FIRST sections above** - they are the most relevant to the query
+- If specific steps or procedures are provided in the context, USE THEM DIRECTLY
+- Do NOT say "steps are not provided" or "documentation does not outline" if the information IS present in the context
+- Answer the question thoroughly using information from the relevant sections
 - Structure your answer with clear headings
 - Be specific and accurate
 - Mention page numbers for key information when appropriate
@@ -309,41 +311,38 @@ Troubleshooting Guide:"""
         sections = []
 
         sections.append(f"Retrieved Information ({context.total_chunks} relevant sections):")
-        sections.append("")
+        sections.append("NOTE: Sections are ordered by relevance - FIRST sections are MOST relevant!\n")
 
-        # Format by topic
-        for topic, chunks in context.topic_groups.items():
-            sections.append(f"\n## Topic: {topic}")
+        # Format in RANKED ORDER (preserve the order from context.chunks)
+        # DO NOT reorganize by topic - keep the ranking we worked hard to create!
+        for i, chunk in enumerate(context.chunks, 1):
+            metadata = chunk.get('metadata', {})
+            heading_path = metadata.get('heading_path', [])
+            page_start = metadata.get('page_start', 0)
+            content = chunk['content']
+
+            # Format heading
+            if heading_path:
+                heading = " > ".join(heading_path)
+            else:
+                heading = "General Information"
+
+            sections.append(f"\n### Section {i}: {heading} (Page {page_start})")
+
+            # Add content
+            sections.append(content)
             sections.append("")
 
-            for i, chunk in enumerate(chunks, 1):
-                metadata = chunk.get('metadata', {})
-                heading_path = metadata.get('heading_path', [])
-                page_start = metadata.get('page_start', 0)
-                content = chunk['content']
-
-                # Format heading
-                if heading_path:
-                    heading = " > ".join(heading_path)
-                else:
-                    heading = "General Information"
-
-                sections.append(f"### [{i}] {heading} (Page {page_start})")
-
-                # Add content
-                sections.append(content)
-                sections.append("")
-
-                # Note images/tables if present
-                if metadata.get('has_images'):
-                    image_paths = metadata.get('image_paths', [])
-                    if image_paths:
-                        sections.append(f"*[Images available: {', '.join(image_paths)}]*")
-                        sections.append("")
-
-                if metadata.get('has_tables'):
-                    sections.append("*[Contains data tables]*")
+            # Note images/tables if present
+            if metadata.get('has_images'):
+                image_paths = metadata.get('image_paths', [])
+                if image_paths:
+                    sections.append(f"*[Images available: {', '.join(image_paths)}]*")
                     sections.append("")
+
+            if metadata.get('has_tables'):
+                sections.append("*[Contains data tables]*")
+                sections.append("")
 
         return "\n".join(sections)
 

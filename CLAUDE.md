@@ -30,7 +30,43 @@ python src/retrieval/multi_step_retriever.py
 
 **Root cause**: All modules use relative imports which require proper package context. The `-m` flag ensures Python treats the directory as a package.
 
-### 2. Pydantic V2 Configuration System
+### 2. Critical Pinecone Metadata Limitation & Fix (Nov 2, 2025)
+
+**IMPORTANT**: Pinecone has a 40KB metadata limit per vector, which required a critical fix to the retrieval pipeline.
+
+**The Problem**:
+- Pinecone cannot store full chunk `content` (too large for 40KB limit)
+- Pinecone only stores `first_image_path`, not full `image_paths` list
+- Vector search was returning chunks with **empty content** (0 chars) and no images
+
+**The Fix** (Applied in `hybrid_search.py`):
+```python
+# Content mapping: chunk_id → full content
+self.chunk_content_map = {
+    chunk['metadata']['chunk_id']: chunk.get('content', '')
+    for chunk in chunks_with_embeddings
+}
+
+# Metadata mapping: chunk_id → full metadata (with complete image_paths)
+self.chunk_metadata_map = {
+    chunk['metadata']['chunk_id']: chunk.get('metadata', {})
+    for chunk in chunks_with_embeddings
+}
+
+# During retrieval: Restore full data
+content = self.chunk_content_map.get(chunk_id, '')
+full_metadata = self.chunk_metadata_map.get(chunk_id, {})
+merged_metadata = {**match.metadata, **full_metadata}
+```
+
+**Impact**:
+- ✅ Fixed ALL integration queries (MS Teams, Shopify, Slack, etc.)
+- ✅ Restored content for ALL vector search results
+- ✅ Fixed image retrieval for ALL queries
+
+**See**: `MS_TEAMS_INTEGRATION_FIX.md` for complete documentation
+
+### 3. Pydantic V2 Configuration System
 
 Settings fields are **flat** (not nested). Access as:
 - `settings.pdf_path` ✅ NOT `settings.paths.pdf_path` ❌
@@ -184,6 +220,22 @@ python -m src.evaluation.generation_metrics
 **Output**: `tests/results/comprehensive_evaluation.json`
 
 **Important**: Be mindful of Groq rate limits when testing many queries!
+
+### Continue/Resume Evaluation (if interrupted by rate limits)
+```bash
+# Resume evaluation from a specific query ID
+python continue_evaluation.py
+
+# Complete remaining failed queries
+python finish_evaluation.py
+
+# Run system analysis and generate recommendations
+python system_analysis.py
+```
+
+**Output**:
+- Updates `tests/results/comprehensive_evaluation.json` with new results
+- Generates `tests/results/system_recommendations.json`
 
 ### Checking Pipeline State
 ```bash
@@ -354,6 +406,11 @@ src/
 
 ## Performance & Quality Metrics
 
+### Comprehensive Evaluation Results (Phase 7) - ALL 30 QUERIES ✅
+**Evaluation Date**: November 2, 2025
+**Success Rate**: 100% (30/30 queries completed)
+**Total Time**: 13.7 minutes (822.7 seconds)
+
 ### Chunk Quality (Phase 2)
 - Overall score: 0.89/1.00 ✅ (target: >0.80)
 - Structure preservation: 0.99/1.00
@@ -368,29 +425,38 @@ src/
 - BM25 vocabulary: 16,460 terms
 - 0% upload failures
 
-### Retrieval Performance (Phase 4 + 7)
-Based on evaluation results:
-- **Precision@10**: 0.52-0.70 (target: >0.70)
-- **Recall@10**: 0.41-0.64 (target: >0.60)
-- **MRR**: 0.39-0.75 (target: >0.70)
-- **Coverage**: 0.66-0.75 (target: >0.80)
-- **Diversity**: 1.00 (target: >0.70) ✅
+### Retrieval Performance (ACTUAL MEASURED - 30 queries)
+- **Precision@10**: 0.567 (target: >0.70) ⚠️ needs improvement
+- **Recall@10**: 0.551 (target: >0.60) ⚠️ needs improvement
+- **MRR**: 0.627 (target: >0.70) ⚠️ needs improvement
+- **Coverage**: 0.679 (target: >0.80) ⚠️ needs improvement
+- **Diversity**: 1.000 (target: >0.70) ✅ **PERFECT**
 
-### Generation Quality (Phase 6 + 7)
-Based on evaluation results:
-- **Overall Score**: 0.88-0.92 (target: >0.75) ✅
-- **Completeness**: 1.00 (target: >0.80) ✅
-- **Word Count**: 400-600 words (ideal range)
-- **Quality Distribution**: 90% excellent (≥0.85)
+**Performance by Query Type**:
+- Security queries: 0.950 precision ⭐ (best)
+- Integration queries: 0.800 precision ⭐
+- Procedural queries: 0.465 precision ⚠️ (needs improvement)
+- Technical queries: 0.450 precision ⚠️ (needs improvement)
 
-### Performance
-- **Avg Time per Query**: 14-30 seconds
+### Generation Quality (ACTUAL MEASURED - 30 queries)
+- **Overall Score**: 0.916/1.0 ✅ (target: >0.75)
+- **Completeness**: 1.000/1.0 ✅ **PERFECT** (target: >0.80)
+- **Word Count**: 484 words avg (ideal: 400-600) ✅
+- **Quality Distribution**:
+  - Excellent (≥0.85): 25 queries (83.3%) ✅
+  - Good (0.70-0.85): 5 queries (16.7%)
+  - Fair/Poor (<0.70): 0 queries (0%)
+
+### Performance (ACTUAL MEASURED)
+- **Avg Time per Query**: 27.4 seconds (target: <15s) ⚠️ needs optimization
   - Query understanding: ~1-2s
-  - Retrieval (3 sub-questions): ~8-15s
-  - Generation: ~2-4s
+  - Retrieval (3 sub-questions): ~10-12s
+  - Generation: ~3-4s
   - Validation: <1s
-- **Cost per Query**: ~$0.002 (OpenAI embeddings + Cohere reranking)
-- **Groq LLM**: FREE (within rate limits)
+- **Cost per Query**: ~$0.002 (OpenAI embeddings + Cohere reranking) ✅
+- **Groq LLM**: FREE (within rate limits) ✅
+
+**See `EVALUATION_COMPLETE.md` for detailed analysis and improvement roadmap.**
 
 ## Common Patterns
 
@@ -530,11 +596,109 @@ All keys configured in `.env`:
 
 ---
 
+## Upgrade Recommendations (Based on Comprehensive Evaluation)
+
+### 🔴 High Priority (Immediate Action Required)
+
+#### 1. Improve Retrieval Precision (0.567 → 0.70)
+**Impact**: +15-20% improvement expected
+
+**Action Items**:
+- Fine-tune embedding model on Watermelon-specific data
+- Implement query expansion with domain terms
+- Increase Cohere reranking influence (adjust weights)
+- Add metadata filtering by query type
+- Test cross-encoder reranking
+
+#### 2. Improve Retrieval Recall (0.551 → 0.60)
+**Impact**: +10-15% improvement expected
+
+**Action Items**:
+- Increase `vector_top_k` from 30 → 50
+- Increase `bm25_top_k` from 30 → 50
+- Improve query decomposition prompts
+- Add query reformulation/paraphrasing
+- Test HyDE (Hypothetical Document Embeddings)
+
+### 🟡 Medium Priority (Plan for Q1 2026)
+
+#### 3. Optimize Performance Speed (27.4s → <15s)
+**Impact**: 40-50% speed improvement expected
+
+**Action Items**:
+- Implement Redis caching for query results
+- Parallelize sub-question retrieval (currently sequential)
+- Use async processing for non-critical operations
+- Optimize Pinecone queries (use namespaces, metadata filtering)
+- Consider Groq Pro API for faster inference
+
+#### 4. Increase Coverage (0.679 → 0.80)
+**Impact**: +12-15% improvement expected
+
+**Action Items**:
+- Improve sub-question generation (more comprehensive)
+- Increase final context from 20 → 30 chunks
+- Add topic modeling/clustering
+- Implement graph-based retrieval for related concepts
+
+#### 5. Production Infrastructure
+**Action Items**:
+- Deploy with Docker containers
+- Add Prometheus/Grafana monitoring
+- Implement structured logging (ELK stack)
+- Set up CI/CD pipeline
+- Add health checks and alerting
+- Implement rate limiting and quotas
+- Add A/B testing framework
+
+### 🟢 Low Priority (Future Optimization)
+
+#### 6. Generation Quality Fine-tuning (0.916 → 0.95)
+- Fine-tune prompt templates per query type
+- Add few-shot examples for each strategy
+- Implement iterative refinement
+- Use GPT-4 for most complex queries
+
+#### 7. Cost Optimization ($0.002 → <$0.001 per query)
+- Cache embeddings for common query patterns
+- Self-host reranking model (eliminate Cohere cost)
+- Batch reranking calls when possible
+
+---
+
+### Implementation Roadmap
+
+**Phase 1 - Quick Wins (Week 1-2)**:
+- Increase retrieval `top_k` (30 → 50)
+- Implement query result caching
+- Adjust RRF fusion weights
+- **Expected**: Recall 0.55 → 0.62, Speed 27s → 22s
+
+**Phase 2 - Retrieval Optimization (Week 3-6)**:
+- Fine-tune embedding model
+- Implement query expansion
+- Test cross-encoder reranking
+- **Expected**: Precision 0.57 → 0.72, Recall 0.62 → 0.68
+
+**Phase 3 - Performance & Infrastructure (Week 7-10)**:
+- Parallelize retrieval
+- Deploy with Docker
+- Add monitoring
+- **Expected**: Speed 22s → 12s, Production-ready
+
+**See `EVALUATION_COMPLETE.md` for detailed analysis, statistics, and full upgrade roadmap.**
+
+---
+
 **See Also**:
 - `README.md` - Project overview and architecture
-- `PROGRESS.md` - Detailed phase breakdowns
+- `EVALUATION_COMPLETE.md` - Full evaluation report with 30 queries and recommendations
+- `PROJECT_STATUS.md` - Current status and capabilities
 - `PHASE_3_COMPLETE.md` - Query understanding details
 - `PHASE_4_COMPLETE.md` - Multi-step retrieval details
 - `PHASE_6_COMPLETE.md` - Advanced generation details
 - `PHASE_7_COMPLETE.md` - Evaluation framework details
 - `TOC_HANDLING.md` - TOC filtering strategy
+- `tests/results/comprehensive_evaluation.json` - Raw evaluation data (all 30 queries)
+- `tests/results/system_recommendations.json` - Detailed upgrade recommendations
+- `system_analysis.py` - System analysis script

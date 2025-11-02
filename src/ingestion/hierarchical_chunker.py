@@ -11,11 +11,11 @@ from dataclasses import dataclass, field, asdict
 from collections import defaultdict
 
 try:
-    from langchain.text_splitter import RecursiveCharacterTextSplitter
+    from langchain_text_splitters import RecursiveCharacterTextSplitter
     import tiktoken
 except ImportError:
     print("⚠️  LangChain or tiktoken not installed.")
-    print("Please run: pip install langchain tiktoken")
+    print("Please run: pip install langchain-text-splitters tiktoken")
     RecursiveCharacterTextSplitter = None
     tiktoken = None
 
@@ -106,7 +106,7 @@ class HierarchicalChunker:
         if RecursiveCharacterTextSplitter is None or tiktoken is None:
             raise ImportError(
                 "LangChain and tiktoken are required. "
-                "Please run: pip install langchain tiktoken"
+                "Please run: pip install langchain-text-splitters tiktoken"
             )
 
         # Initialize tokenizer for accurate token counting

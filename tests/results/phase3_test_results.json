@@ -1,0 +1,637 @@
+[
+  {
+    "test_id": 1,
+    "query": "How do I create a no-code block on Watermelon platform and process it for Autonomous Functional Testing?",
+    "test_metadata": {
+      "id": 1,
+      "query": "How do I create a no-code block on Watermelon platform and process it for Autonomous Functional Testing?",
+      "type": "multi-topic_procedural",
+      "complexity": "high",
+      "topics": [
+        "no-code blocks",
+        "autonomous functional testing",
+        "workflow creation"
+      ],
+      "expected_components": [
+        "What are no-code blocks",
+        "Steps to create a no-code block",
+        "What is Autonomous Functional Testing",
+        "How to connect blocks to testing framework"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    "understanding": {
+      "original_query": "How do I create a no-code block on Watermelon platform and process it for Autonomous Functional Testing?",
+      "decomposition": {
+        "original_query": "How do I create a no-code block on Watermelon platform and process it for Autonomous Functional Testing?",
+        "sub_questions": [
+          {
+            "id": "q1",
+            "question": "How do I create a no-code block on the Watermelon platform?",
+            "topics": [
+              "Watermelon platform",
+              "no-code block creation"
+            ],
+            "dependency_type": "sequential",
+            "depends_on": [],
+            "priority": 1,
+            "reasoning": "Understanding how to create a no-code block is the foundational step."
+          },
+          {
+            "id": "q2",
+            "question": "What is Autonomous Functional Testing and how does it apply to no-code blocks on the Watermelon platform?",
+            "topics": [
+              "Autonomous Functional Testing",
+              "Watermelon platform"
+            ],
+            "dependency_type": "sequential",
+            "depends_on": [
+              "q1"
+            ],
+            "priority": 2,
+            "reasoning": "Before processing a no-code block for testing, one needs to understand what Autonomous Functional Testing entails in this context."
+          },
+          {
+            "id": "q3",
+            "question": "How do I process a no-code block for Autonomous Functional Testing on the Watermelon platform?",
+            "topics": [
+              "Autonomous Functional Testing",
+              "no-code block processing",
+              "Watermelon platform"
+            ],
+            "dependency_type": "sequential",
+            "depends_on": [
+              "q1",
+              "q2"
+            ],
+            "priority": 3,
+            "reasoning": "With the understanding of no-code block creation and Autonomous Functional Testing, this step involves applying that knowledge to process the block for testing."
+          }
+        ],
+        "query_complexity": "complex",
+        "should_decompose": true,
+        "total_topics": 4,
+        "reasoning": "The query involves multiple steps and concepts, including creating a no-code block and processing it for Autonomous Functional Testing, which requires breaking down into manageable parts."
+      },
+      "classification": {
+        "query_type": "procedural",
+        "complexity": "very_complex",
+        "topic_count": 7,
+        "primary_topics": [
+          "Watermelon platform",
+          "no-code block creation",
+          "Autonomous Functional Testing"
+        ],
+        "expected_format": "detailed_guide",
+        "requires_images": false,
+        "requires_code": true,
+        "requires_tables": false,
+        "technical_depth": "medium",
+        "estimated_chunks_needed": 29,
+        "confidence": 0.85
+      },
+      "intent": {
+        "primary_intent": "create",
+        "secondary_intents": [],
+        "actions": [
+          "write",
+          "test"
+        ],
+        "entities": [
+          {
+            "text": "watermelon",
+            "type": "product",
+            "confidence": 0.9
+          },
+          {
+            "text": "no-code block",
+            "type": "feature",
+            "confidence": 0.9
+          },
+          {
+            "text": "Autonomous Functional Testing",
+            "type": "unknown",
+            "confidence": 0.7
+          }
+        ],
+        "user_goal": "Create create a no-code block on",
+        "prerequisites": [
+          "Required permissions",
+          "Understanding of basic concepts"
+        ],
+        "expected_outcome": "Successfully created and functional",
+        "confidence": 0.85
+      },
+      "retrieval_strategy": "hybrid",
+      "generation_strategy": "step_by_step",
+      "priority_topics": [
+        "no-code block creation",
+        "no-code block processing",
+        "Autonomous Functional Testing",
+        "no-code block",
+        "Watermelon platform",
+        "watermelon"
+      ],
+      "estimated_response_time": 15.0
+    }
+  },
+  {
+    "test_id": 2,
+    "query": "What are the integration steps for MS Teams and how do I configure automated responses with chatbots?",
+    "test_metadata": {
+      "id": 2,
+      "query": "What are the integration steps for MS Teams and how do I configure automated responses with chatbots?",
+      "type": "multi-topic_integration",
+      "complexity": "high",
+      "topics": [
+        "MS Teams integration",
+        "chatbots",
+        "automated responses",
+        "configuration"
+      ],
+      "expected_components": [
+        "MS Teams integration prerequisites",
+        "Step-by-step integration guide",
+        "Chatbot configuration options",
+        "Automated response setup"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    "understanding": {
+      "original_query": "What are the integration steps for MS Teams and how do I configure automated responses with chatbots?",
+      "decomposition": {
+        "original_query": "What are the integration steps for MS Teams and how do I configure automated responses with chatbots?",
+        "sub_questions": [
+          {
+            "id": "q1",
+            "question": "What are the integration steps for MS Teams?",
+            "topics": [
+              "MS Teams",
+              "Integration"
+            ],
+            "dependency_type": "independent",
+            "depends_on": [],
+            "priority": 1,
+            "reasoning": "Understanding the integration process is a foundational step."
+          },
+          {
+            "id": "q2",
+            "question": "How do I configure automated responses with chatbots in MS Teams?",
+            "topics": [
+              "MS Teams",
+              "Chatbots",
+              "Automated Responses"
+            ],
+            "dependency_type": "sequential",
+            "depends_on": [
+              "q1"
+            ],
+            "priority": 2,
+            "reasoning": "Configuring automated responses likely requires a integrated MS Teams environment, making it sequential to the integration step."
+          }
+        ],
+        "query_complexity": "moderate",
+        "should_decompose": true,
+        "total_topics": 4,
+        "reasoning": "The query involves two distinct tasks: integrating MS Teams and configuring automated responses with chatbots, which require separate steps and considerations."
+      },
+      "classification": {
+        "query_type": "integration",
+        "complexity": "very_complex",
+        "topic_count": 5,
+        "primary_topics": [
+          "MS Teams",
+          "Integration",
+          "MS Teams"
+        ],
+        "expected_format": "detailed_guide",
+        "requires_images": false,
+        "requires_code": false,
+        "requires_tables": false,
+        "technical_depth": "low",
+        "estimated_chunks_needed": 25,
+        "confidence": 0.85
+      },
+      "intent": {
+        "primary_intent": "learn",
+        "secondary_intents": [
+          "configure"
+        ],
+        "actions": [
+          "configure"
+        ],
+        "entities": [
+          {
+            "text": "ms teams",
+            "type": "product",
+            "confidence": 0.9
+          },
+          {
+            "text": "integration",
+            "type": "feature",
+            "confidence": 0.9
+          }
+        ],
+        "user_goal": "Understand the integration steps for ms",
+        "prerequisites": [],
+        "expected_outcome": "Clear understanding of the concept",
+        "confidence": 0.85
+      },
+      "retrieval_strategy": "hybrid",
+      "generation_strategy": "standard",
+      "priority_topics": [
+        "MS Teams",
+        "Chatbots",
+        "Integration",
+        "integration",
+        "ms teams"
+      ],
+      "estimated_response_time": 12.0
+    }
+  },
+  {
+    "test_id": 3,
+    "query": "How do I set up WhatsApp Business API integration, create conversation flows, and implement message templates?",
+    "test_metadata": {
+      "id": 3,
+      "query": "How do I set up WhatsApp Business API integration, create conversation flows, and implement message templates?",
+      "type": "multi-topic_integration",
+      "complexity": "very_high",
+      "topics": [
+        "WhatsApp Business API",
+        "conversation flows",
+        "message templates",
+        "integration"
+      ],
+      "expected_components": [
+        "WhatsApp Business API setup",
+        "Conversation flow designer usage",
+        "Message template creation",
+        "Template approval process"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    "understanding": {
+      "original_query": "How do I set up WhatsApp Business API integration, create conversation flows, and implement message templates?",
+      "decomposition": {
+        "original_query": "How do I set up WhatsApp Business API integration, create conversation flows, and implement message templates?",
+        "sub_questions": [
+          {
+            "id": "q1",
+            "question": "How do I set up WhatsApp Business API integration?",
+            "topics": [
+              "WhatsApp Business API",
+              "Integration"
+            ],
+            "dependency_type": "sequential",
+            "depends_on": [],
+            "priority": 1,
+            "reasoning": "Setup is the foundational step, and understanding this process is crucial before proceeding to more advanced features."
+          },
+          {
+            "id": "q2",
+            "question": "How do I create conversation flows for WhatsApp Business API?",
+            "topics": [
+              "Conversation Flows",
+              "WhatsApp Business API"
+            ],
+            "dependency_type": "sequential",
+            "depends_on": [
+              "q1"
+            ],
+            "priority": 2,
+            "reasoning": "Creating conversation flows builds upon the setup of the WhatsApp Business API, as it requires an established integration to function."
+          },
+          {
+            "id": "q3",
+            "question": "How do I implement message templates in WhatsApp Business API?",
+            "topics": [
+              "Message Templates",
+              "WhatsApp Business API"
+            ],
+            "dependency_type": "sequential",
+            "depends_on": [
+              "q1",
+              "q2"
+            ],
+            "priority": 3,
+            "reasoning": "Implementing message templates is a step that follows the setup of the API and the creation of conversation flows, as it often relies on these foundational elements to be effective."
+          }
+        ],
+        "query_complexity": "complex",
+        "should_decompose": true,
+        "total_topics": 4,
+        "reasoning": "The query involves multiple steps and components of WhatsApp Business API integration, including setup, conversation flows, and message templates, which require separate explanations and procedures."
+      },
+      "classification": {
+        "query_type": "integration",
+        "complexity": "very_complex",
+        "topic_count": 6,
+        "primary_topics": [
+          "WhatsApp Business API",
+          "Integration",
+          "Conversation Flows"
+        ],
+        "expected_format": "detailed_guide",
+        "requires_images": false,
+        "requires_code": true,
+        "requires_tables": false,
+        "technical_depth": "medium",
+        "estimated_chunks_needed": 27,
+        "confidence": 0.85
+      },
+      "intent": {
+        "primary_intent": "create",
+        "secondary_intents": [
+          "configure",
+          "integrate"
+        ],
+        "actions": [
+          "write",
+          "configure"
+        ],
+        "entities": [
+          {
+            "text": "api",
+            "type": "feature",
+            "confidence": 0.9
+          },
+          {
+            "text": "integration",
+            "type": "feature",
+            "confidence": 0.9
+          },
+          {
+            "text": "WhatsApp Business API",
+            "type": "unknown",
+            "confidence": 0.7
+          }
+        ],
+        "user_goal": "Create set up whatsapp business api",
+        "prerequisites": [
+          "API key or token",
+          "Required permissions",
+          "Understanding of basic concepts"
+        ],
+        "expected_outcome": "Successfully created and functional",
+        "confidence": 0.85
+      },
+      "retrieval_strategy": "hybrid",
+      "generation_strategy": "code_focused",
+      "priority_topics": [
+        "WhatsApp Business API",
+        "Message Templates",
+        "Conversation Flows",
+        "Integration",
+        "integration",
+        "api"
+      ],
+      "estimated_response_time": 15.0
+    }
+  },
+  {
+    "test_id": 4,
+    "query": "What's the difference between triggered messages and scheduled broadcasts, and how do I set them up?",
+    "test_metadata": {
+      "id": 4,
+      "query": "What's the difference between triggered messages and scheduled broadcasts, and how do I set them up?",
+      "type": "conceptual_procedural",
+      "complexity": "medium",
+      "topics": [
+        "triggered messages",
+        "scheduled broadcasts",
+        "messaging"
+      ],
+      "expected_components": [
+        "Definition of triggered messages",
+        "Definition of scheduled broadcasts",
+        "Key differences",
+        "Setup instructions for both"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    "understanding": {
+      "original_query": "What's the difference between triggered messages and scheduled broadcasts, and how do I set them up?",
+      "decomposition": {
+        "original_query": "What's the difference between triggered messages and scheduled broadcasts, and how do I set them up?",
+        "sub_questions": [
+          {
+            "id": "q1",
+            "question": "What is the difference between triggered messages and scheduled broadcasts?",
+            "topics": [
+              "triggered messages",
+              "scheduled broadcasts",
+              "messaging types"
+            ],
+            "dependency_type": "independent",
+            "depends_on": [],
+            "priority": 1,
+            "reasoning": "Understanding the difference is fundamental before setting up either type."
+          },
+          {
+            "id": "q2",
+            "question": "How do I set up triggered messages?",
+            "topics": [
+              "triggered messages",
+              "setup",
+              "configuration"
+            ],
+            "dependency_type": "sequential",
+            "depends_on": [
+              "q1"
+            ],
+            "priority": 2,
+            "reasoning": "Setting up triggered messages requires understanding what they are and how they differ from scheduled broadcasts."
+          },
+          {
+            "id": "q3",
+            "question": "How do I set up scheduled broadcasts?",
+            "topics": [
+              "scheduled broadcasts",
+              "setup",
+              "configuration"
+            ],
+            "dependency_type": "sequential",
+            "depends_on": [
+              "q1"
+            ],
+            "priority": 2,
+            "reasoning": "Similar to setting up triggered messages, understanding the concept and its differences from triggered messages is necessary for setup."
+          }
+        ],
+        "query_complexity": "moderate",
+        "should_decompose": true,
+        "total_topics": 5,
+        "reasoning": "The query asks for both a comparison between two concepts and instructions on setup, indicating a need for decomposition into more specific sub-questions."
+      },
+      "classification": {
+        "query_type": "comparison",
+        "complexity": "very_complex",
+        "topic_count": 9,
+        "primary_topics": [
+          "triggered messages",
+          "scheduled broadcasts",
+          "messaging types"
+        ],
+        "expected_format": "comparison_table",
+        "requires_images": false,
+        "requires_code": false,
+        "requires_tables": false,
+        "technical_depth": "low",
+        "estimated_chunks_needed": 33,
+        "confidence": 0.85
+      },
+      "intent": {
+        "primary_intent": "configure",
+        "secondary_intents": [
+          "compare"
+        ],
+        "actions": [
+          "configure"
+        ],
+        "entities": [],
+        "user_goal": "Configure what's the difference between triggered",
+        "prerequisites": [
+          "Understanding of options",
+          "Access to settings"
+        ],
+        "expected_outcome": "Configured correctly and working as expected",
+        "confidence": 0.85
+      },
+      "retrieval_strategy": "hybrid",
+      "generation_strategy": "comparison",
+      "priority_topics": [
+        "triggered messages",
+        "messaging types",
+        "setup",
+        "scheduled broadcasts"
+      ],
+      "estimated_response_time": 15.0
+    }
+  },
+  {
+    "test_id": 5,
+    "query": "How do I create custom attributes for contacts, use them in conversation flows, and set up personalized messaging?",
+    "test_metadata": {
+      "id": 5,
+      "query": "How do I create custom attributes for contacts, use them in conversation flows, and set up personalized messaging?",
+      "type": "multi-topic_procedural",
+      "complexity": "high",
+      "topics": [
+        "custom attributes",
+        "contact management",
+        "conversation flows",
+        "personalization"
+      ],
+      "expected_components": [
+        "Creating custom attributes",
+        "Using attributes in flows",
+        "Personalization syntax",
+        "Best practices"
+      ],
+      "requires_images": true,
+      "requires_steps": true
+    },
+    "understanding": {
+      "original_query": "How do I create custom attributes for contacts, use them in conversation flows, and set up personalized messaging?",
+      "decomposition": {
+        "original_query": "How do I create custom attributes for contacts, use them in conversation flows, and set up personalized messaging?",
+        "sub_questions": [
+          {
+            "id": "q1",
+            "question": "How do I create custom attributes for contacts?",
+            "topics": [
+              "contact management",
+              "custom attributes"
+            ],
+            "dependency_type": "independent",
+            "depends_on": [],
+            "priority": 1,
+            "reasoning": "Creating custom attributes is the foundational step, necessary before using them in conversation flows or setting up personalized messaging."
+          },
+          {
+            "id": "q2",
+            "question": "How do I use custom attributes in conversation flows?",
+            "topics": [
+              "conversation flows",
+              "custom attributes"
+            ],
+            "dependency_type": "sequential",
+            "depends_on": [
+              "q1"
+            ],
+            "priority": 2,
+            "reasoning": "Using custom attributes in conversation flows depends on having already created these attributes, making it a sequential step."
+          },
+          {
+            "id": "q3",
+            "question": "How do I set up personalized messaging using custom attributes?",
+            "topics": [
+              "personalized messaging",
+              "custom attributes"
+            ],
+            "dependency_type": "sequential",
+            "depends_on": [
+              "q1",
+              "q2"
+            ],
+            "priority": 3,
+            "reasoning": "Setting up personalized messaging requires both the creation of custom attributes and their integration into conversation flows, making it the final step in the sequence."
+          }
+        ],
+        "query_complexity": "complex",
+        "should_decompose": true,
+        "total_topics": 4,
+        "reasoning": "The query involves multiple tasks related to custom attributes for contacts, conversation flows, and personalized messaging, requiring a breakdown into manageable parts."
+      },
+      "classification": {
+        "query_type": "procedural",
+        "complexity": "very_complex",
+        "topic_count": 6,
+        "primary_topics": [
+          "contact management",
+          "custom attributes",
+          "conversation flows"
+        ],
+        "expected_format": "detailed_guide",
+        "requires_images": false,
+        "requires_code": false,
+        "requires_tables": false,
+        "technical_depth": "low",
+        "estimated_chunks_needed": 27,
+        "confidence": 0.85
+      },
+      "intent": {
+        "primary_intent": "create",
+        "secondary_intents": [
+          "configure"
+        ],
+        "actions": [
+          "write",
+          "configure"
+        ],
+        "entities": [],
+        "user_goal": "Create create custom attributes for contacts,",
+        "prerequisites": [
+          "Required permissions",
+          "Understanding of basic concepts"
+        ],
+        "expected_outcome": "Successfully created and functional",
+        "confidence": 0.85
+      },
+      "retrieval_strategy": "hybrid",
+      "generation_strategy": "step_by_step",
+      "priority_topics": [
+        "contact management",
+        "conversation flows",
+        "personalized messaging",
+        "custom attributes"
+      ],
+      "estimated_response_time": 15.0
+    }
+  }
+]

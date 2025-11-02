@@ -146,6 +146,11 @@ class DoclingPDFProcessor:
         for page_idx, page in enumerate(doc.pages, start=1):
             logger.info(f"Processing page {page_idx}/{len(doc.pages)}")
 
+            # Safety check: skip if page is not an object
+            if not hasattr(page, 'elements'):
+                logger.warning(f"Skipping page {page_idx}: not a valid page object")
+                continue
+
             # Extract text blocks with hierarchy
             for element in page.elements:
                 text_block = self._process_element(
@@ -195,12 +200,19 @@ class DoclingPDFProcessor:
             return doc.metadata['title']
 
         # Fallback to first H1 heading
-        for page in doc.pages:
-            for element in page.elements:
-                if hasattr(element, 'label') and element.label == 'title':
-                    return element.text
-                if hasattr(element, 'level') and element.level == 1:
-                    return element.text
+        try:
+            if hasattr(doc, 'pages') and doc.pages:
+                for page in doc.pages:
+                    # Skip if page is not an object (safety check)
+                    if not hasattr(page, 'elements'):
+                        continue
+                    for element in page.elements:
+                        if hasattr(element, 'label') and element.label == 'title':
+                            return element.text
+                        if hasattr(element, 'level') and element.level == 1:
+                            return element.text
+        except Exception as e:
+            logger.warning(f"Failed to extract title from pages: {e}")
 
         return None
 

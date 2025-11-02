@@ -1,0 +1,58 @@
+======================================================================
+CHUNK QUALITY EVALUATION REPORT
+======================================================================
+
+📊 OVERVIEW
+   Total Chunks: 2133
+   Overall Quality Score: 0.89/1.00
+
+📏 SIZE METRICS
+   Average Size: 1283 chars (282 tokens)
+   Size Range: 155 - 1500 chars
+   Standard Deviation: 331 chars
+   Size Consistency Score: 0.67/1.00
+
+🏗️  STRUCTURE PRESERVATION
+   Chunks with Headings: 2106 (98.7%)
+   Average Heading Depth: 1.0
+   Sections Preserved: 100.0%
+   Avg Chunks per Section: 3.3
+   Structure Preservation Score: 0.99/1.00
+
+📦 CONTENT DISTRIBUTION
+   With Images: 719 (33.7%)
+   With Tables: 0 (0.0%)
+   With Code: 126 (5.9%)
+   With Lists: 1378 (64.6%)
+
+🔬 TECHNICAL DEPTH DISTRIBUTION
+   High: 773 (36.2%)
+   Low: 475 (22.3%)
+   Medium: 885 (41.5%)
+
+🔗 BOUNDARY ANALYSIS
+   Section Breaks: 654
+   Heading Splits: 0
+   Natural Breaks: 551
+   Mid-paragraph Splits: 927
+   Natural Break Ratio: 0.57
+
+⚠️  POTENTIAL ISSUES
+   Too Small: 94 chunks
+   Too Large: 0 chunks
+   Missing Context: 27 chunks
+   Missing Heading: 27 chunks
+   Isolated Chunks: 55 chunks
+
+✨ QUALITY SCORES
+   Size Consistency: 0.67/1.00
+   Structure Preservation: 0.99/1.00
+   Context Completeness: 0.96/1.00
+   OVERALL QUALITY: 0.89/1.00
+
+💡 RECOMMENDATIONS
+   - Consider adjusting chunk_size or chunk_overlap for better consistency
+   - Some chunks lack heading context; review document structure
+   ✅ Chunk quality is excellent! No major issues detected.
+
+======================================================================

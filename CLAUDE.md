@@ -4,341 +4,398 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Maximum-quality RAG system for complex multi-topic queries across 2300+ pages of Watermelon documentation. Implements **query decomposition + hierarchical chunking + multi-step retrieval** for questions spanning multiple topics.
+Maximum-quality RAG system for complex multi-topic queries across 2300+ pages of Watermelon documentation. Implements **query decomposition + hierarchical chunking + multi-step retrieval + advanced generation** for questions spanning multiple topics.
 
-**Example**: *"How do I create a no-code block on Watermelon and process it for Autonomous Functional Testing?"* requires understanding 3-4 different topics, retrieving context from different sections, and integrating information into coherent step-by-step answers.
+**Example Query**: *"How do I create a no-code block on Watermelon and process it for Autonomous Functional Testing?"* requires understanding 3-4 different topics, retrieving context from different sections, and integrating information into coherent step-by-step answers.
 
-**Current Status**: Phase 2 complete (22% overall - document processing pipeline ready). Phases 3-9 (query understanding, retrieval, generation, UI) are planned but not implemented.
+**Current Status**: Phases 1-7 complete (78% overall). Full RAG pipeline operational with evaluation framework. Phases 8-9 (UI and Deployment) remain.
 
-## Quick Reference
+## Critical Development Rules
 
-```bash
-# Setup
-python3 -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env  # Then add your API keys
+### 1. Module Import Pattern (MOST COMMON ERROR)
 
-# Run Phase 2 pipeline (document processing)
-python -m src.ingestion.docling_processor      # 15-60 min
-python -m src.ingestion.hierarchical_chunker   # 1-2 min
-python -m src.ingestion.chunk_evaluator        # <1 min
-
-# Check progress
-ls -lh cache/docling_processed.json cache/hierarchical_chunks.json
-cat tests/results/chunk_quality_report.txt
-
-# Validate configuration
-python config/settings.py
-```
-
-**Most Common Error**: Running modules with `python file.py` instead of `python -m module.path` → causes import errors.
-
-## Development Commands
-
-### Environment Setup
-```bash
-# Create and activate virtual environment
-python3 -m venv venv
-source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Validate configuration
-python config/settings.py
-```
-
-### Running Phase 2 Components (Document Processing)
-```bash
-# CRITICAL: Always use 'python -m module.path' syntax, never direct file paths
-# This ensures proper package context for relative imports
-
-python -m src.ingestion.docling_processor      # Extract PDF structure (~15-60 min)
-python -m src.ingestion.hierarchical_chunker   # Create context-aware chunks (~1-2 min)
-python -m src.ingestion.chunk_evaluator        # Evaluate chunk quality (<1 min)
-
-# Or run full pipeline sequentially
-python -m src.ingestion.docling_processor && \
-python -m src.ingestion.hierarchical_chunker && \
-python -m src.ingestion.chunk_evaluator
-```
-
-### Checking Processing State
-```bash
-# Check what's been processed (each step produces output files)
-ls -lh cache/docling_processed.json           # Should be ~23 MB (from step 1)
-ls -lh cache/hierarchical_chunks.json         # Should be ~3 MB (from step 2)
-ls tests/results/chunk_quality_report.txt     # Quality report (from step 3)
-
-# Check extracted images (if image processing enabled)
-ls cache/images/ | wc -l                      # Count extracted images
-
-# View test queries structure
-cat tests/test_queries.json | head -50        # See first test query
-```
-
-## Architecture & Critical Concepts
-
-### 1. Module Import Pattern (CRITICAL)
-
-**Always use `python -m module.path` syntax**, never direct file paths. This is the #1 most common error when working with this codebase.
+**Always use `python -m module.path` syntax**, never direct file paths.
 
 ```bash
 # ✅ CORRECT
 python -m src.ingestion.docling_processor
-python -m src.ingestion.hierarchical_chunker
+python -m src.retrieval.multi_step_retriever
+python -m src.generation.end_to_end_pipeline
+python -m src.evaluation.comprehensive_evaluation
 
 # ❌ WRONG - Will fail with ModuleNotFoundError
 python src/ingestion/docling_processor.py
-python src/ingestion/hierarchical_chunker.py
+python src/retrieval/multi_step_retriever.py
 ```
 
-**Root cause**: All modules use relative imports (`from src.ingestion.docling_processor import DocumentStructure`) which require proper package context. The `-m` flag ensures Python treats the directory as a package.
+**Root cause**: All modules use relative imports which require proper package context. The `-m` flag ensures Python treats the directory as a package.
 
 ### 2. Pydantic V2 Configuration System
 
-The configuration system in `config/settings.py` uses **Pydantic V2** with specific patterns:
-
-```python
-from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import field_validator
-
-class Settings(BaseSettings):
-    # Direct field definitions (no Field(..., env="VAR"))
-    openai_api_key: str
-    chunk_size: int = 1500
-
-    # V2 config pattern
-    model_config = SettingsConfigDict(
-        env_file=".env",
-        case_sensitive=False,
-        extra="ignore"
-    )
-
-    # V2 validator pattern
-    @field_validator("openai_api_key")
-    @classmethod
-    def check_not_placeholder(cls, v: str) -> str:
-        # validation logic
-        return v
-```
-
-**Important**: Settings fields are **flat** (not nested). Access as:
+Settings fields are **flat** (not nested). Access as:
 - `settings.pdf_path` ✅ NOT `settings.paths.pdf_path` ❌
 - `settings.chunk_size` ✅ NOT `settings.document.chunk_size` ❌
 
-### 3. Hierarchical Document Processing Pipeline
+Always use the getter function:
+```python
+from config.settings import get_settings
 
-The system processes documents in 3 stages:
+settings = get_settings()
+pdf_path = settings.pdf_path
+```
+
+### 3. Pinecone Package Version
+
+The project uses the new `pinecone` package (NOT `pinecone-client`). If you see import errors:
+```bash
+pip uninstall pinecone-client -y
+pip install -U pinecone
+```
+
+### 4. Groq Rate Limits (CRITICAL)
+
+**Free tier limits**: 100,000 tokens/day for Llama 3.3 70B
+- Query understanding uses ~1,000 tokens/query (decomposition)
+- Answer generation uses ~6,000 tokens/query
+- **Total**: ~7,000 tokens per query
+- **Daily capacity**: ~14 queries/day on free tier
+
+**If you hit rate limits**:
+```
+Error: Rate limit reached for model `llama-3.3-70b-versatile`
+Wait time: ~10 minutes (or until daily reset at midnight UTC)
+```
+
+**Solutions**:
+- Spread testing across multiple days (10 queries/day)
+- Upgrade to Groq Dev Tier for higher limits
+- Use smaller test sets during development
+
+## Common Commands
+
+### Environment Setup
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Validate configuration
+python -m config.settings
+```
+
+### Phase 2: Document Processing (✅ Complete)
+```bash
+# Process PDF with Docling (~15-60 min)
+python -m src.ingestion.docling_processor
+
+# Create hierarchical chunks (~1-2 min)
+python -m src.ingestion.hierarchical_chunker
+
+# Evaluate chunk quality (<1 min)
+python -m src.ingestion.chunk_evaluator
+
+# Filter TOC chunks (optional)
+python -m src.utils.toc_filter --strategy mark
+```
+
+**Output**:
+- `cache/docling_processed.json` (43 MB)
+- `cache/hierarchical_chunks_filtered.json` (4.5 MB, 2,106 content chunks)
+- `cache/images/` (1,454 images)
+
+### Phase 3: Query Understanding (✅ Complete)
+```bash
+# Test individual components
+python -m src.query.query_decomposer
+python -m src.query.query_classifier
+python -m src.query.intent_analyzer
+
+# Test full pipeline
+python -m src.query.query_understanding
+
+# Test with actual test queries
+python -m src.query.test_phase3
+```
+
+**Features**: LLM-based query decomposition, rule-based classification, intent analysis
+
+### Phase 4: Multi-Step Retrieval (✅ Complete)
+```bash
+# Test individual components
+python -m src.retrieval.hybrid_search
+python -m src.retrieval.reranker
+python -m src.retrieval.context_organizer
+
+# Test full retrieval pipeline
+python -m src.retrieval.multi_step_retriever
+
+# Run comprehensive tests
+python -m src.retrieval.test_phase4
+```
+
+**Features**: Hybrid search (vector + BM25), RRF fusion, Cohere reranking, context organization
+
+### Phase 5: Embeddings & Indexing (✅ Complete)
+```bash
+# Run full pipeline (embeddings + Pinecone + BM25)
+python -m src.database.run_phase5
+
+# Or run individual steps:
+python -m src.database.embedding_generator  # Generate embeddings
+python -m src.database.vector_store        # Create/upload to Pinecone
+python -m src.database.bm25_index         # Create BM25 index
+```
+
+**Output**:
+- `cache/hierarchical_embeddings.pkl` (59 MB)
+- `cache/bm25_index.pkl` (64 MB)
+- Pinecone index: `watermelon-docs-v2` (2,106 vectors, 3072-dim)
+
+**Cost**: ~$0.08 for embeddings (OpenAI text-embedding-3-large)
+
+### Phase 6: Advanced Generation (✅ Complete)
+```bash
+# Test answer generation
+python -m src.generation.answer_generator
+
+# Test response validation
+python -m src.generation.response_validator
+
+# Test full end-to-end pipeline
+python -m src.generation.end_to_end_pipeline
+```
+
+**Features**: Multi-strategy generation, response validation, citation extraction, image referencing
+
+### Phase 7: Evaluation & Testing (✅ Complete)
+```bash
+# Run comprehensive evaluation (interactive)
+python -m src.evaluation.comprehensive_evaluation
+# Options when prompted:
+# - Enter a number (e.g., "5") for first N queries
+# - Enter "all" for all 30 queries
+# - Press Enter for default (5 queries)
+
+# Test individual metrics
+python -m src.evaluation.retrieval_metrics
+python -m src.evaluation.generation_metrics
+```
+
+**Output**: `tests/results/comprehensive_evaluation.json`
+
+**Important**: Be mindful of Groq rate limits when testing many queries!
+
+### Checking Pipeline State
+```bash
+# Check what's been processed
+ls -lh cache/docling_processed.json              # Phase 2 step 1
+ls -lh cache/hierarchical_chunks_filtered.json   # Phase 2 step 2
+ls -lh cache/hierarchical_embeddings.pkl         # Phase 5 step 1
+ls -lh cache/bm25_index.pkl                      # Phase 5 step 2
+
+# Check quality reports
+cat tests/results/chunk_quality_report.txt
+cat tests/results/phase3_test_results.json
+cat tests/results/comprehensive_evaluation.json
+
+# Check evaluation results
+python -c "import json; print(json.dumps(json.load(open('tests/results/comprehensive_evaluation.json'))['statistics'], indent=2))"
+```
+
+## Architecture & Key Concepts
+
+### Complete Processing Pipeline (Phases 1-7 Complete)
 
 ```
 PDF (157 MB, 2257 pages)
     ↓
-[Docling Processor] - Extracts structure, headings, tables, images
+[Phase 2: Docling Processor]
+    → Structured JSON (43 MB) + 1,454 images
     ↓
-Structured JSON (23 MB) + Images
+[Phase 2: Hierarchical Chunker]
+    → 2,106 context-aware chunks (4.5 MB)
     ↓
-[Hierarchical Chunker] - Creates context-aware chunks with metadata
+[Phase 5: Embedding Generator]
+    → OpenAI embeddings (59 MB, 3072-dim)
     ↓
-Chunks with Context (3 MB, ~2500 chunks)
+[Phase 5: Vector Store + BM25]
+    → Pinecone index (2,106 vectors)
+    → BM25 index (16,460 vocab terms)
     ↓
-[Quality Evaluator] - Validates chunk quality
+[Phase 3: Query Understanding]
     ↓
-Quality Report + Metrics
+    Query → Decomposed Sub-questions → Classification → Intent
+    ↓
+[Phase 4: Multi-Step Retrieval]
+    ↓
+    For each sub-question:
+      1. Generate embedding (OpenAI)
+      2. Hybrid search (Vector + BM25)
+      3. RRF fusion
+      4. Cohere reranking
+    → Organized context (20 chunks)
+    ↓
+[Phase 6: Advanced Generation]
+    ↓
+    1. Strategy-aware prompting (Groq Llama 3.3 70B)
+    2. Multi-context integration
+    3. Citation extraction
+    4. Response validation
+    → Final answer with citations & images
+    ↓
+[Phase 7: Evaluation]
+    ↓
+    1. Retrieval metrics (Precision, Recall, MRR, MAP, NDCG)
+    2. Generation metrics (Completeness, Coherence, Formatting)
+    → Performance statistics
 ```
 
-**Key Innovation**: Unlike traditional RAG that loses document structure, this system:
-- Maintains heading hierarchy (H1→H2→H3→H4) in every chunk
-- Prepends section path for context: `"Section: Getting Started > Integration > MS Teams\n\n[content]"`
-- Preserves semantic boundaries (doesn't split mid-section)
-- Adds 20+ metadata fields per chunk
+### Key Innovations
 
-### 4. Docling Processing Performance
-
-**Important**: Docling PDF processing is CPU-intensive and can take 15-60 minutes for large PDFs (2000+ pages).
-
-**Why it's slow**:
-- Extracts hierarchical structure (not just raw text)
-- Processes images and tables
-- Runs OCR on embedded images
-- Preserves bounding boxes for all elements
-
-**Optimization for testing**:
+#### 1. **Hierarchical Context Preservation**
+Unlike traditional RAG, every chunk includes full section hierarchy:
 ```python
-processor = DoclingPDFProcessor(
-    pdf_path="data/helpdocs.pdf",
-    enable_tables=True,      # Keep tables
-    enable_images=False,     # Disable to speed up (if not needed immediately)
-    enable_ocr=False         # Disable if PDF has selectable text
-)
-```
-
-**Default Docling Configuration**:
-The code uses `DocumentConverter()` with defaults (StandardPdfPipeline), which includes:
-- OCR with RapidOCR
-- Table extraction
-- Image extraction
-- Structure preservation
-
-### 5. Chunk Metadata Schema (20+ Fields)
-
-Each `HierarchicalChunk` has a `ChunkMetadata` dataclass with rich metadata (see `src/ingestion/hierarchical_chunker.py:28`):
-
-```python
-@dataclass
-class ChunkMetadata:
-    # Location
-    chunk_id: str                    # Unique identifier
-    page_start: int                  # Starting page number
-    page_end: int                    # Ending page number
-    section_id: str                  # Section identifier
-
-    # Hierarchy (enables context reconstruction)
-    heading_path: List[str]          # ["Chapter 1", "Section 1.1", "Subsection 1.1.1"]
-    current_heading: Optional[str]   # "Subsection 1.1.1"
-    heading_level: Optional[int]     # 1-4 (H1-H4)
-
-    # Content characteristics (enables smart filtering)
-    content_type: str                # "text" | "table" | "list" | "code" | "mixed"
-    technical_depth: str             # "low" | "medium" | "high"
-
-    # Feature flags (enables multi-modal retrieval)
-    has_images: bool
-    has_tables: bool
-    has_code: bool
-    has_lists: bool
-
-    # References to related content
-    image_paths: List[str]           # Paths to extracted images
-    image_captions: List[str]        # Image captions
-    table_texts: List[str]           # Table content summaries
-
-    # Chunking metadata
-    is_continuation: bool            # True if part of split section
-    chunk_index: int                 # Index within section
-    total_chunks_in_section: int     # Total chunks in this section
-
-    # Size information
-    token_count: int                 # OpenAI tokens (for cost estimation)
-    char_count: int                  # Character count
-```
-
-**Usage in retrieval**: This metadata enables sophisticated filtering (e.g., "only return chunks with code examples" or "prioritize high technical depth") and ranking (e.g., "boost chunks with images for visual queries").
-
-## Data Flow & File Structure
-
-### Input/Output Files
-
-**Input**:
-- `data/helpdocs.pdf` - Source documentation (157 MB, 2257 pages)
-- `.env` - API keys and configuration (not in git)
-
-**Output from Phase 2**:
-- `cache/docling_processed.json` - Structured document (23 MB)
-- `cache/hierarchical_chunks.json` - Chunks with metadata (3 MB)
-- `cache/images/*.png` - Extracted images
-- `tests/results/chunk_quality_report.txt` - Quality evaluation
-
-**Configuration**:
-- `.env.example` - Template with all config options
-- `config/settings.py` - Pydantic settings class
-
-**Test Data**:
-- `tests/test_queries.json` - 30 complex multi-topic queries (structure shown below)
-
-### Test Query Structure
-
-Each test query in `tests/test_queries.json` follows this format:
-
-```json
-{
-  "id": 1,
-  "query": "How do I create a no-code block on Watermelon platform and process it for Autonomous Functional Testing?",
-  "type": "multi-topic_procedural",
-  "complexity": "high",
-  "topics": ["no-code blocks", "autonomous functional testing", "workflow creation"],
-  "expected_components": [
-    "What are no-code blocks",
-    "Steps to create a no-code block",
-    "What is Autonomous Functional Testing",
-    "How to connect blocks to testing framework"
-  ]
-}
-```
-
-Query types include: `multi-topic_procedural`, `multi-topic_integration`, `conceptual_procedural`, `troubleshooting`, `security_compliance`.
-
-### Module Organization
-
-```
-src/
-├── ingestion/          # ✅ Phase 2 COMPLETE
-│   ├── docling_processor.py    # PDF → Structured JSON (Docling-based)
-│   ├── hierarchical_chunker.py # JSON → Context-aware chunks
-│   └── chunk_evaluator.py      # Quality evaluation
-├── query/              # 🚧 Phase 3 NOT STARTED
-├── retrieval/          # 🚧 Phase 4 NOT STARTED
-├── database/           # 🚧 Phase 5 NOT STARTED
-├── generation/         # 🚧 Phase 6 NOT STARTED
-└── memory/             # 🚧 Phase 8 NOT STARTED
-```
-
-**Progress**: 2/9 phases complete (22%). Only document processing pipeline is implemented.
-
-## Critical Implementation Details
-
-### Context Injection Pattern
-
-The hierarchical chunker **prepends** section hierarchy to every chunk:
-
-```python
-# Example chunk content
 """
 Section: Getting Started > Integrations > MS Teams
 
 To integrate MS Teams with Watermelon:
 1. Navigate to Settings > Integrations
-2. Click "Connect MS Teams"
 ...
 """
 ```
 
-This ensures chunks contain hierarchical context even when retrieved in isolation.
+#### 2. **Rich Chunk Metadata (20+ Fields)**
+Each chunk in `hierarchical_chunks_filtered.json` has:
+- **Location**: chunk_id, page_start, page_end, section_id
+- **Hierarchy**: heading_path, current_heading, heading_level
+- **Content flags**: has_images, has_tables, has_code, is_toc
+- **Characteristics**: content_type, technical_depth
+- **References**: image_paths, table_texts
+- **Size**: token_count, char_count
 
-### Quality Targets
+This metadata is preserved in Pinecone for filtering during retrieval.
 
-The chunk evaluator measures quality with these targets:
-- **Size consistency score**: >0.85
-- **Structure preservation score**: >0.90
-- **Context completeness score**: >0.85
-- **Overall quality score**: >0.80 (critical threshold)
+#### 3. **TOC Filtering**
+Pages 1-18 are table of contents. All TOC chunks are marked with `is_toc: true` flag for filtering during retrieval.
 
-If quality is below 0.80, review chunking parameters in `.env`:
-```bash
-CHUNK_SIZE=1500
-CHUNK_OVERLAP=300
-MIN_CHUNK_SIZE=200
+#### 4. **Multi-Step Retrieval with Context Chaining**
+Each sub-question retrieves independently, then results are:
+1. Deduplicated across sub-questions
+2. Score-aggregated for multi-retrieved chunks
+3. Organized by topic and section hierarchy
+4. Context from earlier sub-questions enriches later ones
+
+#### 5. **Strategy-Aware Generation**
+Generation adapts based on query type:
+- **Step-by-step**: Procedural queries → numbered instructions
+- **Comparison**: Feature comparison queries → structured tables
+- **Troubleshooting**: Error queries → diagnosis + solutions
+- **Standard**: General queries → comprehensive answers
+
+### Data Flow & Files
+
+**Inputs**:
+- `data/helpdocs.pdf` (157 MB, 2257 pages)
+- `.env` (API keys - not in git)
+- `tests/test_queries.json` (30 complex test queries)
+
+**Phase 2 Outputs**:
+- `cache/docling_processed.json` - Structured document
+- `cache/hierarchical_chunks_filtered.json` - 2,106 chunks with TOC marked
+- `cache/images/*.png` - 1,454 extracted images
+
+**Phase 3 Outputs**:
+- `tests/results/phase3_test_results.json` - Query understanding tests
+
+**Phase 5 Outputs**:
+- `cache/hierarchical_embeddings.pkl` - All embeddings
+- `cache/bm25_index.pkl` - Keyword search index
+- Pinecone cloud index: `watermelon-docs-v2`
+
+**Phase 7 Outputs**:
+- `tests/results/comprehensive_evaluation.json` - Full evaluation results
+
+**Module Organization**:
+```
+src/
+├── ingestion/          # ✅ Phase 2 COMPLETE
+│   ├── docling_processor.py       # PDF → structured JSON
+│   ├── hierarchical_chunker.py    # JSON → context-aware chunks
+│   ├── chunk_evaluator.py         # Quality assessment
+│   └── pymupdf_processor.py       # Alternative PDF processor
+├── query/              # ✅ Phase 3 COMPLETE
+│   ├── query_decomposer.py        # LLM-based decomposition (Groq)
+│   ├── query_classifier.py        # Rule-based classification
+│   ├── intent_analyzer.py         # Intent extraction
+│   ├── query_understanding.py     # Orchestrator
+│   └── test_phase3.py            # Test suite
+├── database/           # ✅ Phase 5 COMPLETE
+│   ├── embedding_generator.py     # OpenAI embeddings
+│   ├── vector_store.py            # Pinecone management
+│   ├── bm25_index.py             # Keyword search index
+│   └── run_phase5.py             # Full pipeline
+├── retrieval/          # ✅ Phase 4 COMPLETE
+│   ├── hybrid_search.py           # Vector + BM25 + RRF fusion
+│   ├── reranker.py               # Cohere semantic reranking
+│   ├── context_organizer.py      # Result aggregation
+│   ├── multi_step_retriever.py   # Full retrieval orchestrator
+│   └── test_phase4.py            # Test suite
+├── generation/         # ✅ Phase 6 COMPLETE
+│   ├── answer_generator.py        # LLM generation (Groq)
+│   ├── response_validator.py      # Quality validation
+│   └── end_to_end_pipeline.py    # Complete RAG pipeline
+├── evaluation/         # ✅ Phase 7 COMPLETE
+│   ├── retrieval_metrics.py       # IR metrics (P, R, MRR, MAP, NDCG)
+│   ├── generation_metrics.py      # NLG metrics
+│   └── comprehensive_evaluation.py # Batch evaluation
+└── utils/
+    └── toc_filter.py              # TOC filtering utility
 ```
 
-### API Cost Considerations
+## Performance & Quality Metrics
 
-**Free Tier Limits**:
-- Groq: 14,400 requests/day (free)
-- Pinecone: 100,000 vectors (free)
-- Cohere: 1,000 calls/month (then $0.002/call)
+### Chunk Quality (Phase 2)
+- Overall score: 0.89/1.00 ✅ (target: >0.80)
+- Structure preservation: 0.99/1.00
+- Context completeness: 0.96/1.00
 
-**One-time costs**:
-- OpenAI embeddings (~2500 chunks): $3-5
+### Query Understanding (Phase 3)
+- 100% test success rate on 5 complex queries
+- Average 2.8 sub-questions per complex query
 
-**Per query**:
-- ~$0.002-0.005 (mostly Cohere re-ranking)
+### Embeddings (Phase 5)
+- 2,106 vectors in Pinecone (3072-dim)
+- BM25 vocabulary: 16,460 terms
+- 0% upload failures
 
-## Common Patterns & Conventions
+### Retrieval Performance (Phase 4 + 7)
+Based on evaluation results:
+- **Precision@10**: 0.52-0.70 (target: >0.70)
+- **Recall@10**: 0.41-0.64 (target: >0.60)
+- **MRR**: 0.39-0.75 (target: >0.70)
+- **Coverage**: 0.66-0.75 (target: >0.80)
+- **Diversity**: 1.00 (target: >0.70) ✅
+
+### Generation Quality (Phase 6 + 7)
+Based on evaluation results:
+- **Overall Score**: 0.88-0.92 (target: >0.75) ✅
+- **Completeness**: 1.00 (target: >0.80) ✅
+- **Word Count**: 400-600 words (ideal range)
+- **Quality Distribution**: 90% excellent (≥0.85)
+
+### Performance
+- **Avg Time per Query**: 14-30 seconds
+  - Query understanding: ~1-2s
+  - Retrieval (3 sub-questions): ~8-15s
+  - Generation: ~2-4s
+  - Validation: <1s
+- **Cost per Query**: ~$0.002 (OpenAI embeddings + Cohere reranking)
+- **Groq LLM**: FREE (within rate limits)
+
+## Common Patterns
 
 ### Error Handling
-
 All modules use try/except with graceful degradation:
-
 ```python
 try:
     from docling.document_converter import DocumentConverter
@@ -348,21 +405,16 @@ except ImportError:
 ```
 
 ### Logging
-
-Use Python's logging module (already configured):
-
 ```python
 import logging
 logger = logging.getLogger(__name__)
 
-logger.info(f"Processing page {page_num}/{total_pages}")
-logger.warning(f"Failed to extract image: {e}")
+logger.info(f"Processing {count} items")
+logger.warning(f"Skipped {skip_count} items")
 ```
 
-### Dataclasses for Structured Data
-
-The codebase extensively uses dataclasses:
-
+### Dataclasses
+Extensively used for structured data:
 ```python
 from dataclasses import dataclass, field, asdict
 
@@ -375,69 +427,17 @@ class ChunkMetadata:
 
 Use `asdict()` for JSON serialization.
 
-### Settings Access
-
-Always access settings via the getter:
-
+### Embedding Generation Pattern
+**Important**: Two separate methods for different use cases:
 ```python
-from config.settings import get_settings
+generator = EmbeddingGenerator()
 
-settings = get_settings()
-pdf_path = settings.pdf_path  # NOT settings.paths.pdf_path
+# For simple text strings (queries)
+embeddings = generator.generate_embeddings(["query1", "query2"])
+
+# For chunk dictionaries with metadata
+embedded_chunks = generator.generate_embeddings_for_chunks(chunks, show_progress=True)
 ```
-
-## Implementing Future Phases (3-9)
-
-### Development Approach
-
-Each new phase follows this pattern:
-1. Create module in appropriate `src/` subdirectory
-2. Follow existing patterns (dataclasses, logging, error handling)
-3. Add to pipeline in sequential order
-4. Test with `tests/test_queries.json` queries
-5. Update phase progress in this file
-
-### Key Architectural Decisions for Future Phases
-
-**Phase 3 (Query Understanding)** - Create `src/query/`:
-- Use OpenAI GPT-4 for query decomposition (via Groq Llama 3.3 70B to save cost)
-- Store sub-questions as structured data (dataclass with dependencies)
-- Query classification determines retrieval strategy
-- Integration point: Takes user query string, returns `DecomposedQuery` object
-
-**Phase 4 (Multi-Step Retrieval)** - Create `src/retrieval/`:
-- Hybrid search: Vector (Pinecone) + BM25 (in-memory index)
-- Use RRF (Reciprocal Rank Fusion) to merge results: `score = 1 / (k + rank)`
-- Cohere reranking as final step
-- Context chaining: Use results from sub-question N to refine retrieval for N+1
-- Integration point: Takes `DecomposedQuery` + `HierarchicalChunk[]`, returns `RetrievalResult[]`
-
-**Phase 5 (Embeddings)** - Create `src/database/`:
-- OpenAI text-embedding-3-large (3072-dim) for all chunks
-- Pinecone serverless index (AWS us-east-1, cosine similarity)
-- Store chunk metadata in Pinecone for filtering
-- BM25 index from chunk content (rank-bm25 library)
-- Integration point: One-time embedding generation, then query-time retrieval
-
-**Phase 6 (Generation)** - Create `src/generation/`:
-- Groq Llama 3.3 70B for answer generation
-- Multi-context prompt template (prepend all relevant chunks)
-- Response validation: Check all sub-questions addressed
-- Smart image selection from chunk metadata
-- Integration point: Takes `RetrievalResult[]`, returns formatted answer with citations
-
-**Phase 7 (Evaluation)** - Extend `tests/`:
-- Run all 30 test queries
-- Measure: Precision@10, MRR, NDCG (retrieval)
-- Measure: Completeness, accuracy, formatting (generation)
-- Store results in `tests/results/`
-
-**Phase 8 (UI)** - Create `app.py`:
-- Streamlit interface
-- Query input → show decomposed sub-questions → show retrieved chunks → final answer
-- Debug mode: Display all intermediate steps
-
-See `PROGRESS.md` for detailed specifications of each phase.
 
 ## Troubleshooting
 
@@ -445,101 +445,96 @@ See `PROGRESS.md` for detailed specifications of each phase.
 **Problem**: `ModuleNotFoundError: No module named 'src'`
 **Solution**: Use `python -m src.module.name` instead of running files directly
 
-### Pydantic Errors
-**Problem**: `PydanticDeprecatedSince20` warnings
-**Solution**: Settings class already uses Pydantic V2 patterns - don't use `Field(..., env="VAR")` syntax
+### Pinecone Import Error
+**Problem**: Error about `pinecone-client` vs `pinecone`
+**Solution**: `pip uninstall pinecone-client -y && pip install -U pinecone`
 
 ### Settings AttributeError
 **Problem**: `'Settings' object has no attribute 'paths'`
 **Solution**: Settings are flat - use `settings.pdf_path` not `settings.paths.pdf_path`
 
-### Docling Slow/Stuck
-**Problem**: PDF processing takes >60 minutes
+### Groq Rate Limit Error
+**Problem**: `Error code: 429 - Rate limit reached for model llama-3.3-70b-versatile`
 **Solution**:
-- For 2000+ page PDFs, 15-60 min is normal on CPU
-- To speed up: disable images/OCR if not needed immediately
-- Process is not stuck if CPU usage is high (check with `top`)
+- Wait 10 minutes or until daily reset (midnight UTC)
+- Spread testing across multiple days
+- Use smaller test batches (5-10 queries)
+- Upgrade to Groq Dev Tier for higher limits
 
-### Memory Issues
-**Problem**: Out of memory during Docling processing
-**Solution**: Large PDFs (150+ MB) need 4-8 GB RAM; consider processing in page ranges
+### Evaluation Fails on Many Queries
+**Problem**: Only first 1-2 queries succeed in batch evaluation
+**Root Cause**: Groq free tier limit (100K tokens/day ≈ 14 queries)
+**Solution**: Run evaluation in batches across multiple days:
+```bash
+# Day 1: First 10 queries
+python -m src.evaluation.comprehensive_evaluation
+# Enter: 10
+
+# Day 2: Next 10 queries (manually edit test_queries.json)
+# Day 3: Final 10 queries
+```
 
 ## API Keys Required
 
-Get from:
+All keys configured in `.env`:
 1. **OpenAI**: https://platform.openai.com/api-keys
+   - Used for: Embeddings (text-embedding-3-large)
+   - Cost: ~$0.08 one-time for all chunks
+   - Per-query cost: ~$0.0005 (3 sub-questions × 1 embedding each)
+
 2. **Pinecone**: https://app.pinecone.io/
+   - Used for: Vector database
+   - Free tier: 100K vectors, 1 index
+   - Current usage: 2,106 vectors
+
 3. **Cohere**: https://dashboard.cohere.com/api-keys
+   - Used for: Semantic reranking (rerank-english-v3.0)
+   - Free tier: 1000 requests/month
+   - Per-query cost: ~$0.0015 (3 sub-questions × 1 rerank each)
+
 4. **Groq**: https://console.groq.com/keys
+   - Used for: LLM inference (Llama 3.3 70B)
+   - Free tier: 100K tokens/day ≈ 14 queries/day
+   - Per-query usage: ~7,000 tokens
+   - **CRITICAL**: Monitor usage to avoid rate limits
 
-Add to `.env` (copy from `.env.example`).
+## Current State Summary
 
-## Quality Standards
+### ✅ Completed (78%)
+- **Phase 1**: Foundation & Setup
+- **Phase 2**: Document Processing (2,106 chunks, quality: 0.89)
+- **Phase 3**: Query Understanding (decomposition + classification + intent)
+- **Phase 4**: Multi-Step Retrieval (hybrid search + reranking + organization)
+- **Phase 5**: Embeddings & Indexing (Pinecone + BM25)
+- **Phase 6**: Advanced Generation (multi-strategy + validation)
+- **Phase 7**: Evaluation & Testing (comprehensive metrics)
 
-- **Chunk quality score**: Must be >0.80 before proceeding to embeddings
-- **Code documentation**: All functions have comprehensive docstrings
-- **Type hints**: Used throughout (Python 3.10+)
-- **Error handling**: Graceful degradation with user-friendly messages
-- **Logging**: Info/warning/error at appropriate levels
+### 🚧 Pending (22%)
+- **Phase 8**: UI Integration (Streamlit web app)
+- **Phase 9**: Documentation & Deployment (Docker, API, deployment guide)
 
----
+### 📊 System Capabilities (Current)
+- ✅ Process 2,257-page PDFs with structure preservation
+- ✅ Generate 2,106 context-aware chunks with 20+ metadata fields
+- ✅ Understand complex multi-topic queries via LLM decomposition
+- ✅ Hybrid retrieval (Vector + BM25 + RRF fusion + Cohere reranking)
+- ✅ Multi-step retrieval with context chaining
+- ✅ Strategy-aware answer generation (4 different strategies)
+- ✅ Response validation and quality scoring
+- ✅ Comprehensive evaluation framework (IR + NLG metrics)
+- ⏳ Web UI (Phase 8 needed)
+- ⏳ Production deployment (Phase 9 needed)
 
-## Resuming or Restarting Processing
-
-### If Processing Was Interrupted
-
-Check which outputs exist:
-```bash
-ls -lh cache/docling_processed.json        # Step 1 output
-ls -lh cache/hierarchical_chunks.json      # Step 2 output
-ls tests/results/chunk_quality_report.txt  # Step 3 output
-```
-
-**Resume from where it stopped**:
-- If `docling_processed.json` exists: Skip to step 2 (hierarchical_chunker)
-- If `hierarchical_chunks.json` exists: Skip to step 3 (chunk_evaluator)
-- If all exist: Phase 2 is complete, ready for Phase 3
-
-### Processing the Full PDF (First Time)
-
-The full 2257-page PDF takes 15-60 minutes depending on features enabled:
-
-```bash
-# Standard processing (tables only, no images): ~15-30 min
-python -m src.ingestion.docling_processor
-
-# With images: ~60-90 min (modify enable_images=True in docling_processor.py:~490)
-```
-
-**To run in background**:
-```bash
-nohup python -m src.ingestion.docling_processor > logs/docling.log 2>&1 &
-tail -f logs/docling.log  # Monitor progress
-```
-
-### Testing with Small Subset
-
-For rapid iteration/testing, extract first 20 pages:
-```bash
-pip install pypdf
-python -c "
-from PyPDF2 import PdfReader, PdfWriter
-reader = PdfReader('data/helpdocs.pdf')
-writer = PdfWriter()
-for i in range(20):
-    writer.add_page(reader.pages[i])
-with open('data/helpdocs_test.pdf', 'wb') as f:
-    writer.write(f)
-"
-# Then modify PDF_PATH in .env to point to helpdocs_test.pdf
-```
-
-Processing time: <2 minutes for 20 pages.
+### 🎯 Next Priority
+**Phase 8: UI Integration** - Build Streamlit web app for interactive query testing with real-time pipeline visualization and metrics display.
 
 ---
 
 **See Also**:
 - `README.md` - Project overview and architecture
-- `PROGRESS.md` - Detailed phase breakdowns and technical specs
-- `NEXT_STEPS.md` - Current processing options and troubleshooting
-- `SETUP.md` - Installation and configuration guide
+- `PROGRESS.md` - Detailed phase breakdowns
+- `PHASE_3_COMPLETE.md` - Query understanding details
+- `PHASE_4_COMPLETE.md` - Multi-step retrieval details
+- `PHASE_6_COMPLETE.md` - Advanced generation details
+- `PHASE_7_COMPLETE.md` - Evaluation framework details
+- `TOC_HANDLING.md` - TOC filtering strategy

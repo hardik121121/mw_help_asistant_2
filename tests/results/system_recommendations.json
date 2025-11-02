@@ -1,0 +1,309 @@
+{
+  "retrieval_analysis": {
+    "precision": {
+      "mean": 0.5666666666666667,
+      "median": 0.6,
+      "stdev": 0.29400132926433414,
+      "min": 0.0,
+      "max": 1.0,
+      "low_performers": [
+        4,
+        6,
+        7,
+        9,
+        11,
+        12,
+        15,
+        19,
+        21,
+        27,
+        29
+      ]
+    },
+    "recall": {
+      "mean": 0.5512300988771577,
+      "median": 0.5,
+      "stdev": 0.30392460044282804,
+      "min": 0.0,
+      "max": 1.0,
+      "low_performers": [
+        1,
+        4,
+        6,
+        7,
+        9,
+        10,
+        13,
+        15,
+        18,
+        19,
+        21,
+        22,
+        25,
+        29
+      ]
+    },
+    "mrr": {
+      "mean": 0.6272222222222222,
+      "median": 0.5,
+      "stdev": 0.3765512826357939,
+      "min": 0.0,
+      "max": 1.0,
+      "low_performers": [
+        1,
+        4,
+        6,
+        7,
+        9,
+        10,
+        13,
+        16,
+        19,
+        21,
+        22
+      ]
+    },
+    "coverage": {
+      "mean": 0.6788888888888889,
+      "median": 0.75,
+      "stdev": 0.3217806460361993,
+      "min": 0.0,
+      "max": 1.0
+    }
+  },
+  "generation_analysis": {
+    "overall_score": {
+      "mean": 0.9156603333333333,
+      "median": 0.92005,
+      "stdev": 0.05555023737391997,
+      "min": 0.8069799999999998,
+      "max": 0.99883,
+      "low_quality": [
+        1,
+        20,
+        21,
+        22,
+        27
+      ]
+    },
+    "completeness": {
+      "mean": 1.0,
+      "median": 1.0,
+      "perfect_count": 30
+    },
+    "word_count": {
+      "mean": 483.6666666666667,
+      "median": 458.0,
+      "stdev": 94.13355638018575,
+      "min": 340,
+      "max": 684,
+      "too_short": [],
+      "too_long": []
+    }
+  },
+  "time_analysis": {
+    "mean": 27.421941169102986,
+    "median": 33.359387159347534,
+    "stdev": 12.327922201337298,
+    "min": 3.4722981452941895,
+    "max": 42.483360290527344,
+    "slow_queries": [
+      4,
+      6,
+      10,
+      11,
+      13,
+      14,
+      15,
+      18,
+      19,
+      23,
+      25,
+      27,
+      30
+    ]
+  },
+  "type_analysis": {
+    "multi-topic_procedural": {
+      "count": 17,
+      "avg_precision": 0.4647058823529412,
+      "avg_generation_score": 0.9055835294117647,
+      "avg_time": 28.97831301128163
+    },
+    "multi-topic_integration": {
+      "count": 5,
+      "avg_precision": 0.8,
+      "avg_generation_score": 0.936574,
+      "avg_time": 17.682118606567382
+    },
+    "conceptual_procedural": {
+      "count": 1,
+      "avg_precision": 0.3,
+      "avg_generation_score": 0.94282,
+      "avg_time": 38.69479155540466
+    },
+    "multi-topic_conceptual": {
+      "count": 2,
+      "avg_precision": 0.7,
+      "avg_generation_score": 0.9715,
+      "avg_time": 35.30791258811951
+    },
+    "multi-topic_technical": {
+      "count": 2,
+      "avg_precision": 0.45,
+      "avg_generation_score": 0.8906799999999999,
+      "avg_time": 15.905466794967651
+    },
+    "multi-topic_security": {
+      "count": 2,
+      "avg_precision": 0.95,
+      "avg_generation_score": 0.9377500000000001,
+      "avg_time": 41.03851306438446
+    },
+    "multi-topic_experimental": {
+      "count": 1,
+      "avg_precision": 0.6,
+      "avg_generation_score": 0.8493399999999999,
+      "avg_time": 18.417744398117065
+    }
+  },
+  "recommendations": [
+    {
+      "category": "Retrieval - Precision",
+      "priority": "HIGH",
+      "current": "0.567",
+      "target": "0.70",
+      "issues": [
+        "Precision@10 below target",
+        "Too many irrelevant chunks in top results"
+      ],
+      "recommendations": [
+        "Fine-tune embedding model on domain-specific data",
+        "Implement query expansion with domain terms",
+        "Adjust reranking weights (increase Cohere influence)",
+        "Add metadata filtering for query types",
+        "Consider using cross-encoder reranking"
+      ]
+    },
+    {
+      "category": "Retrieval - Recall",
+      "priority": "HIGH",
+      "current": "0.551",
+      "target": "0.60",
+      "issues": [
+        "Recall@10 below target",
+        "Missing relevant chunks in retrievals"
+      ],
+      "recommendations": [
+        "Increase top_k in hybrid search (30 \u2192 50)",
+        "Improve query decomposition to capture all aspects",
+        "Add query reformulation/paraphrasing",
+        "Consider dense-sparse hybrid with ColBERT",
+        "Implement HyDE (Hypothetical Document Embeddings)"
+      ]
+    },
+    {
+      "category": "Retrieval - Ranking",
+      "priority": "MEDIUM",
+      "current": "0.627",
+      "target": "0.70",
+      "issues": [
+        "MRR below target",
+        "Relevant chunks not ranked high enough"
+      ],
+      "recommendations": [
+        "Train a custom reranking model on your data",
+        "Adjust RRF fusion weights (test different ratios)",
+        "Add LLM-based reranking as final step",
+        "Implement learning-to-rank with user feedback"
+      ]
+    },
+    {
+      "category": "Retrieval - Coverage",
+      "priority": "MEDIUM",
+      "current": "0.679",
+      "target": "0.80",
+      "issues": [
+        "Not all query topics being covered",
+        "Missing topic identification in retrieval"
+      ],
+      "recommendations": [
+        "Improve sub-question generation",
+        "Add topic modeling/clustering",
+        "Increase context window (20 \u2192 30 chunks)",
+        "Implement graph-based retrieval for related concepts"
+      ]
+    },
+    {
+      "category": "Generation - Quality",
+      "priority": "LOW",
+      "current": "0.916",
+      "target": "0.95",
+      "issues": [
+        "Some answers below excellence threshold",
+        "Formatting or citation issues"
+      ],
+      "recommendations": [
+        "Fine-tune prompt templates",
+        "Add few-shot examples for each query type",
+        "Implement iterative refinement",
+        "Use GPT-4 for complex queries",
+        "Add structured output validation"
+      ]
+    },
+    {
+      "category": "Performance - Speed",
+      "priority": "MEDIUM",
+      "current": "27.42s",
+      "target": "<15s",
+      "issues": [
+        "Average query time above target",
+        "User experience impact"
+      ],
+      "recommendations": [
+        "Implement query result caching",
+        "Parallelize sub-question retrieval",
+        "Use faster embedding model (reduce dimensions)",
+        "Optimize Pinecone queries (use namespaces)",
+        "Add async processing for non-critical paths",
+        "Consider using Groq API Pro tier for faster inference"
+      ]
+    },
+    {
+      "category": "Cost Optimization",
+      "priority": "LOW",
+      "current": "~$0.002/query",
+      "target": "<$0.001/query",
+      "issues": [
+        "Cohere reranking adds cost per query",
+        "Multiple embedding calls per query"
+      ],
+      "recommendations": [
+        "Cache embeddings for common query patterns",
+        "Use smaller embedding model for initial retrieval",
+        "Batch reranking calls when possible",
+        "Implement smart caching (Redis)",
+        "Consider self-hosted reranking model"
+      ]
+    },
+    {
+      "category": "Infrastructure",
+      "priority": "MEDIUM",
+      "current": "Development setup",
+      "target": "Production-ready",
+      "issues": [
+        "No production deployment",
+        "Missing monitoring and logging"
+      ],
+      "recommendations": [
+        "Deploy with Docker containers",
+        "Add Prometheus/Grafana for monitoring",
+        "Implement structured logging (ELK stack)",
+        "Set up CI/CD pipeline",
+        "Add health checks and alerting",
+        "Implement rate limiting and quotas",
+        "Add A/B testing framework"
+      ]
+    }
+  ]
+}

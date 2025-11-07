@@ -48,9 +48,9 @@ class Settings(BaseSettings):
     heading_4_size: int = 12
 
     # Retrieval Config
-    vector_top_k: int = 30
-    bm25_top_k: int = 30
-    rerank_top_k: int = 10
+    vector_top_k: int = 50  # Increased from 30 for better coverage
+    bm25_top_k: int = 50    # Increased from 30 for better coverage
+    rerank_top_k: int = 20  # Increased from 10 for better final results
     rerank_model: str = "rerank-english-v3.0"
     rrf_k: int = 60
     page_proximity: int = 3

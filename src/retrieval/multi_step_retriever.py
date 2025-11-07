@@ -204,11 +204,13 @@ class MultiStepRetriever:
         # Generate query embedding
         query_embedding = self.embedding_generator.generate_embeddings([query])[0]
 
-        # Hybrid search
-        results = self.hybrid_search.search(
+        # Hybrid search with query expansion (improves recall by searching synonyms)
+        results = self.hybrid_search.search_with_expansion(
             query=query,
             query_embedding=query_embedding,
+            embedding_generator=self.embedding_generator,
             top_k=30,  # Get more for reranking
+            max_expansions=2,  # Try original + 2 variations
             filter_toc=True
         )
 
@@ -416,11 +418,13 @@ class MultiStepRetriever:
         # Generate embedding
         query_embedding = self.embedding_generator.generate_embeddings([query])[0]
 
-        # Hybrid search
-        results = self.hybrid_search.search(
+        # Hybrid search with query expansion
+        results = self.hybrid_search.search_with_expansion(
             query=query,
             query_embedding=query_embedding,
-            top_k=top_k * 3
+            embedding_generator=self.embedding_generator,
+            top_k=top_k * 3,
+            max_expansions=2  # Try original + 2 variations
         )
 
         # Rerank if enabled

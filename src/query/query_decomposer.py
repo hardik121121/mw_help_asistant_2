@@ -171,38 +171,83 @@ class QueryDecomposer:
             return self._fallback_decomposition(query)
 
     def _build_decomposition_prompt(self, query: str) -> str:
-        """Build prompt for LLM decomposition."""
-        return f"""Analyze this query and break it down into sub-questions if needed.
+        """Build prompt for LLM decomposition with domain-specific guidance."""
+        return f"""You are analyzing a query about Watermelon (a test automation platform).
+Break down complex queries into sub-questions that enable effective documentation retrieval.
 
 Query: "{query}"
 
-Instructions:
-1. Identify if this is a simple query or requires decomposition
-2. If complex, break it into 2-4 logical sub-questions
-3. Identify topics for each sub-question
-4. Determine if sub-questions are independent or sequential
-5. Assign priority (1=highest)
+DOMAIN CONTEXT:
+- Watermelon is a test automation platform with features like:
+  * No-code test creation and automation
+  * Autonomous Functional Testing (AFT)
+  * Integrations (MS Teams, Slack, Shopify, Jira, etc.)
+  * API testing and parameterization
+  * Visual AI for test recording
+  * Device farms and grid testing
+
+DECOMPOSITION GUIDELINES:
+
+1. WHEN TO DECOMPOSE:
+   - Multiple distinct topics/features mentioned (e.g., "X and Y")
+   - Multi-step procedures (e.g., "create X then process for Y")
+   - Conceptual + procedural mix (e.g., "what is X and how to use it")
+   - Integration + configuration (e.g., "integrate X and configure Y")
+
+2. WHEN NOT TO DECOMPOSE:
+   - Single focused question about one feature
+   - Simple "what is" or "how to" questions
+   - Questions about a single integration or feature
+
+3. HOW TO CREATE EFFECTIVE SUB-QUESTIONS:
+   - Make each sub-question SELF-CONTAINED and SPECIFIC
+   - Use exact feature/integration names (e.g., "MS Teams", not just "integration")
+   - For procedural queries, separate "what" from "how"
+   - Maintain context from original query in each sub-question
+   - Keep sub-questions focused (one topic per question)
+   - Use the SAME terminology as the original query
+
+4. EXAMPLES OF GOOD DECOMPOSITION:
+
+   Query: "How do I integrate MS Teams and configure automated notifications?"
+   → Sub-Q1: "How do I integrate MS Teams with Watermelon?"
+   → Sub-Q2: "How do I configure automated notifications in MS Teams integration?"
+
+   Query: "What is Autonomous Functional Testing and how do I use it with no-code blocks?"
+   → Sub-Q1: "What is Autonomous Functional Testing in Watermelon?"
+   → Sub-Q2: "How do I use Autonomous Functional Testing with no-code blocks?"
+
+   Query: "How do I set up API testing?"  [SIMPLE - NO DECOMPOSITION]
+   → Sub-Q1: Original query only
+
+5. DEPENDENCY TYPES:
+   - "independent": Can answer in parallel (e.g., two unrelated features)
+   - "sequential": Must answer in order (e.g., "what is X" before "how to use X")
+   - "conditional": Answer depends on previous results (rarely used)
 
 Respond ONLY with valid JSON in this exact format:
 {{
     "query_complexity": "simple|moderate|complex|very_complex",
     "should_decompose": true|false,
-    "reasoning": "Brief explanation of your analysis",
+    "reasoning": "Brief explanation (1 sentence)",
     "sub_questions": [
         {{
             "id": "q1",
-            "question": "The sub-question text",
-            "topics": ["topic1", "topic2"],
+            "question": "Self-contained specific sub-question",
+            "topics": ["specific_feature", "integration_name"],
             "dependency_type": "independent|sequential|conditional",
             "depends_on": [],
             "priority": 1,
-            "reasoning": "Why this sub-question is needed"
+            "reasoning": "Why this sub-question helps retrieval (1 sentence)"
         }}
     ]
 }}
 
-If simple query (should_decompose=false), include just one sub-question with the original query.
-Ensure valid JSON syntax."""
+IMPORTANT:
+- If simple query, set should_decompose=false and include ONE sub-question with original query
+- Keep sub-questions specific and self-contained
+- Use exact names/terms from original query
+- Ensure valid JSON syntax (no trailing commas, proper escaping)"""
 
     def _parse_llm_response(self, original_query: str, llm_response: str) -> DecomposedQuery:
         """

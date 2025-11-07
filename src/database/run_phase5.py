@@ -61,7 +61,7 @@ print(f"  Estimated time: {estimate['estimated_time_minutes']:.1f} minutes")
 # Generate embeddings
 print(f"\nGenerating embeddings...")
 start_time = time.time()
-embedded_chunks = generator.generate_embeddings(chunks, show_progress=True)
+embedded_chunks = generator.generate_embeddings_for_chunks(chunks, show_progress=True)
 elapsed_time = time.time() - start_time
 
 print(f"\n⏱️  Time elapsed: {elapsed_time / 60:.1f} minutes")

@@ -14,6 +14,7 @@ except ImportError:
     Pinecone = None
 
 from config.settings import get_settings
+from src.query.query_expander import QueryExpander
 
 logger = logging.getLogger(__name__)
 
@@ -98,6 +99,9 @@ class HybridSearch:
             self.chunk_content_map = {}
             self.chunk_metadata_map = {}
 
+        # Initialize query expander for synonym-based expansion
+        self.query_expander = QueryExpander()
+
         logger.info("✅ HybridSearch initialized")
 
     def search(self,
@@ -162,6 +166,103 @@ class HybridSearch:
         final_results = fused_results[:top_k]
 
         logger.info(f"✅ Hybrid search complete: {len(final_results)} results")
+
+        return final_results
+
+    def search_with_expansion(self,
+                             query: str,
+                             query_embedding: List[float],
+                             embedding_generator,
+                             top_k: Optional[int] = None,
+                             max_expansions: int = 2,
+                             vector_weight: float = 0.5,
+                             bm25_weight: float = 0.5,
+                             filter_toc: bool = True,
+                             metadata_filter: Optional[Dict] = None) -> List[Dict]:
+        """
+        Perform hybrid search with query expansion for better recall.
+
+        Expands the query with synonyms and variations, searches with each,
+        then combines and deduplicates results.
+
+        Args:
+            query: Query text
+            query_embedding: Query embedding vector for original query
+            embedding_generator: Generator to create embeddings for expanded queries
+            top_k: Number of results to return
+            max_expansions: Maximum query variations to try (1-3 recommended)
+            vector_weight: Weight for vector search
+            bm25_weight: Weight for BM25 search
+            filter_toc: Filter out TOC chunks
+            metadata_filter: Optional metadata filter
+
+        Returns:
+            Combined and ranked results from all query variations
+        """
+        top_k = top_k or self.settings.vector_top_k
+
+        # Expand query
+        query_variations = self.query_expander.expand_query(query, max_expansions=max_expansions)
+
+        logger.info(f"🔍 Search with expansion: {len(query_variations)} query variations")
+        for i, var in enumerate(query_variations, 1):
+            logger.debug(f"  {i}. {var}")
+
+        # Search with each variation
+        all_results = {}  # chunk_id -> best result
+        all_scores = defaultdict(list)  # chunk_id -> list of scores
+
+        for i, query_var in enumerate(query_variations):
+            # Use original embedding for first query, generate new for expansions
+            if i == 0:
+                var_embedding = query_embedding
+            else:
+                # Generate embedding for expanded query
+                var_embedding = embedding_generator.generate_embeddings([query_var])[0]
+
+            # Search with this variation
+            results = self.search(
+                query=query_var,
+                query_embedding=var_embedding,
+                top_k=top_k * 2,  # Get more results per variation
+                vector_weight=vector_weight,
+                bm25_weight=bm25_weight,
+                filter_toc=filter_toc,
+                metadata_filter=metadata_filter
+            )
+
+            # Collect results
+            for result in results:
+                chunk_id = result['metadata']['chunk_id']
+                score = result.get('score', 0)
+
+                # Track all scores for this chunk
+                all_scores[chunk_id].append(score)
+
+                # Keep best result for each chunk
+                if chunk_id not in all_results or score > all_results[chunk_id].get('score', 0):
+                    all_results[chunk_id] = result
+
+        # Aggregate scores (use max score from all variations)
+        for chunk_id in all_results:
+            scores = all_scores[chunk_id]
+            all_results[chunk_id]['score'] = max(scores)  # Use best score
+            all_results[chunk_id]['expansion_hits'] = len(scores)  # How many variations matched
+
+        # Sort by aggregated score
+        combined_results = sorted(
+            all_results.values(),
+            key=lambda x: x['score'],
+            reverse=True
+        )
+
+        # Return top-k
+        final_results = combined_results[:top_k]
+
+        logger.info(f"✅ Expansion search complete:")
+        logger.info(f"   Query variations: {len(query_variations)}")
+        logger.info(f"   Unique chunks found: {len(all_results)}")
+        logger.info(f"   Returned: {len(final_results)}")
 
         return final_results
 

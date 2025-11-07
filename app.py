@@ -271,6 +271,21 @@ def main():
         st.info("💾 Indexed: 2,106 chunks")
         st.info("📄 Documentation: 2,257 pages")
 
+        st.markdown("---")
+        st.markdown("## 📈 Performance")
+        st.markdown("""
+        **Latest Evaluation Results:**
+        - Precision@10: **0.667** (+19%)
+        - Recall@10: **0.638** (+43%)
+        - MRR: **0.854** (+49%)
+        - Avg Time: **27.7s**
+        - Quality: **100% Excellent**
+        """)
+
+        st.markdown("**Improvements Active:**")
+        st.success("✅ Query Expansion (3x variations)")
+        st.success("✅ Fine-tuned Decomposition")
+
     # Initialize pipeline
     try:
         pipeline = load_pipeline()

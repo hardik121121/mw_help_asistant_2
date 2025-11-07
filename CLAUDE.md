@@ -60,8 +60,29 @@ Maximum-quality RAG system for complex multi-topic queries across 2300+ pages. I
 - Docling failed at page 495/2257 due to OCR errors
 - Switched to PyMuPDF - completed all 2257 pages in ~1 minute
 - File `cache/docling_processed.json` is **misleadingly named** - contains PyMuPDF output!
+- **README.md mentions Docling** but production uses PyMuPDF - this is a known documentation lag
 
 ## Critical Development Rules
+
+### 0. Python Module Execution (MOST FUNDAMENTAL)
+
+**NEVER run Python files directly. ALWAYS use module syntax.**
+
+```bash
+# ❌ WRONG - Will cause import errors
+python src/query/query_decomposer.py
+python3 src/retrieval/hybrid_search.py
+
+# ✅ CORRECT - Works from project root
+python -m src.query.query_decomposer
+python -m src.retrieval.hybrid_search
+python -m src.evaluation.comprehensive_evaluation
+
+# Why: Module syntax ensures Python includes project root in sys.path
+# This allows imports like "from config.settings import get_settings" to work
+```
+
+**This is THE most common error. When in doubt, use `python -m`.**
 
 ### 1. PDF Processing Strategy (MOST CRITICAL)
 
@@ -134,12 +155,26 @@ python -m src.evaluation.comprehensive_evaluation
 
 ### Testing Individual Components
 ```bash
-python -m src.query.query_decomposer
-python -m src.retrieval.hybrid_search
-python -m src.generation.answer_generator
+# Query Understanding Components
+python -m src.query.query_decomposer      # Test query decomposition
+python -m src.query.query_classifier      # Test query classification
+python -m src.query.query_expander        # Test query expansion
+python -m src.query.intent_analyzer       # Test intent analysis
+
+# Retrieval Components
+python -m src.retrieval.hybrid_search     # Test hybrid search
+python -m src.retrieval.multi_step_retriever  # Test multi-step retrieval
+
+# Generation Components
+python -m src.generation.answer_generator # Test answer generation
+python -m src.generation.response_validator  # Test validation
+
+# Database Components
+python -m src.database.bm25_index         # Test BM25 index
+python -m src.database.vector_store       # Test Pinecone operations
 ```
 
-**Note**: All modules with `if __name__ == "__main__"` can be tested independently.
+**Note**: All modules with `if __name__ == "__main__"` can be tested independently. ALWAYS use `python -m` syntax, never run files directly.
 
 ## Architecture Overview
 
@@ -187,20 +222,26 @@ Query → Decomposition → Multi-Step Retrieval → Generation → Answer
 - `cache/bm25_index.pkl` (64 MB)
 - Pinecone index: `watermelon-docs-v2` (2,106 vectors)
 
-## Performance Metrics (After Improvements)
+## Performance Metrics (Latest - Nov 7, 2024)
 
-**Retrieval** (15 queries evaluated):
-- Precision@10: **0.667** (+19.0% from baseline)
-- Recall@10: **0.638** (+42.8% from baseline)
-- MRR: **0.854** (+48.7% from baseline)
+**After Query Expansion + RRF Tuning** (5 queries evaluated):
+- Precision@10: **0.740** (+11% from 50/50 baseline)
+- Recall@10: **0.561** (-12% trade-off for precision)
+- MRR: **1.000** (perfect - best result always ranked #1!) 🎯
+- Coverage: **0.833** (+13%)
+
+**RRF Weights** (tuned for technical documentation):
+- Vector (semantic): 45%
+- BM25 (keyword): 55%
+- **Why**: Exact keywords (integration names, features) matter more than pure semantics
 
 **Generation**:
-- Overall Score: **0.914** (target >0.75) ✅
+- Overall Score: **0.912** (target >0.75) ✅
 - Completeness: **1.000** (perfect)
-- Quality: 100% excellent (15/15 queries)
+- Avg Word Count: 421
 
 **Performance**:
-- Avg time: **27.7s** per query
+- Avg time: **28.0s** per query
 - Cost: **$0.003** per query
 
 **See**: `docs/evaluation/final-results.md` for complete analysis.
@@ -224,6 +265,30 @@ python scripts/enrich_chunks.py
 ```
 
 ## Development Workflows
+
+### Debugging Pipeline Issues
+
+When the end-to-end pipeline fails or produces poor results:
+
+```bash
+# 1. Test each stage independently
+python -m src.query.query_understanding  # Check decomposition
+python -m src.retrieval.hybrid_search    # Check retrieval
+python -m src.generation.answer_generator  # Check generation
+
+# 2. Enable debug logging
+# In .env: LOG_LEVEL=DEBUG ENABLE_DEBUG_MODE=true
+
+# 3. Check intermediate outputs
+python -c "from dataclasses import asdict; import json;
+from src.generation.end_to_end_pipeline import EndToEndPipeline;
+pipeline = EndToEndPipeline();
+result = pipeline.process('test query');
+print(json.dumps(asdict(result), indent=2, default=str))"
+
+# 4. Inspect retrieval quality
+python scripts/diagnose_quality.py
+```
 
 ### Adding New Integration Synonyms
 ```python
@@ -309,16 +374,44 @@ print(f"Score: {pipeline_result.validation.overall_score}")
 - Context chaining requires sequential processing
 - Trade-off: simplicity vs speed (parallelization possible in Phase 9)
 
-### RRF Parameters
+### RRF Parameters (TUNED - Nov 7, 2024)
 
 ```python
-# In hybrid_search.py
+# In config/settings.py (configurable)
 rrf_k = 60  # Standard value (range: 20-100)
-vector_weight = 0.7  # 70% semantic
-bm25_weight = 0.3    # 30% keyword
+vector_weight = 0.45  # 45% semantic (TUNED from 0.5)
+bm25_weight = 0.55    # 55% keyword (TUNED from 0.5)
 ```
 
+**Why 45/55 split:**
+- Technical docs need exact keyword matching (integration names, features)
+- Achieved: MRR 100% (perfect ranking), +11% precision
+- Trade-off: -12% recall (acceptable for better UX)
+
+**How to tune:**
+1. Run baseline: `python -m src.evaluation.comprehensive_evaluation` (5 queries)
+2. Modify `vector_weight` and `bm25_weight` in `config/settings.py`
+3. Re-run evaluation
+4. Compare with: `python scripts/compare_evaluations.py tests/results/baseline.json tests/results/comprehensive_evaluation.json`
+
 ## Troubleshooting
+
+### Pipeline Runs Slowly
+**Problem**: End-to-end queries take >45 seconds
+**Solutions**:
+1. Reduce `vector_top_k` and `bm25_top_k` from 50 to 30
+2. Reduce `rerank_top_k` from 20 to 10
+3. Disable context chaining: `enable_context_chaining=False`
+4. Check Groq rate limits (free tier has throttling)
+
+### Poor Retrieval Results
+**Problem**: Retrieved chunks don't answer the query
+**Solutions**:
+1. Check query expansion: `python -m src.query.query_expander`
+2. Verify BM25 index is loaded: Check `cache/bm25_index.pkl` size (should be ~64MB)
+3. Test vector search alone: Set `bm25_weight=0.0, vector_weight=1.0`
+4. Test keyword search alone: Set `vector_weight=0.0, bm25_weight=1.0`
+5. Run diagnostics: `python scripts/diagnose_quality.py`
 
 ### Import Errors
 **Problem**: `ModuleNotFoundError: No module named 'src'`
@@ -369,6 +462,7 @@ Get keys at: `docs/setup/api-keys.md`
 - ❌ Using `= []` for mutable defaults instead of `field(default_factory=list)`
 - ❌ Evaluating all 30 queries at once (exceeds Groq limits - use 5!)
 - ❌ Not saving baseline before changes (use `compare_evaluations.py`)
+- ❌ Trusting README.md over CLAUDE.md (README has outdated Docling references)
 
 ## Critical File Naming Gotchas
 

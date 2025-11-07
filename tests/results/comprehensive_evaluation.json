@@ -1,27 +1,27 @@
 {
-  "evaluation_date": "2025-11-04 11:03:38",
-  "num_queries": 30,
+  "evaluation_date": "2025-11-07 06:37:00",
+  "num_queries": 5,
   "statistics": {
-    "num_total": 30,
-    "num_successful": 15,
-    "num_failed": 15,
-    "success_rate": 0.5,
-    "total_time": 610.2048897743225,
-    "avg_query_time": 27.70451924006144,
+    "num_total": 5,
+    "num_successful": 5,
+    "num_failed": 0,
+    "success_rate": 1.0,
+    "total_time": 143.91893076896667,
+    "avg_query_time": 27.981607246398926,
     "retrieval": {
-      "avg_precision_at_10": 0.6666666666666666,
-      "avg_recall_at_10": 0.6384137757667169,
-      "avg_mrr": 0.853968253968254,
-      "avg_coverage": 0.7377777777777778,
+      "avg_precision_at_10": 0.74,
+      "avg_recall_at_10": 0.5610714285714286,
+      "avg_mrr": 1.0,
+      "avg_coverage": 0.8333333333333334,
       "avg_diversity": 1.0
     },
     "generation": {
-      "avg_overall_score": 0.9136106666666667,
+      "avg_overall_score": 0.9123239999999999,
       "avg_completeness": 1.0,
-      "avg_word_count": 505.6666666666667,
+      "avg_word_count": 420.6,
       "quality_distribution": {
-        "excellent": 15,
-        "good": 0,
+        "excellent": 4,
+        "good": 1,
         "fair": 0,
         "poor": 0
       }
@@ -43,35 +43,41 @@
         },
         "retrieval": {
           "total_retrieved": 20,
-          "final_chunks": 15,
+          "final_chunks": 17,
           "unique_sections": 0,
-          "time": 18.35162663459778
+          "time": 19.64979887008667
         },
         "answer": {
-          "text": "**Prerequisites:**\n1. Ensure you have access to the Watermelon platform and are familiar with its basic functionality.\n2. Understand the concept of no-code blocks and Autonomous Functional Testing (AFT) within the Watermelon platform.\n\n**Step-by-Step Instructions:**\n\n### Creating a No-Code Block on the Watermelon Platform:\n\n1. **Access the No-Code Workspace:**\n   - Navigate to the Watermelon platform and select the appropriate project and application under test.\n   - Identify the specific test case or API where you want to create a no-code block. For example, if you're working with an API that requires a unique quotation code, you'll need to access the request body of that API.\n   - Click on the input variable you need to parameterize (e.g., quotationCode), and Watermelon will bring it into the Field-Value pane below.\n   - Click on the fx button next to the Field Value pair to create the parameterization. This will open the no-code workspace.\n\n2. **Utilize No-Code Functions:**\n   - Within the no-code workspace, you can use the block-based no-code functions provided by Watermelon to manipulate the input variable (e.g., creating a unique quotation code).\n   - Watermelon offers various toolkits for manipulating inputs, including list operations, logical operations, string operations, math functions, date/time functions, and more.\n   - Select the appropriate function that matches your requirement. For instance, if you need to generate a random alphanumeric string starting with \"QC\" followed by a unique number, you would use a combination of string and math functions.\n\n3. **Configure the No-Code Block:**\n   - Once you've selected the function, configure it according to your needs. This might involve specifying the format of the output, the length of a string, or the conditions for a logical operation.\n   - Ensure that the configuration aligns with the requirements of your test case or API.\n\n4. **Apply the No-Code Block:**\n   - After configuring the no-code block, apply it to your test case or API request.\n   - Watermelon will integrate the no-code block into your test script, allowing you to automate the manipulation of input variables without writing code.\n\n### Processing a No-Code Block for Autonomous Functional Testing:\n\n1. **Record a Test Case:**\n   - Use Watermelon's recording feature to capture the steps of your test case. This can be done for web, mobile, or desktop applications.\n   - As you perform the test case steps, Watermelon automatically generates a no-code test script in the background.\n\n2. **Refine the Test Case:**\n   - Once the test case is recorded, refine it as needed by manually editing, adding, or adjusting steps.\n   - Utilize Watermelon's Visual AI engine to track and record all activities within the application under test.\n\n3. **Integrate No-Code Blocks into the Test Case:**\n   - Identify where in the test case you need to integrate the no-code block created earlier (e.g., for generating a unique quotation code).\n   - Insert the no-code block into the appropriate step of the test case, ensuring that it is properly configured to meet the test case's requirements.\n\n4. **Execute the Test Case:**\n   - With the no-code block integrated into your test case, execute the test case using Watermelon's Autonomous Functional Testing module.\n   - The no-code block will automate the manipulation of input variables according to its configuration, allowing for dynamic and flexible testing without the need for manual intervention or coding.\n\n**Expected Outcomes:**\n- Successful creation and integration of a no-code block into a test case for Autonomous Functional Testing.\n- Automated manipulation of input variables during test execution, enhancing the efficiency and reliability of testing.\n- Ability to perform comprehensive testing across various scenarios and requirements without requiring extensive programming knowledge.\n\n**Tips and Warnings:**\n- Ensure that the no-code block is properly configured to meet the specific requirements of your test case or API.\n- Regularly review and update your no-code blocks as needed to maintain their effectiveness and relevance.\n- Leverage Watermelon's support resources and documentation for guidance on creating and utilizing no-code blocks for Autonomous Functional Testing.\n\n**Relevant Screenshots:**\n- Refer to the screenshots available in the Watermelon documentation, such as those found in Section 1 (cache/images/page_0880_img_02.png, cache/images/page_0881_img_00.png), for visual guidance on creating and configuring no-code blocks.",
+          "text": "**Prerequisites:**\n1. Ensure you have access to the Watermelon platform and the necessary permissions to create and process no-code blocks.\n2. Familiarize yourself with the Watermelon interface and its various components, such as the no-code workspace and the Field-Value pane.\n\n**Creating a No-Code Block on the Watermelon Platform:**\n1. **Access the No-Code Workspace**: Click on the input variable you need to parameterize (e.g., quotationCode) and Watermelon will recognize you want to manipulate it, bringing it into the Field-Value pane below.\n2. **Create Parameterization**: Click on the fx button to the side of the Field Value pair to create the parameterization. This will bring up the no-code workspace.\n3. **Utilize No-Code Functions**: In the no-code workspace, use the block-based no-code functions provided by Watermelon to create the desired parameterization (e.g., creating a random alphanumeric string starting with \"QC\").\n4. **Apply the Function**: Apply the created function to the request field. Watermelon will indicate that the function has been applied to the request field.\n\n**Processing a No-Code Block for Autonomous Functional Testing:**\n1. **Navigate to the Test Case Repository**: Go to the test case repository and select the test case you want to process for Autonomous Functional Testing.\n2. **Choose the Desired Dataset**: Select the necessary dataset from the repository, pick the version, and assign the data.\n3. **Use the 'Get Test Data' Block**: Select the \"Get Test Data\" block from the utility menu and connect it to the parent block where data values are input. Choose the desired column from the dropdown menu and save the test data.\n4. **Execute the Test Case**: Execute the test case with the assigned data. Watermelon will run the test case using the parameterized input.\n\n**Expected Outcomes:**\n- Successful creation and application of a no-code block for parameterization.\n- Successful execution of the test case with the assigned data.\n\n**Relevant Screenshots:**\n- cache/images/page_0880_img_02.png (no-code workspace)\n- cache/images/page_0228_img_01.png (recording mode)\n- cache/images/page_0229_img_00.png (test case canvas)\n\n**Tips and Warnings:**\n- Ensure you have the necessary permissions and access to the Watermelon platform.\n- Familiarize yourself with the Watermelon interface and its components to efficiently create and process no-code blocks.\n- Use the no-code functions provided by Watermelon to create parameterizations and automate test cases.\n- Verify the successful execution of the test case with the assigned data.",
           "citations": [
             "Request-body variable parameterization (Page 879)",
             "FAQs (Page 2254)",
-            "Overall Platform (Page 20)",
             "Autonomous Testing (Page 129)",
-            "Chaos Engineering (Page 901)",
-            "Recording a test case for a web application (Page 224)",
-            "Recording a test case for a mobile application (Page 227)",
-            "How to bring in a Selenium/Appium file without making changes in Watermelon? (Page 209)",
-            "Swipe Direction (Page 467)",
-            "AFT - UTILIZATION OF LOOP FUNCTIONS (Page 672)",
+            "Overall Platform (Page 20)",
             "Recording a test case for a desktop app (Page 232)",
+            "Initial Configurations (Page 132)",
+            "How to bring in a Selenium/Appium file without making changes in Watermelon? (Page 209)",
+            "Recording a test case for a mobile application (Page 227)",
+            "Recording a test case for a web application (Page 224)",
+            "Create Dictionary (Page 536)",
+            "AFT - DATA DRIVEN TEST CASES (Page 723)",
+            "AFT - UTILIZATION OF LOOP FUNCTIONS (Page 672)",
             "No Code API Actions (Page 882)",
+            "Choose your workspace (Page 151)",
             "No Code Automation (Page 252)"
           ],
           "images": [
             "cache/images/page_0880_img_02.png",
             "cache/images/page_0881_img_00.png",
-            "cache/images/page_0224_img_00.png",
-            "cache/images/page_0224_img_01.png",
-            "cache/images/page_0224_img_02.png",
+            "cache/images/page_0133_img_00.png",
             "cache/images/page_0228_img_01.png",
             "cache/images/page_0229_img_00.png",
+            "cache/images/page_0225_img_00.png",
+            "cache/images/page_0225_img_01.png",
+            "cache/images/page_0536_img_00.png",
+            "cache/images/page_0537_img_00.png",
+            "cache/images/page_0725_img_01.png",
+            "cache/images/page_0726_img_00.png",
             "cache/images/page_0879_img_00.png",
             "cache/images/page_0880_img_00.png",
             "cache/images/page_0880_img_01.png",
@@ -88,52 +94,55 @@
             "cache/images/page_0886_img_02.png",
             "cache/images/page_0887_img_00.png",
             "cache/images/page_0888_img_00.png",
+            "cache/images/page_0151_img_00.png",
+            "cache/images/page_0152_img_00.png",
+            "cache/images/page_0152_img_01.png",
             "cache/images/page_0252_img_00.png",
             "cache/images/page_0252_img_01.png",
             "cache/images/page_0252_img_02.png"
           ],
-          "tokens": 5567,
-          "time": 3.625361204147339,
+          "tokens": 5692,
+          "time": 3.315063714981079,
           "confidence": 0.85
         },
         "validation": {
           "is_valid": false,
-          "overall_score": 0.9249999999999999,
+          "overall_score": 0.85,
           "completeness": 1.0,
           "formatting": 1.0,
-          "citation": 0.75,
+          "citation": 0.5,
           "issues": [
             "Consider adding page number references"
           ],
           "warnings": []
         },
-        "total_time": 23.298581838607788,
+        "total_time": 30.73850154876709,
         "success": true
       },
       "retrieval_metrics": {
-        "precision_at_10": 0.9,
-        "recall_at_10": 0.75,
+        "precision_at_10": 1.0,
+        "recall_at_10": 0.7142857142857143,
         "mrr": 1.0,
-        "map": 0.9495670995670996,
-        "ndcg_at_10": 0.933745776545611,
+        "map": 0.9528090082186722,
+        "ndcg_at_10": 1.0,
         "coverage": 1.0,
         "diversity": 1.0,
-        "total_retrieved": 15,
-        "relevant_retrieved": 12
+        "total_retrieved": 17,
+        "relevant_retrieved": 14
       },
       "generation_metrics": {
-        "overall_score": 0.9046899999999999,
+        "overall_score": 0.9178,
         "completeness": 1.0,
-        "coherence": 0.39999999999999963,
+        "coherence": 0.4999999999999996,
         "formatting": 1.0,
         "citation": 1.0,
-        "length": 0.9469,
+        "length": 0.9279999999999999,
         "keyword_coverage": 1.0,
-        "word_count": 677,
+        "word_count": 380,
         "has_headings": true,
         "has_lists": true
       },
-      "total_time": 23.301583528518677,
+      "total_time": 30.74184823036194,
       "success": true,
       "error": ""
     },
@@ -152,40 +161,42 @@
         },
         "retrieval": {
           "total_retrieved": 20,
-          "final_chunks": 17,
+          "final_chunks": 19,
           "unique_sections": 0,
-          "time": 18.60121750831604
+          "time": 13.721861124038696
         },
         "answer": {
-          "text": "## Introduction to MS Teams Integration\nTo integrate MS Teams with Watermelon, you need to create an incoming webhook in a Teams channel and then use that webhook to send messages from Watermelon. This process involves actions on both MS Teams and Watermelon.\n\n## Steps for MS Teams Integration\nThe steps for integrating MS Teams with Watermelon are as follows:\n1. **Create an Incoming Webhook in Microsoft Teams**:\n   - Open Microsoft Teams and navigate to the team and channel where you want to add the webhook.\n   - Click on the three dots next to the team name, then choose More options > Connectors.\n   - Scroll through the list of connectors to Incoming Webhook, and click Add.\n   - Give your webhook a name, and optionally, upload an image to help identify it.\n   - Click Create. Teams will generate a URL for your webhook; make sure to copy and save this URL.\n2. **Finish Setup**:\n   - After copying the URL, click Done. Your incoming webhook is now configured and ready to receive messages.\n\n## Configuring MS Teams Webhook in Watermelon\nAfter setting up the MS Teams side of things, you'll move to integrate these webhooks within Watermelon:\n1. **Navigate to WM-Meta and Teams under Global Tools**: This is where you'll be registering the webhooks you created on Teams.\n2. **Register Webhooks**: Assign each webhook a unique name for easy identification.\n\n## Configuring Automated Responses with Chatbots\nFor configuring automated responses with chatbots in MS Teams, the process involves integrating Watermelon with MS Teams using the webhook created. While the provided sections do not directly outline the steps for configuring chatbots, the integration process enables the foundation for such automation. Typically, after integrating MS Teams with Watermelon, you would configure automated responses or chatbot interactions within the MS Teams platform or through Watermelon's capabilities for notification and alert management.\n\n## Additional Considerations\n- The integration steps are subject to change, so it's essential to refer to the official documentation for MS Teams and Watermelon for any deviations.\n- Watermelon supports integration with various notification and alerting tools, including MS Teams, allowing for flexible configuration of notifications during the application onboarding process under WM-Meta.\n\n## Conclusion\nIntegrating MS Teams with Watermelon involves creating an incoming webhook in MS Teams and registering it within Watermelon. This setup is crucial for sending notifications and potentially configuring automated responses or chatbot interactions. By following the outlined steps and referring to the official documentation for both platforms, you can achieve a seamless integration for enhanced notification and collaboration capabilities. Key information for this process can be found on page 70 of the Watermelon documentation.",
+          "text": "## Introduction to MS Teams Integration\nTo integrate MS Teams with Watermelon, you need to create an incoming webhook in a Teams channel and then use that webhook to send messages from Watermelon. This process involves both actions on MS Teams and Watermelon.\n\n## Actions on MS Teams\nThe steps to create an incoming webhook in MS Teams are as follows:\n1. **Open Microsoft Teams**: Navigate to the team and channel where you want to add the webhook.\n2. **Add a Connector**: Click on the three dots next to the team name, then choose More options > Connectors. Scroll through the list of connectors to Incoming Webhook, and click Add.\n3. **Configure the Webhook**: Give your webhook a name, and optionally, upload an image to help identify it. Click Create. Teams will generate a URL for your webhook; make sure to copy and save this URL as it is needed to send messages to this channel.\n4. **Finish Setup**: After copying the URL, click Done. Your incoming webhook is now configured and ready to receive messages.\n\n## Actions on Watermelon\nAfter setting up the MS Teams side of things, you'll move to integrate these webhooks within Watermelon:\n1. **Navigate to WM-Meta and Teams under Global Tools**: This is where you'll be registering the webhooks you created on Teams.\n2. **Register Webhooks**: Assign each webhook a unique name for easy identification.\n\n## Configuring Automated Responses with Chatbots\nWhile the provided documentation primarily focuses on the integration of MS Teams with Watermelon, configuring automated responses with chatbots involves leveraging Watermelon's capabilities for automation and integration with various tools. Watermelon supports the creation of reusable, no-code snippets for frequently used actions, which can be part of automating responses. However, specific steps for configuring chatbots are not detailed in the provided sections but can be inferred to involve:\n- Utilizing Watermelon's no-code approach for automation.\n- Possibly integrating with notification/alerting tools as described in Section 13.\n- Leveraging the platform's ability to perform complex actions without coding, as mentioned in Section 5.\n\n## Conclusion\nIntegrating MS Teams with Watermelon involves creating an incoming webhook in MS Teams and then registering this webhook in Watermelon. For configuring automated responses with chatbots, while direct steps are not provided, Watermelon's no-code automation capabilities and its integration features can be utilized. Refer to Section 1 (Page 70) for MS Teams integration details and explore Watermelon's documentation further for chatbot automation specifics.",
           "citations": [
             "MS Teams Integration (Page 70)",
-            "ServiceNow Integration (Page 73)",
-            "Integration with Notification/Alerting tools (Page 2235)",
             "FAQs (Page 2254)",
-            "Slack Integration (Page 68)",
-            "Integration with Incident and Change Management Systems (Page 2238)",
-            "Onboarding Applications (Page 83)",
-            "Configurations (Page 51)",
-            "SLO Summary Dashboard (Page 2129)",
-            "New Relic (Page 2223)",
-            "Datadog (Page 2225)",
+            "How to bring in a Selenium/Appium file without making changes in Watermelon? (Page 209)",
+            "Watermelon Grid (Browsers) (Page 78)",
+            "Kubernetes Situations (Page 979)",
+            "Lightning API Testing (Page 861)",
+            "Compare Values (Page 557)",
+            "Integration with Notification/Alerting tools (Page 2235)",
+            "SLO Onboarding (Page 2136)",
+            "Device Farms (Mobiles and Browsers) (Page 76)",
+            "ServiceNow Integration (Page 73)",
             "Reports (Page 816)",
-            "SLO Onboarding (Page 2136)"
+            "Folder Execution History Report (Page 839)"
           ],
           "images": [
             "cache/images/page_0071_img_00.png",
-            "cache/images/page_0074_img_00.png",
+            "cache/images/page_0080_img_00.png",
+            "cache/images/page_0213_img_00.png",
+            "cache/images/page_0864_img_01.png",
+            "cache/images/page_0864_img_02.png",
             "cache/images/page_2235_img_00.png",
-            "cache/images/page_0069_img_00.png",
-            "cache/images/page_0085_img_01.png",
-            "cache/images/page_0086_img_00.png",
-            "cache/images/page_2239_img_00.png",
-            "cache/images/page_2240_img_00.png",
-            "cache/images/page_2240_img_01.png"
+            "cache/images/page_0078_img_00.png",
+            "cache/images/page_0074_img_00.png",
+            "cache/images/page_0557_img_00.png",
+            "cache/images/page_0559_img_00.png",
+            "cache/images/page_0559_img_01.png"
           ],
-          "tokens": 5679,
-          "time": 2.335205554962158,
+          "tokens": 6106,
+          "time": 3.451392889022827,
           "confidence": 0.85
         },
         "validation": {
@@ -197,33 +208,33 @@
           "issues": [],
           "warnings": []
         },
-        "total_time": 21.978736877441406,
+        "total_time": 18.488362312316895,
         "success": true
       },
       "retrieval_metrics": {
-        "precision_at_10": 1.0,
-        "recall_at_10": 0.5882352941176471,
+        "precision_at_10": 0.9,
+        "recall_at_10": 0.5625,
         "mrr": 1.0,
-        "map": 1.0,
-        "ndcg_at_10": 1.0,
+        "map": 0.9124715143387745,
+        "ndcg_at_10": 0.9216017310213247,
         "coverage": 0.75,
         "diversity": 1.0,
-        "total_retrieved": 17,
-        "relevant_retrieved": 17
+        "total_retrieved": 19,
+        "relevant_retrieved": 16
       },
       "generation_metrics": {
-        "overall_score": 0.98116,
+        "overall_score": 0.9191800000000001,
         "completeness": 1.0,
-        "coherence": 0.8999999999999999,
+        "coherence": 0.7499999999999998,
         "formatting": 1.0,
         "citation": 1.0,
-        "length": 0.9616,
-        "keyword_coverage": 1.0,
-        "word_count": 436,
+        "length": 0.9418,
+        "keyword_coverage": 0.75,
+        "word_count": 403,
         "has_headings": true,
         "has_lists": true
       },
-      "total_time": 21.98090672492981,
+      "total_time": 18.491288423538208,
       "success": true,
       "error": ""
     },
@@ -242,32 +253,33 @@
         },
         "retrieval": {
           "total_retrieved": 30,
-          "final_chunks": 19,
+          "final_chunks": 20,
           "unique_sections": 0,
-          "time": 26.84629988670349
+          "time": 33.525681257247925
         },
         "answer": {
-          "text": "### Introduction to WhatsApp Business API Integration\nUnfortunately, the provided documentation does not directly address the setup of WhatsApp Business API integration, the creation of conversation flows, or the implementation of message templates. However, we can infer a general approach to integrating services with Watermelon based on the information given for other integrations.\n\n### General Approach to Integration with Watermelon\nWatermelon seems to support a wide range of integrations, including Slack, MS Teams, ServiceNow, and more, as seen in sections like **Section 2: Slack Integration (Page 68)**, **Section 6: MS Teams Integration (Page 70)**, and **Section 10: ServiceNow Integration (Page 73)**. These sections outline specific steps for integrating these services with Watermelon, such as creating applications, enabling incoming webhooks, and configuring integration details within Watermelon.\n\n### Creating Conversation Flows and Implementing Message Templates\nWhile the exact process for creating conversation flows and implementing message templates is not detailed in the provided sections, we can look at the structure of other integrations for clues. For example, **Section 14: Email Integration (Page 66)** discusses configuring SMTP servers for email integration, which involves setting up server addresses, usernames, passwords/tokens, and ports. Similarly, for WhatsApp Business API, one might expect to configure API keys, set up webhooks for incoming messages, and define message templates according to WhatsApp's guidelines.\n\n### Steps for WhatsApp Business API Integration (Inferred)\nGiven the pattern of integration steps outlined in the documentation for other services, a hypothetical approach to setting up WhatsApp Business API integration might involve:\n1. **Obtaining WhatsApp Business API Credentials**: This would involve registering for WhatsApp Business API and obtaining necessary credentials such as API keys or access tokens.\n2. **Configuring Webhooks**: Setting up webhooks to receive incoming messages and other events from WhatsApp.\n3. **Defining Message Templates**: Creating and approving message templates according to WhatsApp's policies and guidelines.\n4. **Integrating with Watermelon**: This step would involve configuring Watermelon to use the WhatsApp Business API, potentially by registering the API credentials and webhook URLs within Watermelon's interface, similar to how other integrations are configured as seen in **Section 8: Slack Integration (Page 68)** and **Section 18: MS Teams Integration (Page 70)**.\n\n### Conclusion\nWithout direct documentation on WhatsApp Business API integration, conversation flow creation, and message template implementation, we rely on the patterns and structures provided for other integrations. It's essential to consult the official WhatsApp Business API documentation and Watermelon's support resources for the most accurate and up-to-date information on integrating these services.",
+          "text": "### Introduction to WhatsApp Business API Integration\nTo set up WhatsApp Business API integration, create conversation flows, and implement message templates, you need to follow a series of steps. However, the provided documentation does not directly address WhatsApp Business API integration. It covers various other integrations such as Slack, MS Teams, and ServiceNow, as well as features like test case management and API testing.\n\n### Setting Up Integrations in Watermelon\nWhile the exact steps for WhatsApp Business API integration are not provided, the process for other integrations can give us insight into how Watermelon handles third-party service integrations. For example, integrating Slack involves creating an application on Slack, enabling incoming webhooks, and then registering those webhooks within Watermelon.\n\n### Creating Conversation Flows\nConversation flows can be considered analogous to test cases or scenarios in Watermelon. The platform allows for the creation of test cases without coding, using a recording feature. This is detailed in sections like \"Recording New Test Case\" (Page 220), which explains how testers can construct test cases without heavy dependency on coding skills.\n\n### Implementing Message Templates\nMessage templates are not directly addressed in the provided sections. However, Watermelon's ability to handle complex actions such as OTP validation, reading from emails, and API validation (mentioned in Section 5: FAQs, Page 2254) suggests that it could support the implementation of message templates through its no-code capabilities.\n\n### Conclusion\nGiven the information available, setting up WhatsApp Business API integration, creating conversation flows, and implementing message templates in Watermelon would likely involve:\n- Registering the WhatsApp Business API with Watermelon, similar to how other integrations are handled.\n- Utilizing Watermelon's test case creation features to design conversation flows.\n- Leveraging Watermelon's no-code capabilities to implement message templates, potentially through its API testing and validation features.\n\nHowever, without direct documentation on WhatsApp Business API integration, these steps are speculative based on how Watermelon handles other integrations and features. For precise instructions, consulting Watermelon's official documentation or support team would be necessary.",
           "citations": [
-            "Datadog (Page 2225)",
             "Slack Integration (Page 68)",
-            "Dynatrace (Page 2213)",
-            "Active Directory Integration (Page 55)",
-            "New Relic (Page 2223)",
             "MS Teams Integration (Page 70)",
             "Lightning API Testing (Page 861)",
+            "FAQs (Page 2254)",
             "Integration with Notification/Alerting tools (Page 2235)",
             "ServiceNow Integration (Page 73)",
             "Handling API Authentication (Page 876)",
-            "FAQs (Page 2254)",
-            "Email Integration (Page 66)",
+            "API chaining (Page 893)",
+            "How to bring in a Selenium/Appium file without making changes in Watermelon? (Page 209)",
+            "Configurations for Test Packs (Page 747)",
+            "Network connectivity requirements (Page 46)",
+            "Review of the Test Case Repository (Page 216)",
+            "Test Case Execution (Page 768)",
+            "Get Local Variable (Page 553)",
             "AFT - MULTI-APP MOBILE RECORDING (Page 736)",
-            "Elastic (ELK) (Page 2227)"
+            "Recording New Test Case (Page 220)"
           ],
           "images": [
             "cache/images/page_0069_img_00.png",
-            "cache/images/page_2215_img_02.png",
-            "cache/images/page_2216_img_00.png",
+            "cache/images/page_0071_img_00.png",
             "cache/images/page_0864_img_01.png",
             "cache/images/page_0864_img_02.png",
             "cache/images/page_2235_img_00.png",
@@ -278,54 +290,59 @@
             "cache/images/page_0877_img_01.png",
             "cache/images/page_0877_img_02.png",
             "cache/images/page_0879_img_00.png",
-            "cache/images/page_0057_img_00.png",
-            "cache/images/page_0057_img_01.png",
-            "cache/images/page_0057_img_02.png",
-            "cache/images/page_0067_img_00.png",
-            "cache/images/page_0071_img_00.png"
+            "cache/images/page_0895_img_01.png",
+            "cache/images/page_0896_img_00.png",
+            "cache/images/page_0213_img_00.png",
+            "cache/images/page_0747_img_00.png",
+            "cache/images/page_0748_img_00.png",
+            "cache/images/page_0748_img_01.png",
+            "cache/images/page_0216_img_00.png",
+            "cache/images/page_0216_img_01.png",
+            "cache/images/page_0217_img_00.png",
+            "cache/images/page_0220_img_00.png",
+            "cache/images/page_0221_img_00.png",
+            "cache/images/page_0221_img_01.png"
           ],
-          "tokens": 6347,
-          "time": 2.581925630569458,
+          "tokens": 6311,
+          "time": 5.879345893859863,
           "confidence": 0.85
         },
         "validation": {
           "is_valid": true,
-          "overall_score": 0.96,
+          "overall_score": 1.0,
           "completeness": 1.0,
-          "formatting": 0.8,
+          "formatting": 1.0,
           "citation": 1.0,
           "issues": [],
-          "warnings": [
-            "Consider using lists for clarity"
-          ]
+          "warnings": []
         },
-        "total_time": 31.262571811676025,
+        "total_time": 44.84793257713318,
         "success": true
       },
       "retrieval_metrics": {
-        "precision_at_10": 1.0,
-        "recall_at_10": 0.5882352941176471,
+        "precision_at_10": 0.9,
+        "recall_at_10": 0.5,
         "mrr": 1.0,
-        "map": 0.980351686598272,
-        "ndcg_at_10": 1.0,
+        "map": 0.960230698524042,
+        "ndcg_at_10": 0.9363792118010483,
         "coverage": 1.0,
         "diversity": 1.0,
-        "total_retrieved": 19,
-        "relevant_retrieved": 17
+        "total_retrieved": 20,
+        "relevant_retrieved": 18
       },
       "generation_metrics": {
-        "overall_score": 0.91192,
+        "overall_score": 0.9898,
         "completeness": 1.0,
-        "coherence": 0.7999999999999998,
-        "formatting": 0.6499999999999999,
+        "coherence": 1.0,
+        "formatting": 1.0,
         "citation": 1.0,
-        "length": 0.9441999999999999,
+        "length": 0.8979999999999999,
         "keyword_coverage": 1.0,
-        "word_count": 407,
+        "word_count": 330,
         "has_headings": true,
-        "has_lists": false
+        "has_lists": true
       },
-      "total_time": 31.26490306854248,
+      "total_time": 44.84983730316162,
       "success": true,
       "error": ""
     },
@@ -346,37 +363,38 @@
           "total_retrieved": 30,
           "final_chunks": 19,
           "unique_sections": 0,
-          "time": 15.434773921966553
+          "time": 18.090591430664062
         },
         "answer": {
-          "text": "### Overview\n\nTriggered messages and scheduled broadcasts are two distinct features used for sending notifications in the Watermelon platform. Triggered messages are typically sent in response to specific events or conditions, such as SLO breaches, while scheduled broadcasts are sent at predetermined times or intervals.\n\n### Similarities\n\n* Both triggered messages and scheduled broadcasts can be used to send notifications to stakeholders via various channels, including email, Slack, and MS Teams.\n* They can be configured to send notifications to specific groups or individuals, ensuring that relevant stakeholders receive timely alerts and updates.\n* Both features can be integrated with other tools and platforms, such as incident management tools, to facilitate seamless workflows and efficient response to potential issues.\n\n### Differences\n\n| Feature | Triggered Messages | Scheduled Broadcasts |\n| --- | --- | --- |\n| **Trigger** | Sent in response to specific events or conditions, such as SLO breaches | Sent at predetermined times or intervals |\n| **Frequency** | Can be sent repeatedly, but with mechanisms to avoid alert overload and fatigue | Can be set to send daily, weekly, or at other specified intervals |\n| **Purpose** | Primarily used for alerting and notification of critical issues or events | Can be used for regular updates, summaries, or reminders |\n| **Configuration** | Often requires setup of specific conditions or thresholds for triggering | Requires setting a schedule and selecting the notification content |\n\n### Recommendations\n\nBased on the use case:\n* Use **triggered messages** for critical notifications that require immediate attention, such as SLO breaches or service disruptions.\n* Use **scheduled broadcasts** for regular updates, summaries, or reminders, such as daily or weekly reports on SLO performance.\n* Consider integrating both features with incident management tools to ensure efficient response to potential issues and minimize business impact.\n* Configure both features to send notifications to specific groups or individuals, ensuring that relevant stakeholders receive timely alerts and updates.\n\nBy understanding the differences and similarities between triggered messages and scheduled broadcasts, users can effectively leverage these features to enhance their notification workflows and improve overall communication and efficiency within their organizations.",
+          "text": "### Overview\nThe question pertains to the comparison between triggered messages and scheduled broadcasts within the Watermelon platform. To address this, we'll delve into the features and functionalities of both, highlighting their similarities, differences, and provide recommendations based on specific use cases.\n\n### Similarities\n- **Automation**: Both triggered messages and scheduled broadcasts offer automation capabilities, allowing users to streamline their communication processes.\n- **Customization**: Both features can be customized to fit specific needs, whether it's the content of the message or the timing of the broadcast.\n- **Integration**: Both can be integrated with various tools and platforms, such as MS Teams, Slack, and email services, to enhance their functionality.\n\n### Differences\n| Feature | Triggered Messages | Scheduled Broadcasts |\n| --- | --- | --- |\n| **Trigger** | Sent in response to a specific event or action | Sent at a predetermined time or interval |\n| **Timing** | Real-time, based on the trigger event | Pre-scheduled, can be one-time or recurring |\n| **Content** | Often more personalized, as it's based on user actions | Can be more general, as it's scheduled in advance |\n| **Use Case** | Ideal for immediate feedback, notifications, or follow-ups | Suitable for regular updates, reminders, or promotional messages |\n\n### Recommendations\n- **Use triggered messages** for scenarios where immediate, personalized feedback is necessary, such as:\n  - Welcome messages after a user signs up\n  - Order confirmations after a purchase\n  - Alerts for unusual account activity\n- **Use scheduled broadcasts** for scenarios where regular, timed communications are beneficial, such as:\n  - Weekly newsletters\n  - Monthly promotional offers\n  - Daily or weekly updates on ongoing projects or events\n- **Consider integration** with tools like MS Teams or Slack for both triggered messages and scheduled broadcasts to enhance team communication and collaboration.\n- **Leverage Watermelon's analytics** to monitor the effectiveness of both triggered messages and scheduled broadcasts, making adjustments as needed to improve engagement and outcomes.\n\nBy understanding the distinct benefits and appropriate use cases for triggered messages and scheduled broadcasts, users can more effectively utilize these features within the Watermelon platform to achieve their communication and automation goals.",
           "citations": [
             "MS Teams Integration (Page 70)",
+            "OpenShift - Network conditions - Remove Network Policy (Page 2029)",
             "Chaos Engineering (Page 901)",
-            "Watermelon Chaos Agent Setup Guide (Page 2048)",
             "Error Budgets (SLO Management) (Page 2124)",
-            "Slack Integration (Page 68)",
-            "New Relic (Page 2223)",
             "Scheduling Chaos Experiments (Page 2042)",
             "FAQs (Page 2254)",
+            "Reports (Page 816)",
             "Integration with Notification/Alerting tools (Page 2235)",
             "Index Data Table (Page 309)",
             "Training with Watermelon: Unlocking Your Full Potential (Page 2249)",
-            "Email Integration (Page 66)",
+            "Slack Integration (Page 68)",
             "SLO Onboarding (Page 2136)",
-            "AFT - DIFFERENCE BETWEEN ‘IS VISIBLE’ AND ‘IMAGE EXISTS’ (Page 714)",
-            "SLO Summary Dashboard (Page 2129)"
+            "Datadog (Page 2225)",
+            "New Relic (Page 2223)",
+            "Kubernetes Situations (Page 979)",
+            "CE - Component Failures - Loss of Interfacing System (Page 1873)"
           ],
           "images": [
             "cache/images/page_0071_img_00.png",
-            "cache/images/page_0069_img_00.png",
             "cache/images/page_2042_img_00.png",
             "cache/images/page_2043_img_00.png",
             "cache/images/page_2043_img_01.png",
-            "cache/images/page_2235_img_00.png"
+            "cache/images/page_2235_img_00.png",
+            "cache/images/page_0069_img_00.png"
           ],
-          "tokens": 5760,
-          "time": 2.0810065269470215,
+          "tokens": 5750,
+          "time": 6.799368858337402,
           "confidence": 0.85
         },
         "validation": {
@@ -390,19 +408,19 @@
           ],
           "warnings": []
         },
-        "total_time": 18.559895038604736,
+        "total_time": 25.99705672264099,
         "success": true
       },
       "retrieval_metrics": {
-        "precision_at_10": 0.2,
-        "recall_at_10": 0.4,
+        "precision_at_10": 0.3,
+        "recall_at_10": 0.42857142857142855,
         "mrr": 1.0,
-        "map": 0.45497737556561085,
-        "ndcg_at_10": 0.48522855511632257,
+        "map": 0.47099892588614395,
+        "ndcg_at_10": 0.48488457017441744,
         "coverage": 0.6666666666666666,
         "diversity": 1.0,
         "total_retrieved": 19,
-        "relevant_retrieved": 5
+        "relevant_retrieved": 7
       },
       "generation_metrics": {
         "overall_score": 0.88886,
@@ -416,7 +434,7 @@
         "has_headings": true,
         "has_lists": true
       },
-      "total_time": 18.561421155929565,
+      "total_time": 25.999122619628906,
       "success": true,
       "error": ""
     },
@@ -437,247 +455,51 @@
           "total_retrieved": 30,
           "final_chunks": 20,
           "unique_sections": 0,
-          "time": 14.576386451721191
+          "time": 15.237906455993652
         },
         "answer": {
-          "text": "**Creating Custom Attributes for Contacts, Using Them in Conversation Flows, and Setting Up Personalized Messaging in Watermelon**\n\n### Prerequisites\n1. Ensure you have the necessary permissions to access and manage contact attributes and conversation flows within Watermelon.\n2. Familiarize yourself with the Watermelon interface, particularly the sections related to contact management and conversation flows.\n\n### Step 1: Creating Custom Attributes for Contacts\n1. **Navigate to the Contact Management Section**: Go to the part of the Watermelon platform where you manage contacts. This might be labeled as \"Contacts\" or \"Customer Management,\" depending on your Watermelon setup.\n2. **Access Attribute Settings**: Look for a settings or configuration option related to contact attributes. This could be under a \"Settings\" or \"Configuration\" menu.\n3. **Create a New Attribute**: Find the option to create a new attribute. This might be a button or link labeled \"Create Attribute\" or \"Add New Attribute.\"\n4. **Define the Attribute**: Fill in the required information for the new attribute, such as its name, data type (e.g., text, number, date), and any other relevant details.\n5. **Save the Attribute**: Click \"Save\" or \"Create\" to add the new attribute to your list of available contact attributes.\n\n### Step 2: Using Custom Attributes in Conversation Flows\n1. **Navigate to the Conversation Flow Editor**: Go to the part of Watermelon where you design and manage conversation flows. This might be under a \"Conversation Flows\" or \"Automation\" section.\n2. **Select or Create a New Flow**: Choose an existing conversation flow where you want to use the custom attribute, or create a new one.\n3. **Add a Condition or Action**: In the flow editor, look for the option to add a condition or action. This is where you can utilize the custom attribute to personalize the conversation.\n4. **Configure the Condition or Action**: Select the custom attribute you created earlier and configure how it should be used in the condition or action. For example, you might use it to decide which message to send based on the attribute's value.\n5. **Save the Flow**: After configuring the condition or action with the custom attribute, save the changes to the conversation flow.\n\n### Step 3: Setting Up Personalized Messaging Using Custom Attributes\n1. **Navigate to the Messaging Section**: Go to the part of Watermelon where you manage messages or responses within conversation flows.\n2. **Create or Edit a Message**: Find the message you want to personalize with the custom attribute, or create a new one.\n3. **Insert the Custom Attribute**: Look for an option to insert attributes or variables into the message. This might be a button or a syntax like `{attribute_name}`.\n4. **Configure the Attribute Display**: Decide how the custom attribute should be displayed in the message. You might need to select the attribute from a list or enter its name manually.\n5. **Save the Message**: After personalizing the message with the custom attribute, save your changes.\n\n### Tips and Warnings\n- **Test Your Flows**: Always test your conversation flows after making changes to ensure they work as expected.\n- **Attribute Naming**: Choose clear and descriptive names for your custom attributes to avoid confusion.\n- **Data Privacy**: Be mindful of data privacy laws and regulations when collecting and using custom attributes, especially if they contain sensitive information.\n\n### Relevant Screenshots\nWhile specific screenshots are not provided here, you can refer to the Watermelon documentation or interface for visual guidance on each step. Look for sections like \"Contact Management,\" \"Conversation Flows,\" and \"Messaging\" to find relevant screenshots or diagrams that illustrate the process.",
+          "text": "**Creating Custom Attributes for Contacts, Using Them in Conversation Flows, and Setting Up Personalized Messaging in Watermelon**\n\n### Prerequisites\n1. Ensure you have the necessary permissions to access and manage contact attributes and conversation flows in Watermelon.\n2. Familiarize yourself with the Watermelon interface, particularly the sections related to contact management and conversation flows.\n\n### Step 1: Create Custom Attributes for Contacts\n1. **Navigate to the Contact Management Section**: Go to the part of the Watermelon platform where you manage contacts. This might be under a \"Contacts\" or \"CRM\" tab, depending on your Watermelon setup.\n2. **Access Attribute Settings**: Look for a settings or configuration option related to contact attributes. This could be labeled as \"Custom Fields,\" \"Attributes,\" or something similar.\n3. **Create a New Attribute**: Click on a button to create a new attribute, such as \"Add Attribute\" or \"Create Custom Field.\"\n4. **Define the Attribute**: Give your attribute a name and choose its data type (e.g., text, number, date). Depending on the Watermelon platform, you might have additional options like making the field required or setting default values.\n5. **Save the Attribute**: After defining your attribute, save it. The new attribute should now be available for use in your contacts.\n\n### Step 2: Use Custom Attributes in Conversation Flows\n1. **Navigate to Conversation Flows**: Go to the section of Watermelon where you design and manage conversation flows. This might be under a \"Flows,\" \"Conversations,\" or \"Automation\" tab.\n2. **Select or Create a Flow**: Choose an existing conversation flow where you want to use the custom attribute, or create a new one.\n3. **Add a Condition or Action**: In your flow, find the point where you want to utilize the custom attribute. You might need to add a condition to check the attribute's value or an action to set or update the attribute.\n4. **Configure the Attribute**: When adding the condition or action, select the custom attribute you created. Depending on the action or condition, you might need to specify how the attribute is used (e.g., checking if it's empty, setting a new value).\n5. **Save the Flow**: After configuring the attribute in your conversation flow, save the changes. The flow should now use the custom attribute as defined.\n\n### Step 3: Set Up Personalized Messaging Using Custom Attributes\n1. **Navigate to Messaging Settings**: Go to the part of Watermelon where you manage messaging templates and settings.\n2. **Create or Edit a Message Template**: Find or create a message template where you want to include personalized content based on the custom attribute.\n3. **Insert Attribute Placeholder**: In the template, insert a placeholder for the custom attribute. The exact method might vary, but it often involves clicking a button or using a specific syntax to indicate where the attribute's value should be inserted.\n4. **Save the Template**: After inserting the placeholder, save the template. When messages are sent using this template, the placeholder should be replaced with the actual value of the custom attribute for each contact.\n5. **Test the Personalized Messaging**: To ensure everything works as expected, test the personalized messaging by triggering the conversation flow or sending a test message. Verify that the custom attribute is correctly inserted into the message.\n\n### Tips and Warnings\n- **Test Thoroughly**: Always test new attributes and their usage in conversation flows and messaging to ensure they work as intended.\n- **Attribute Naming**: Choose clear, descriptive names for your custom attributes to avoid confusion, especially if you have many attributes.\n- **Data Privacy**: Be mindful of data privacy laws and regulations when creating and using custom attributes, especially if they involve sensitive information.\n\nBy following these steps and considering the tips and warnings, you should be able to create custom attributes for contacts, use them effectively in conversation flows, and set up personalized messaging in Watermelon.",
           "citations": [
             "AFT - ‘GET’ AND ‘SET’ ATTRIBUTES (Page 706)",
-            "AFT - USING THE RECORDER BOT (Page 680)",
-            "Role Based Access Control (Page 88)",
-            "Creating/Importing Requirements in Watermelon (Page 175)",
+            "Elasticsearch (ELK) Data Source (Page 105)",
             "Elastic (ELK) (Page 2227)",
-            "AFT - USING ENVIRONMENT VARIABLES (Page 677)",
-            "Getting Started with WM-Meta (Page 49)",
             "MS Teams Integration (Page 70)",
-            "JIRA Integration (Page 61)",
             "Get Attribute of Element (Page 510)",
-            "Watermelon (Page 19)",
+            "Slack Integration (Page 68)",
             "AFT - CUSTOM PYTHON CODE (Page 734)",
+            "JIRA Integration (Page 61)",
+            "Prometheus (Page 2230)",
             "Active Directory Integration (Page 55)",
-            "Configurations (Page 51)",
+            "Creating Application Builds (Page 135)",
+            "Swipe Direction (Page 467)",
+            "Azure Permission Pre-requisites (Page 2106)",
+            "Find Element by (Page 495)",
             "Get Attribute (Page 393)",
-            "Slack Integration (Page 68)"
+            "AFT - USING THE RECORDER BOT (Page 680)"
           ],
           "images": [
             "cache/images/page_0707_img_00.png",
             "cache/images/page_0708_img_00.png",
             "cache/images/page_0708_img_01.png",
-            "cache/images/page_0709_img_00.png",
-            "cache/images/page_0711_img_00.png",
-            "cache/images/page_0176_img_00.png",
-            "cache/images/page_0177_img_00.png",
-            "cache/images/page_0678_img_02.png",
-            "cache/images/page_0679_img_00.png",
-            "cache/images/page_0049_img_00.png",
-            "cache/images/page_0050_img_00.png",
+            "cache/images/page_0105_img_00.png",
+            "cache/images/page_0106_img_00.png",
+            "cache/images/page_0107_img_00.png",
+            "cache/images/page_2230_img_00.png",
             "cache/images/page_0510_img_00.png",
             "cache/images/page_0511_img_00.png",
-            "cache/images/page_0090_img_00.png",
-            "cache/images/page_0091_img_00.png",
-            "cache/images/page_0020_img_00.png",
+            "cache/images/page_0069_img_00.png",
             "cache/images/page_0734_img_00.png",
-            "cache/images/page_0734_img_01.png"
-          ],
-          "tokens": 6020,
-          "time": 15.256931781768799,
-          "confidence": 0.85
-        },
-        "validation": {
-          "is_valid": false,
-          "overall_score": 0.905,
-          "completeness": 1.0,
-          "formatting": 0.9,
-          "citation": 0.75,
-          "issues": [
-            "Consider adding page number references"
-          ],
-          "warnings": [
-            "Some paragraphs are very long, consider breaking them up"
-          ]
-        },
-        "total_time": 30.865169525146484,
-        "success": true
-      },
-      "retrieval_metrics": {
-        "precision_at_10": 0.7,
-        "recall_at_10": 0.5384615384615384,
-        "mrr": 1.0,
-        "map": 0.7557609057609057,
-        "ndcg_at_10": 0.7215194105726964,
-        "coverage": 0.75,
-        "diversity": 1.0,
-        "total_retrieved": 20,
-        "relevant_retrieved": 13
-      },
-      "generation_metrics": {
-        "overall_score": 0.8549499999999999,
-        "completeness": 1.0,
-        "coherence": 0.29999999999999966,
-        "formatting": 1.0,
-        "citation": 1.0,
-        "length": 0.9745,
-        "keyword_coverage": 0.75,
-        "word_count": 585,
-        "has_headings": true,
-        "has_lists": true
-      },
-      "total_time": 30.867138862609863,
-      "success": true,
-      "error": ""
-    },
-    {
-      "query_id": 6,
-      "query": "What are the steps to implement live chat handover from chatbot to human agent and how do I configure routing rules?",
-      "query_type": "multi-topic_procedural",
-      "complexity": "high",
-      "pipeline_result": {
-        "query": "What are the steps to implement live chat handover from chatbot to human agent and how do I configure routing rules?",
-        "understanding": {
-          "type": "procedural",
-          "complexity": "complex",
-          "num_sub_questions": 2,
-          "strategy": "step_by_step"
-        },
-        "retrieval": {
-          "total_retrieved": 20,
-          "final_chunks": 20,
-          "unique_sections": 0,
-          "time": 17.425605058670044
-        },
-        "answer": {
-          "text": "Implementing live chat handover from a chatbot to a human agent and configuring routing rules in Watermelon involves several steps. Here's a step-by-step guide to help you achieve this:\n\n### Prerequisites\n1. **Watermelon Account**: Ensure you have a Watermelon account with the necessary permissions to configure chatbot settings and routing rules.\n2. **Chatbot Setup**: Your chatbot should be set up and integrated with Watermelon.\n3. **Human Agent Configuration**: Human agents should be configured and available in the system.\n\n### Steps to Implement Live Chat Handover\n1. **Access Watermelon Configuration**: Log in to your Watermelon account and navigate to the configuration or settings section where chatbot and routing rules are managed.\n2. **Configure Chatbot Triggers**: Identify and configure the triggers or conditions under which the chatbot should hand over the conversation to a human agent. This could be based on specific keywords, conversation topics, or when the chatbot is unable to provide a satisfactory response.\n3. **Set Up Human Agent Routing**: Configure the routing rules to direct conversations to human agents based on the triggers set in the previous step. This may involve specifying which agents or groups should receive the handovers, considering factors like agent availability, skill level, and current workload.\n4. **Define Handover Messages**: Customize the message that will be displayed to the customer when the chat is being handed over from the chatbot to a human agent. This message should be clear and informative, letting the customer know what to expect.\n5. **Test the Handover Process**: Before deploying the handover feature, test it thoroughly to ensure that conversations are being correctly routed from the chatbot to human agents based on the configured triggers and rules.\n\n### Configuring Routing Rules\n1. **Access Routing Rule Configuration**: Go to the section of your Watermelon account where routing rules are configured.\n2. **Create a New Rule**: Click on the option to create a new routing rule, and then select the condition that triggers the handover (e.g., specific keywords, unresolved issues by the chatbot).\n3. **Assign Agents or Groups**: Choose which human agents or agent groups should receive the conversations when the handover condition is met. Consider factors like agent expertise, current workload, and availability.\n4. **Prioritize Rules (If Necessary)**: If you have multiple rules, you may need to prioritize them to ensure that the most critical conditions are addressed first.\n5. **Save and Activate the Rule**: Once you've configured the rule, save it and ensure it's activated. The system should now automatically route conversations based on your configured rules.\n\n### Expected Outcomes\n- Conversations should seamlessly transition from the chatbot to a human agent based on the predefined triggers and routing rules.\n- Customers should receive a clear notification when the handover occurs, explaining the transition and what to expect.\n- Human agents should receive notifications or see the handed-over conversations in their queue, ready to assist the customers.\n\n### Tips and Warnings\n- **Regularly Review and Update Triggers and Rules**: As your chatbot's capabilities and customer interactions evolve, it's crucial to periodically review and update the handover triggers and routing rules to ensure they remain effective and relevant.\n- **Train Human Agents**: Ensure that human agents are aware of the handover process and are trained to handle conversations that have been started by the chatbot, providing a seamless and cohesive customer experience.\n- **Monitor Performance**: Keep an eye on key performance indicators (KPIs) such as first response time, resolution rate, and customer satisfaction to gauge the effectiveness of your chatbot to human agent handover process and make adjustments as needed.\n\nBy following these steps and tips, you can effectively implement live chat handover from your chatbot to human agents in Watermelon, enhancing your customer support capabilities and improving overall customer experience.",
-          "citations": [
-            "SLO Onboarding (Page 2136)",
-            "MS Teams Integration (Page 70)",
-            "Datadog (Page 2225)",
-            "Dynatrace (Page 2213)",
-            "New Relic (Page 2223)",
-            "Onboarding Applications (Page 83)",
-            "Reports (Page 816)",
-            "SLO Manager Navigation Options (Page 2126)",
-            "EKS - Stress Conditions - Scale down Replica Sets (Page 1500)",
-            "Snippets (Page 185)",
-            "CE - Component Failures - Loss of Interfacing System (Page 1873)",
-            "Component Failures - Loss of Interfacing System (Page 922)",
-            "Component Failures - Loss of Middleware Connectivity (Page 931)",
-            "AFT - USING THE RECORDER BOT (Page 680)",
-            "Common Issues  and Troubleshooting (Page 2245)",
-            "Slack Integration (Page 68)",
-            "Azure Situations (Page 1562)",
-            "EMR - Component Failures - Modify Cluster (Page 1519)"
-          ],
-          "images": [
-            "cache/images/page_2215_img_02.png",
-            "cache/images/page_2216_img_00.png",
-            "cache/images/page_0085_img_01.png",
-            "cache/images/page_0086_img_00.png"
-          ],
-          "tokens": 6559,
-          "time": 16.190698862075806,
-          "confidence": 0.85
-        },
-        "validation": {
-          "is_valid": false,
-          "overall_score": 0.905,
-          "completeness": 1.0,
-          "formatting": 0.9,
-          "citation": 0.75,
-          "issues": [
-            "Consider adding page number references"
-          ],
-          "warnings": [
-            "Some paragraphs are very long, consider breaking them up"
-          ]
-        },
-        "total_time": 36.801681995391846,
-        "success": true
-      },
-      "retrieval_metrics": {
-        "precision_at_10": 0.1,
-        "recall_at_10": 1.0,
-        "mrr": 0.14285714285714285,
-        "map": 0.14285714285714285,
-        "ndcg_at_10": 0.3333333333333333,
-        "coverage": 0.2,
-        "diversity": 1.0,
-        "total_retrieved": 20,
-        "relevant_retrieved": 1
-      },
-      "generation_metrics": {
-        "overall_score": 0.9139,
-        "completeness": 1.0,
-        "coherence": 0.4499999999999996,
-        "formatting": 1.0,
-        "citation": 1.0,
-        "length": 0.964,
-        "keyword_coverage": 1.0,
-        "word_count": 620,
-        "has_headings": true,
-        "has_lists": true
-      },
-      "total_time": 36.80431270599365,
-      "success": true,
-      "error": ""
-    },
-    {
-      "query_id": 7,
-      "query": "How do I create and manage tags for conversations, use them for filtering, and set up automated tagging rules?",
-      "query_type": "multi-topic_procedural",
-      "complexity": "medium",
-      "pipeline_result": {
-        "query": "How do I create and manage tags for conversations, use them for filtering, and set up automated tagging rules?",
-        "understanding": {
-          "type": "procedural",
-          "complexity": "very_complex",
-          "num_sub_questions": 3,
-          "strategy": "step_by_step"
-        },
-        "retrieval": {
-          "total_retrieved": 30,
-          "final_chunks": 20,
-          "unique_sections": 0,
-          "time": 29.77984857559204
-        },
-        "answer": {
-          "text": "**Creating and Managing Tags for Conversations, Using Them for Filtering, and Setting Up Automated Tagging Rules in Watermelon**\n\n### Prerequisites\n1. Ensure you have the necessary permissions to create and manage tags in Watermelon.\n2. Familiarize yourself with the Watermelon interface, particularly the sections related to conversation management and tagging.\n\n### Creating and Managing Tags for Conversations\n1. **Access the Tag Management Section**: Navigate to the appropriate section in Watermelon where tags can be created and managed. This might be under a \"Settings\" or \"Configuration\" menu, depending on your Watermelon setup.\n2. **Create a New Tag**: Click on the \"Create Tag\" or \"New Tag\" button. A form will appear where you can input the tag name and optionally, a description.\n3. **Define the Tag**: Enter a unique and descriptive name for the tag. This name will be used to identify the tag when applying it to conversations or when filtering conversations.\n4. **Save the Tag**: After entering the tag details, click \"Save\" to create the tag. The new tag will now be available for use when tagging conversations.\n5. **Manage Existing Tags**: You can edit or delete existing tags from the tag management section. Be cautious when deleting tags, as this may affect conversations that have been tagged with the tag you are about to delete.\n\n### Using Tags for Filtering Conversations\n1. **Navigate to the Conversations Section**: Go to the part of Watermelon where conversations are listed.\n2. **Apply a Filter**: Look for a filter option that allows you to select tags. This might be a dropdown menu, a checkbox list, or a search bar where you can enter the tag name.\n3. **Select the Tag**: Choose the tag you wish to filter by. The conversation list will update to show only conversations that have been tagged with the selected tag.\n4. **Refine Your Filter**: Depending on Watermelon's capabilities, you might be able to apply additional filters or use boolean logic to combine multiple tags for more precise filtering.\n\n### Setting Up Automated Tagging Rules\n1. **Access the Automation Section**: Find the part of Watermelon where automation rules can be set up. This might be under a \"Rules\" or \"Automation\" menu.\n2. **Create a New Rule**: Click on the \"Create Rule\" or \"New Automation\" button. A form will appear where you can define the conditions and actions for the rule.\n3. **Define the Trigger**: Specify the conditions under which the rule should be triggered. This could be based on keywords in the conversation, the conversation's status, or other criteria.\n4. **Specify the Action**: Choose the action that should be taken when the rule is triggered. In this case, select the option to apply a tag to the conversation.\n5. **Select the Tag**: Choose the tag that you want to be applied automatically when the rule's conditions are met.\n6. **Save the Rule**: After defining the rule, click \"Save\" to activate it. The rule will now run automatically based on the defined trigger, applying the selected tag to matching conversations.\n\n### Tips and Warnings\n- **Use Descriptive Tag Names**: Ensure that your tags have descriptive names to avoid confusion when filtering or applying them to conversations.\n- **Test Your Rules**: After setting up automated tagging rules, test them with sample conversations to ensure they work as expected.\n- **Regularly Review Tags and Rules**: Periodically review your tags and automation rules to ensure they remain relevant and effective. Remove or update tags and rules as necessary to maintain organization and efficiency.\n\nBy following these steps and tips, you can effectively create and manage tags for conversations in Watermelon, use them for filtering, and set up automated tagging rules to streamline your workflow.",
-          "citations": [
-            "Failure and Defect Management (Page 787)",
-            "Elastic (ELK) (Page 2227)",
-            "MS Teams Integration (Page 70)",
-            "Managing Requirements in Watermelon (Page 172)",
-            "Getting Started with WM-Meta (Page 49)",
-            "Dynatrace (Page 2213)",
-            "New Relic (Page 2223)",
-            "Test Data (Page 848)",
-            "Test Packs (Page 740)",
-            "ELBv2 - Component Failures - Deregister Target (Page 1517)",
-            "Configurations (Page 51)",
-            "Creating Application Builds (Page 135)",
-            "SLO Analysis (Page 2170)",
-            "FAQs (Page 2254)",
-            "SLO Onboarding (Page 2136)",
-            "Snippets (Page 185)",
-            "Test Case Execution (Page 768)",
-            "ECS - Component Failures - Untag Resource (Page 1457)",
-            "Integration with Incident and Change Management Systems (Page 2238)"
-          ],
-          "images": [
-            "cache/images/page_2230_img_00.png",
-            "cache/images/page_0173_img_00.png",
-            "cache/images/page_0173_img_01.png",
-            "cache/images/page_0174_img_00.png",
-            "cache/images/page_0049_img_00.png",
-            "cache/images/page_0050_img_00.png",
-            "cache/images/page_2215_img_02.png",
-            "cache/images/page_2216_img_00.png",
+            "cache/images/page_0734_img_01.png",
             "cache/images/page_0135_img_00.png",
             "cache/images/page_0137_img_00.png",
-            "cache/images/page_1457_img_00.png",
-            "cache/images/page_1459_img_00.png"
+            "cache/images/page_2227_img_00.png",
+            "cache/images/page_2228_img_00.png",
+            "cache/images/page_2229_img_00.png",
+            "cache/images/page_2108_img_01.png",
+            "cache/images/page_2109_img_00.png"
           ],
-          "tokens": 6473,
-          "time": 3.0926289558410645,
+          "tokens": 6305,
+          "time": 3.5080575942993164,
           "confidence": 0.85
         },
         "validation": {
@@ -693,977 +515,35 @@
             "Some paragraphs are very long, consider breaking them up"
           ]
         },
-        "total_time": 36.1495475769043,
+        "total_time": 19.824161767959595,
         "success": true
       },
       "retrieval_metrics": {
         "precision_at_10": 0.6,
-        "recall_at_10": 0.4,
+        "recall_at_10": 0.6,
         "mrr": 1.0,
-        "map": 0.7336923605576856,
-        "ndcg_at_10": 0.6745711375739728,
-        "coverage": 1.0,
+        "map": 0.5988347763347763,
+        "ndcg_at_10": 0.5829393865084944,
+        "coverage": 0.75,
         "diversity": 1.0,
         "total_retrieved": 20,
-        "relevant_retrieved": 15
+        "relevant_retrieved": 10
       },
       "generation_metrics": {
-        "overall_score": 0.89917,
+        "overall_score": 0.84598,
         "completeness": 1.0,
-        "coherence": 0.34999999999999964,
+        "coherence": 0.24999999999999967,
         "formatting": 1.0,
         "citation": 1.0,
-        "length": 0.9667,
-        "keyword_coverage": 1.0,
-        "word_count": 611,
-        "has_headings": true,
-        "has_lists": true
-      },
-      "total_time": 36.151458501815796,
-      "success": true,
-      "error": ""
-    },
-    {
-      "query_id": 8,
-      "query": "What's the process for integrating Shopify, syncing product catalogs, and enabling order tracking in conversations?",
-      "query_type": "multi-topic_integration",
-      "complexity": "very_high",
-      "pipeline_result": {
-        "query": "What's the process for integrating Shopify, syncing product catalogs, and enabling order tracking in conversations?",
-        "understanding": {
-          "type": "integration",
-          "complexity": "moderate",
-          "num_sub_questions": 1,
-          "strategy": "standard"
-        },
-        "retrieval": {
-          "total_retrieved": 10,
-          "final_chunks": 10,
-          "unique_sections": 0,
-          "time": 9.266352415084839
-        },
-        "answer": {
-          "text": "### Introduction to Integrating Shopify with Watermelon\nTo integrate Shopify with Watermelon, enabling features such as syncing product catalogs and order tracking in conversations, you must follow a series of steps. Although the provided sections do not directly outline the process for Shopify integration, we can infer a general approach based on the information given for other integrations.\n\n### Understanding the Integration Process\nThe integration process typically involves setting up the external application (in this case, Shopify) and then configuring Watermelon to work with it. This often includes registering webhooks, mapping applications, and configuring integration details within Watermelon.\n\n### General Steps for Integration\nBased on the information provided for Slack, ServiceNow, and MS Teams integrations, a general outline for integrating Shopify could involve:\n- **Setting Up Shopify**: This would involve creating an application or configuring an existing one within Shopify to work with Watermelon. This step is similar to creating a Slack App or setting up ServiceNow for integration (Sections 1 and 2).\n- **Enabling Webhooks**: Similar to enabling incoming webhooks in Slack (Section 1), you would need to set up webhooks in Shopify to send notifications to Watermelon.\n- **Registering Webhooks in Watermelon**: After setting up webhooks in Shopify, you would need to register them in Watermelon, similar to the process described for Slack and MS Teams (Sections 1 and 3).\n- **Mapping Applications**: Once webhooks are registered, you would map them to specific applications within Watermelon, as described for MS Teams integration (Section 3).\n\n### Syncing Product Catalogs and Enabling Order Tracking\nFor syncing product catalogs and enabling order tracking, you would likely need to:\n- **Configure Data Sources**: Similar to the Datadog integration (Section 10), you might need to associate a data source with your Shopify integration, specifying how product catalog and order data should be synced.\n- **Define SLOs and Metrics**: As outlined in the SLO onboarding process (Section 4), you would define Service Level Objectives (SLOs) and metrics relevant to your Shopify integration, such as order fulfillment rates or product catalog update frequencies.\n\n### Conclusion\nWhile the exact steps for integrating Shopify with Watermelon are not provided in the given sections, the process likely involves setting up Shopify, enabling webhooks, registering these webhooks in Watermelon, mapping applications, and configuring data sources for product catalog syncing and order tracking. It's essential to refer to the official Watermelon documentation for Shopify integration for detailed, step-by-step instructions.",
-          "citations": [
-            "Slack Integration (Page 68)",
-            "ServiceNow Integration (Page 73)",
-            "MS Teams Integration (Page 70)",
-            "SLO Onboarding (Page 2136)",
-            "Device Farms (Mobiles and Browsers) (Page 76)",
-            "Watermelon Grid (Browsers) (Page 78)",
-            "Overall Platform (Page 20)",
-            "Onboarding Applications (Page 83)",
-            "Datadog (Page 2225)"
-          ],
-          "images": [
-            "cache/images/page_0069_img_00.png",
-            "cache/images/page_0074_img_00.png",
-            "cache/images/page_0078_img_00.png",
-            "cache/images/page_0080_img_00.png"
-          ],
-          "tokens": 3078,
-          "time": 7.052147150039673,
-          "confidence": 0.75
-        },
-        "validation": {
-          "is_valid": false,
-          "overall_score": 0.885,
-          "completeness": 1.0,
-          "formatting": 0.8,
-          "citation": 0.75,
-          "issues": [
-            "Consider adding page number references"
-          ],
-          "warnings": [
-            "Consider using lists for clarity"
-          ]
-        },
-        "total_time": 16.32301115989685,
-        "success": true
-      },
-      "retrieval_metrics": {
-        "precision_at_10": 0.9,
-        "recall_at_10": 1.0,
-        "mrr": 1.0,
-        "map": 0.9765432098765433,
-        "ndcg_at_10": 0.9937947856332163,
-        "coverage": 0.25,
-        "diversity": 1.0,
-        "total_retrieved": 10,
-        "relevant_retrieved": 9
-      },
-      "generation_metrics": {
-        "overall_score": 0.8964400000000001,
-        "completeness": 1.0,
-        "coherence": 0.95,
-        "formatting": 0.6499999999999999,
-        "citation": 1.0,
-        "length": 0.9394,
+        "length": 0.9598,
         "keyword_coverage": 0.75,
-        "word_count": 399,
-        "has_headings": true,
-        "has_lists": false
-      },
-      "total_time": 16.324325561523438,
-      "success": true,
-      "error": ""
-    },
-    {
-      "query_id": 9,
-      "query": "How do I set up multi-language support, create translations for chatbot responses, and configure language detection?",
-      "query_type": "multi-topic_procedural",
-      "complexity": "high",
-      "pipeline_result": {
-        "query": "How do I set up multi-language support, create translations for chatbot responses, and configure language detection?",
-        "understanding": {
-          "type": "procedural",
-          "complexity": "complex",
-          "num_sub_questions": 3,
-          "strategy": "step_by_step"
-        },
-        "retrieval": {
-          "total_retrieved": 30,
-          "final_chunks": 20,
-          "unique_sections": 0,
-          "time": 15.342446565628052
-        },
-        "answer": {
-          "text": "To set up multi-language support, create translations for chatbot responses, and configure language detection in Watermelon, follow these steps:\n\n**Prerequisites:**\n1. Ensure you have administrative access to the Watermelon platform.\n2. Familiarize yourself with the Watermelon interface and its various modules.\n\n**Setting up Multi-Language Support:**\n1. **Access WM-Meta**: Navigate to the WM-Meta section within the Watermelon platform. This is where you will configure global settings, including language support.\n2. **Language Configuration**: Look for the language configuration option within WM-Meta. This might be under a section like \"Global Tools\" or \"Settings.\"\n3. **Add Languages**: Click on the option to add new languages. You will be presented with a list of supported languages or an input field to enter the language code you wish to add.\n4. **Save Changes**: After selecting or entering the desired languages, save your changes. The platform might require you to confirm or apply the changes.\n\n**Creating Translations for Chatbot Responses:**\n1. **Access Chatbot Module**: Navigate to the chatbot module within the Watermelon platform. This is where you design and manage chatbot interactions.\n2. **Edit Chatbot Responses**: Find the chatbot response you wish to translate and click on the edit option. You might need to navigate through a flowchart or a list of responses to find the specific one.\n3. **Translation Input**: Look for a translation or localization option within the edit response section. This could be a dropdown to select the language or a direct input field to enter the translation.\n4. **Enter Translations**: For each language you've added in the multi-language support setup, enter the corresponding translation for the chatbot response.\n5. **Save Translations**: After entering the translations, save your changes. Ensure that the translations are correctly associated with their respective languages.\n\n**Configuring Language Detection:**\n1. **Access Language Detection Settings**: Within the WM-Meta or the chatbot module, look for settings related to language detection. This might be under an \"Advanced\" or \"Configuration\" section.\n2. **Select Detection Method**: Choose how you want the system to detect the user's language. Common methods include detecting the browser's language, using geolocation, or allowing the user to select their language manually.\n3. **Configure Detection Rules**: Depending on the detection method, you might need to configure rules or settings. For example, if using geolocation, you might need to map regions to languages.\n4. **Save Detection Settings**: After configuring the language detection method and rules, save your changes.\n\n**Expected Outcome:**\n- The Watermelon platform should now support multiple languages as configured.\n- Chatbot responses should be translated and displayed correctly based on the detected language.\n- Language detection should work as configured, either automatically detecting the user's language or allowing them to choose it.\n\n**Tips and Warnings:**\n- Ensure that all translations are accurate and culturally appropriate to provide the best user experience.\n- Test the language detection and chatbot response translations thoroughly to catch any errors or inconsistencies.\n- Consider implementing a fallback language in case the detected language is not supported by your chatbot or platform.\n\n**Relevant Screenshots:**\nUnfortunately, without direct access to the Watermelon platform's current interface, specific screenshots cannot be provided. However, you can refer to the Watermelon documentation or support resources for visual guides on navigating the platform and configuring these settings.",
-          "citations": [
-            "Installation instructions - using Docker componse (Page 44)",
-            "Datadog (Page 2225)",
-            "Dynatrace (Page 2213)",
-            "New Relic (Page 2223)",
-            "AppDynamics Data Source (Page 93)",
-            "New Relic Data Source (Page 97)",
-            "Help and Issue Resolution (Page 2241)",
-            "FAQs (Page 2254)",
-            "Snippets (Page 185)",
-            "Prometheus Data Source (Page 103)",
-            "Splunk Data Source (Page 101)",
-            "Oracle Data Source (Page 113)",
-            "Configurations (Page 51)",
-            "Slack Integration (Page 68)",
-            "Email Integration (Page 66)",
-            "Dynatrace Data Source (Page 95)",
-            "Datadog Data Source (Page 99)",
-            "MS Teams Integration (Page 70)",
-            "SLO Onboarding (Page 2136)"
-          ],
-          "images": [
-            "cache/images/page_2215_img_02.png",
-            "cache/images/page_2216_img_00.png",
-            "cache/images/page_0093_img_00.png",
-            "cache/images/page_0094_img_00.png",
-            "cache/images/page_0095_img_00.png",
-            "cache/images/page_0097_img_00.png",
-            "cache/images/page_0098_img_00.png",
-            "cache/images/page_0099_img_00.png",
-            "cache/images/page_0103_img_00.png",
-            "cache/images/page_0104_img_00.png",
-            "cache/images/page_0105_img_00.png",
-            "cache/images/page_0101_img_00.png",
-            "cache/images/page_0102_img_00.png",
-            "cache/images/page_0113_img_00.png",
-            "cache/images/page_0114_img_00.png",
-            "cache/images/page_0115_img_00.png",
-            "cache/images/page_0069_img_00.png",
-            "cache/images/page_0096_img_00.png",
-            "cache/images/page_0100_img_00.png"
-          ],
-          "tokens": 6371,
-          "time": 17.477848768234253,
-          "confidence": 0.85
-        },
-        "validation": {
-          "is_valid": false,
-          "overall_score": 0.9249999999999999,
-          "completeness": 1.0,
-          "formatting": 1.0,
-          "citation": 0.75,
-          "issues": [
-            "Consider adding page number references"
-          ],
-          "warnings": []
-        },
-        "total_time": 36.28952741622925,
-        "success": true
-      },
-      "retrieval_metrics": {
-        "precision_at_10": 0.5,
-        "recall_at_10": 0.625,
-        "mrr": 1.0,
-        "map": 0.7690934065934066,
-        "ndcg_at_10": 0.7322538581500238,
-        "coverage": 0.25,
-        "diversity": 1.0,
-        "total_retrieved": 20,
-        "relevant_retrieved": 8
-      },
-      "generation_metrics": {
-        "overall_score": 0.9164800000000001,
-        "completeness": 1.0,
-        "coherence": 0.4499999999999996,
-        "formatting": 1.0,
-        "citation": 1.0,
-        "length": 0.9898,
-        "keyword_coverage": 1.0,
-        "word_count": 534,
+        "word_count": 634,
         "has_headings": true,
         "has_lists": true
       },
-      "total_time": 36.290581703186035,
+      "total_time": 19.825939655303955,
       "success": true,
       "error": ""
-    },
-    {
-      "query_id": 10,
-      "query": "What are the different analytics dashboards available, how do I create custom reports, and export data for external analysis?",
-      "query_type": "multi-topic_conceptual",
-      "complexity": "medium",
-      "pipeline_result": {
-        "query": "What are the different analytics dashboards available, how do I create custom reports, and export data for external analysis?",
-        "understanding": {
-          "type": "integration",
-          "complexity": "complex",
-          "num_sub_questions": 3,
-          "strategy": "standard"
-        },
-        "retrieval": {
-          "total_retrieved": 30,
-          "final_chunks": 20,
-          "unique_sections": 0,
-          "time": 13.107761859893799
-        },
-        "answer": {
-          "text": "### Introduction to Analytics Dashboards\nWatermelon provides various analytics dashboards to help users analyze and understand the outputs generated by automated test scripts. The most relevant dashboards include the Chaos Dashboard, Dashboard, and Change Dashboards.\n\n### Available Analytics Dashboards\nThe following dashboards are available:\n* **Chaos Dashboard**: This dashboard provides insights into chaos experiments, including coverage, observations, and experiment results (Section 2, Page 901).\n* **Dashboard**: This dashboard offers a consolidated view of functional testing metrics, including coverage, test cases, and test packs (Section 3, Page 796).\n* **Change Dashboards**: These dashboards provide insights into the impact of changes on SLOs, including change requests, SLO type, and time duration (Section 7, Page 2189).\n* **SLO Manager Navigation Options**: This dashboard provides an overview of SLO health, trends, and alerts (Section 4, Page 2126).\n\n### Creating Custom Reports\nTo create custom reports, users can follow these steps:\n1. Navigate to the **Runs** page and select the **Test Packs** tab (Section 11, Page 747).\n2. Choose the reports to download using the checkboxes.\n3. Use the export options: **Export to HTML**, **Export to Excel**, or **Export to Merged Excel**.\n\n### Exporting Data for External Analysis\nTo export data for external analysis, users can follow these steps:\n1. Navigate to the **Test Runs** section (Section 19, Page 816).\n2. Click the **Export** button.\n3. Choose one of the export options: **Export to Excel** or **Export to HTML**.\nThe exported report will include execution metadata, failure diagnostics, and other relevant information.\n\n### Additional Information\nFor more information on data sources integration, users can refer to Section 14 (Page 92). Watermelon supports integration with various data sources, including APM tools, log management tools, proprietary databases, and cloud technologies. Users can configure data sources to ingest relevant data into Watermelon for monitoring, analysis, and reporting purposes.",
-          "citations": [
-            "Managing Folders (Page 802)",
-            "Chaos Engineering (Page 901)",
-            "Dashboard (Page 796)",
-            "SLO Manager Navigation Options (Page 2126)",
-            "Onboarding Applications (Page 83)",
-            "Recording a test case for a desktop app (Page 232)",
-            "Change Dashboards (Page 2189)",
-            "New Relic (Page 2223)",
-            "Dynatrace (Page 2213)",
-            "AppDynamics (Page 2211)",
-            "Configurations for Test Packs (Page 747)",
-            "AFT - MODIFICATION OF EXISTING TEST DATA SET (Page 728)",
-            "Analyzing SLOs (Page 2167)",
-            "Data Sources Integration (Page 92)",
-            "Error Budgets (SLO Management) (Page 2124)",
-            "Test Pack Email Reports (Page 845)",
-            "Configurations (Page 51)",
-            "Reports (Page 816)",
-            "FAQs (Page 2254)"
-          ],
-          "images": [
-            "cache/images/page_0797_img_00.png",
-            "cache/images/page_0801_img_00.png",
-            "cache/images/page_0802_img_00.png",
-            "cache/images/page_2189_img_00.png",
-            "cache/images/page_2189_img_01.png",
-            "cache/images/page_2189_img_02.png",
-            "cache/images/page_2190_img_00.png",
-            "cache/images/page_2191_img_00.png",
-            "cache/images/page_2191_img_01.png",
-            "cache/images/page_2215_img_02.png",
-            "cache/images/page_2216_img_00.png",
-            "cache/images/page_0729_img_02.png",
-            "cache/images/page_0730_img_00.png",
-            "cache/images/page_2168_img_00.png",
-            "cache/images/page_0093_img_00.png",
-            "cache/images/page_0845_img_00.png",
-            "cache/images/page_0848_img_00.png"
-          ],
-          "tokens": 6483,
-          "time": 20.99230670928955,
-          "confidence": 0.85
-        },
-        "validation": {
-          "is_valid": true,
-          "overall_score": 1.0,
-          "completeness": 1.0,
-          "formatting": 1.0,
-          "citation": 1.0,
-          "issues": [],
-          "warnings": []
-        },
-        "total_time": 37.38927245140076,
-        "success": true
-      },
-      "retrieval_metrics": {
-        "precision_at_10": 0.7,
-        "recall_at_10": 0.4117647058823529,
-        "mrr": 1.0,
-        "map": 0.7327518252099386,
-        "ndcg_at_10": 0.6563033086078546,
-        "coverage": 1.0,
-        "diversity": 1.0,
-        "total_retrieved": 20,
-        "relevant_retrieved": 17
-      },
-      "generation_metrics": {
-        "overall_score": 0.958,
-        "completeness": 1.0,
-        "coherence": 0.7999999999999998,
-        "formatting": 1.0,
-        "citation": 1.0,
-        "length": 0.8799999999999999,
-        "keyword_coverage": 1.0,
-        "word_count": 300,
-        "has_headings": true,
-        "has_lists": true
-      },
-      "total_time": 37.39171242713928,
-      "success": true,
-      "error": ""
-    },
-    {
-      "query_id": 11,
-      "query": "How do I implement CSAT surveys in conversations, analyze feedback, and trigger automated follow-ups based on ratings?",
-      "query_type": "multi-topic_procedural",
-      "complexity": "high",
-      "pipeline_result": {
-        "query": "How do I implement CSAT surveys in conversations, analyze feedback, and trigger automated follow-ups based on ratings?",
-        "understanding": {
-          "type": "procedural",
-          "complexity": "very_complex",
-          "num_sub_questions": 3,
-          "strategy": "step_by_step"
-        },
-        "retrieval": {
-          "total_retrieved": 30,
-          "final_chunks": 20,
-          "unique_sections": 0,
-          "time": 8.715176820755005
-        },
-        "answer": {
-          "text": "Implementing CSAT surveys in conversations, analyzing feedback, and triggering automated follow-ups based on ratings in Watermelon involves several steps. Unfortunately, the provided documentation does not directly address CSAT surveys or their implementation within Watermelon. However, based on the general structure of integrating features and analyzing data within Watermelon, we can infer a general approach. Here’s how you might proceed, keeping in mind that specific steps might vary based on the actual Watermelon platform capabilities and your specific requirements.\n\n### Prerequisites:\n1. **Watermelon Account**: Ensure you have access to Watermelon with valid credentials.\n2. **Understanding of Watermelon’s Features**: Familiarize yourself with Watermelon’s capabilities, especially those related to survey integration, analytics, and automation.\n3. **CSAT Survey Tool**: Identify if Watermelon has a built-in CSAT survey tool or if you need to integrate a third-party service.\n\n### Implementing CSAT Surveys in Conversations:\n#### Step 1: Configure CSAT Survey Tool\n- **Action**: If Watermelon has a built-in CSAT survey feature, navigate to the appropriate section within the platform to configure it. If not, you may need to integrate a third-party CSAT survey tool using APIs or available integrations.\n- **Explanation**: This step involves setting up the survey tool to collect customer satisfaction data. You will need to define the survey questions, the scale for measuring satisfaction (e.g., 1-5), and possibly customize the survey’s appearance to match your brand.\n- **Outcome**: A configured CSAT survey tool ready to be integrated into conversations.\n\n#### Step 2: Integrate Survey into Conversations\n- **Action**: Determine how to trigger the CSAT survey within conversations. This could involve setting up specific conversation flows or using automation rules within Watermelon.\n- **Explanation**: The goal is to seamlessly integrate the survey into the natural flow of customer interactions, possibly at the end of a support conversation or after a resolution.\n- **Outcome**: CSAT surveys are now part of the conversation workflow, collecting feedback from customers.\n\n### Analyzing Feedback from CSAT Surveys:\n#### Step 3: Access Analytics Dashboard\n- **Action**: Navigate to Watermelon’s analytics or reporting section to view collected CSAT data.\n- **Explanation**: This step involves using Watermelon’s analytics capabilities to understand customer feedback. Look for features that allow you to filter, sort, and analyze the survey responses.\n- **Outcome**: Access to CSAT survey data and analytics, providing insights into customer satisfaction levels.\n\n#### Step 4: Interpret CSAT Data\n- **Action**: Analyze the CSAT data to identify trends, patterns, or areas of concern. This might involve calculating average satisfaction scores, identifying common issues, or spotting correlations between specific factors and satisfaction levels.\n- **Explanation**: The analysis should help in understanding what aspects of the service or product are meeting customer expectations and where improvements are needed.\n- **Outcome**: A deeper understanding of customer satisfaction and areas for improvement.\n\n### Triggering Automated Follow-ups Based on Ratings:\n#### Step 5: Set Up Automation Rules\n- **Action**: Use Watermelon’s automation features to create rules based on CSAT survey responses. For example, setting up a rule to trigger a follow-up conversation or email when a customer gives a low satisfaction rating.\n- **Explanation**: Automation rules can help in promptly addressing customer concerns, showing that their feedback is valued and acted upon.\n- **Outcome**: Automated follow-ups are triggered based on customer satisfaction ratings, ensuring timely engagement with customers.\n\n#### Step 6: Monitor and Adjust\n- **Action**: Continuously monitor the effectiveness of the CSAT survey integration, analysis, and follow-up processes. Gather feedback on the follow-ups themselves to understand their impact on customer satisfaction.\n- **Explanation**: This step involves refining the process based on feedback and performance data. Adjustments might include changing survey questions, altering automation rules, or improving response strategies.\n- **Outcome**: An iterative improvement in customer satisfaction measurement and response processes.\n\n### Tips and Warnings:\n- **Customization**: Ensure that any integration or automation aligns with your brand’s voice and customer service strategy.\n- **Privacy and Compliance**: Be mindful of customer data privacy and ensure compliance with relevant regulations when collecting and storing feedback.\n- **Continuous Improvement**: Regularly review the effectiveness of your CSAT survey and follow-up processes to identify areas for improvement.\n\nGiven the lack of direct documentation on CSAT surveys within Watermelon, these steps are generalized. For precise instructions, consulting Watermelon’s official documentation or support team is recommended.",
-          "citations": [
-            "GitHub Actions Based Execution (Page 753)",
-            "Watermelon Issue Resolution Workflow (Page 2242)",
-            "Getting Started with WM-Meta (Page 49)",
-            "Azure Pipelines Based Execution (Page 758)",
-            "Help and Issue Resolution (Page 2241)",
-            "Analyzing SLOs (Page 2167)",
-            "Error Budgets (SLO Management) (Page 2124)",
-            "Datadog (Page 2225)",
-            "Dynatrace (Page 2213)",
-            "New Relic (Page 2223)",
-            "FAQs (Page 2254)",
-            "Slack Integration (Page 68)",
-            "AppDynamics (Page 2211)",
-            "Understanding SLO cards (Page 2168)",
-            "SLO Onboarding (Page 2136)",
-            "CE - Component Failures - Loss of Interfacing System (Page 1873)",
-            "Component Failures - Loss of Interfacing System (Page 922)",
-            "Test Case Execution (Page 768)"
-          ],
-          "images": [
-            "cache/images/page_0765_img_00.png",
-            "cache/images/page_0765_img_01.png",
-            "cache/images/page_0766_img_00.png",
-            "cache/images/page_2215_img_02.png",
-            "cache/images/page_2216_img_00.png",
-            "cache/images/page_0069_img_00.png"
-          ],
-          "tokens": 6534,
-          "time": 25.27051830291748,
-          "confidence": 0.85
-        },
-        "validation": {
-          "is_valid": false,
-          "overall_score": 0.885,
-          "completeness": 1.0,
-          "formatting": 0.8,
-          "citation": 0.75,
-          "issues": [
-            "Consider adding page number references"
-          ],
-          "warnings": [
-            "Consider using lists for clarity"
-          ]
-        },
-        "total_time": 36.33515238761902,
-        "success": true
-      },
-      "retrieval_metrics": {
-        "precision_at_10": 0.2,
-        "recall_at_10": 0.3333333333333333,
-        "mrr": 0.16666666666666666,
-        "map": 0.2517056530214425,
-        "ndcg_at_10": 0.20324958761397832,
-        "coverage": 0.6,
-        "diversity": 1.0,
-        "total_retrieved": 20,
-        "relevant_retrieved": 6
-      },
-      "generation_metrics": {
-        "overall_score": 0.9189400000000001,
-        "completeness": 1.0,
-        "coherence": 0.8499999999999999,
-        "formatting": 0.6499999999999999,
-        "citation": 1.0,
-        "length": 0.9394,
-        "keyword_coverage": 1.0,
-        "word_count": 702,
-        "has_headings": true,
-        "has_lists": false
-      },
-      "total_time": 36.33688163757324,
-      "success": true,
-      "error": ""
-    },
-    {
-      "query_id": 12,
-      "query": "What's the process for setting up webhooks, handling incoming data, and triggering actions based on external events?",
-      "query_type": "multi-topic_technical",
-      "complexity": "very_high",
-      "pipeline_result": {
-        "query": "What's the process for setting up webhooks, handling incoming data, and triggering actions based on external events?",
-        "understanding": {
-          "type": "integration",
-          "complexity": "moderate",
-          "num_sub_questions": 1,
-          "strategy": "standard"
-        },
-        "retrieval": {
-          "total_retrieved": 10,
-          "final_chunks": 10,
-          "unique_sections": 0,
-          "time": 5.791638612747192
-        },
-        "answer": {
-          "text": "### Introduction to Setting Up Webhooks\nTo set up webhooks, handle incoming data, and trigger actions based on external events in Watermelon, you need to follow a series of steps that involve integrating webhooks from various platforms such as MS Teams, Slack, or GitHub into Watermelon. The process generally involves creating an incoming webhook in the target platform (e.g., MS Teams, Slack), then registering that webhook within Watermelon under the respective integration section (e.g., WM-Meta and Teams under Global Tools for MS Teams).\n\n### Setting Up Webhooks in MS Teams\nAs outlined in **Section 1: MS Teams Integration (Page 70)**, to integrate notifications into Microsoft Teams via webhooks:\n1. Create an incoming webhook in a Teams channel.\n2. Configure the webhook by giving it a name and optionally uploading an image.\n3. Copy the generated URL for the webhook.\n4. In Watermelon, navigate to WM-Meta and Teams under Global Tools.\n5. Register the webhook with a unique name.\n\n### Setting Up Webhooks in Slack\nAccording to **Section 2: Slack Integration (Page 68)** and **Section 3: Slack Integration (Page 68)**, to integrate Slack with Watermelon:\n1. Create a Slack App and enable incoming webhooks.\n2. Add a new webhook to your workspace, choosing the channel or user to receive notifications.\n3. Note the Webhook URL.\n4. In Watermelon, go to WM-Meta and Slack under Global Tools.\n5. Register the webhook with a unique name and map it to specific applications during onboarding.\n\n### Handling Incoming Data and Triggering Actions\nFor handling incoming data and triggering actions based on external events, such as GitHub Actions, refer to **Section 4: GitHub Actions Based Execution (Page 753)**. This involves configuring a GitHub Actions workflow to trigger Watermelon's test execution capabilities via its API. The workflow is defined in YAML and can be triggered automatically when changes are pushed to the main branch of your repository.\n\n### Integration with Other Tools\nWatermelon also supports integration with other notification/alerting tools as mentioned in **Section 9: Integration with Notification/Alerting tools (Page 2235)**. This includes tools like SMTP (email services), MS Teams, and Slack, which can be configured during the application onboarding process under WM-Meta for seamless integration and effective management of notifications.\n\n### Conclusion\nSetting up webhooks, handling incoming data, and triggering actions based on external events in Watermelon involves a straightforward process of creating webhooks in the target platform (e.g., MS Teams, Slack, GitHub) and then registering those webhooks within Watermelon. This integration enables automated notifications and actions, enhancing the efficiency and reliability of application management and operational processes within Watermelon. Always refer to the official documentation for the most current and detailed instructions, as procedures may be subject to change.",
-          "citations": [
-            "MS Teams Integration (Page 70)",
-            "Slack Integration (Page 68)",
-            "GitHub Actions Based Execution (Page 753)",
-            "JIRA Integration (Page 61)",
-            "Lambda - Component Failures - Toggle Event Source Mapping (Page 1531)",
-            "AWS Situations (Page 1081)",
-            "Integration with Notification/Alerting tools (Page 2235)",
-            "SLO Onboarding (Page 2136)"
-          ],
-          "images": [
-            "cache/images/page_0071_img_00.png",
-            "cache/images/page_0069_img_00.png",
-            "cache/images/page_0061_img_00.png",
-            "cache/images/page_0061_img_01.png",
-            "cache/images/page_0061_img_02.png",
-            "cache/images/page_2235_img_00.png"
-          ],
-          "tokens": 3791,
-          "time": 12.672572374343872,
-          "confidence": 0.75
-        },
-        "validation": {
-          "is_valid": true,
-          "overall_score": 1.0,
-          "completeness": 1.0,
-          "formatting": 1.0,
-          "citation": 1.0,
-          "issues": [],
-          "warnings": []
-        },
-        "total_time": 18.465982675552368,
-        "success": true
-      },
-      "retrieval_metrics": {
-        "precision_at_10": 0.7,
-        "recall_at_10": 1.0,
-        "mrr": 1.0,
-        "map": 0.9821428571428571,
-        "ndcg_at_10": 0.9950883841893562,
-        "coverage": 0.6,
-        "diversity": 1.0,
-        "total_retrieved": 10,
-        "relevant_retrieved": 7
-      },
-      "generation_metrics": {
-        "overall_score": 0.8542,
-        "completeness": 1.0,
-        "coherence": 0.4499999999999996,
-        "formatting": 1.0,
-        "citation": 1.0,
-        "length": 0.967,
-        "keyword_coverage": 0.6,
-        "word_count": 445,
-        "has_headings": true,
-        "has_lists": true
-      },
-      "total_time": 18.46687364578247,
-      "success": true,
-      "error": ""
-    },
-    {
-      "query_id": 13,
-      "query": "How do I create conditional logic in conversation flows, use variables, and implement branching based on user inputs?",
-      "query_type": "multi-topic_procedural",
-      "complexity": "high",
-      "pipeline_result": {
-        "query": "How do I create conditional logic in conversation flows, use variables, and implement branching based on user inputs?",
-        "understanding": {
-          "type": "procedural",
-          "complexity": "very_complex",
-          "num_sub_questions": 3,
-          "strategy": "step_by_step"
-        },
-        "retrieval": {
-          "total_retrieved": 30,
-          "final_chunks": 19,
-          "unique_sections": 0,
-          "time": 12.774880409240723
-        },
-        "answer": {
-          "text": "**Creating Conditional Logic in Conversation Flows, Using Variables, and Implementing Branching Based on User Inputs**\n\n### Prerequisites\n1. Familiarity with the Watermelon platform and its interface.\n2. Access to the Watermelon software with the necessary permissions to create and edit conversation flows.\n3. Basic understanding of logical operations and conditional statements.\n\n### Step-by-Step Instructions\n\n#### Creating Conditional Logic in Conversation Flows\n\n1. **Access the Logic Toolbox**: Navigate to the Recording Canvas while creating or editing a snippet or test case. Click on the Logic Toolbox button in the left toolbox to access its blocks.\n2. **Use the \"If Do\" Block**: Drag and drop the \"If Do\" block into your workflow. This block is used to execute actions based on specific conditions.\n3. **Define the Condition**: Input a Boolean expression (e.g., `score > 90`) that evaluates to true or false in the \"If Condition\" field.\n4. **Specify the Action**: Define the action to perform if the condition is true in the \"Do Action\" field (e.g., \"Say 'Excellent!'\").\n5. **Add Else If or Else Conditions (Optional)**: Click the settings icon to add multiple Else If conditions or an Else block for handling different scenarios.\n\n#### Using Variables in Conversation Flows\n\n1. **Access the Variable Block**: Navigate to the Variable block in the Logic Toolbox.\n2. **Create or Reference a Variable**: Input the name of the variable you want to create or reference (e.g., `itemCount`).\n3. **Assign or Retrieve a Value**: Use the Variable block to assign a value to the variable or retrieve its current value for use in other blocks or operations.\n4. **Use Variables in Conditions**: Variables can be used within the conditions of \"If Do\" blocks or other logical operations to create dynamic workflows based on variable values.\n\n#### Implementing Branching in Conversation Flows Based on User Inputs\n\n1. **Use the \"Compare Values\" Block**: Drag and drop the \"Compare Values\" block into your workflow to compare user inputs against expected values.\n2. **Define the Comparison**: Input the user's input as the first value and the expected value as the second value. Select the appropriate comparison operator (e.g., \"Is equal to\").\n3. **Implement Branching Logic**: Based on the comparison result, use \"If Do\" blocks to execute different actions or workflows. For example, if the user's input matches the expected value, proceed with one action; otherwise, proceed with another.\n4. **Test and Refine**: Test your conversation flow with various user inputs to ensure the branching logic works as expected. Refine the conditions and actions as necessary to achieve the desired outcomes.\n\n### Expected Outcomes\n- Conditional logic is successfully implemented in the conversation flow, allowing for dynamic decision-making based on user inputs or variable values.\n- Variables are effectively used to store and retrieve values, enabling flexible and data-driven workflows.\n- Branching in the conversation flow is correctly implemented, providing different paths based on user inputs or conditions, and enhancing the overall user experience.\n\n### Relevant Screenshots\n- Refer to `cache/images/page_0555_img_00.png` for an example of the \"If Do\" block interface.\n- See `cache/images/page_0670_img_00.png` for the Variable block's interface.\n\n### Tips and Warnings\n- Ensure that conditions are correctly formulated to avoid unintended outcomes.\n- Thoroughly test all possible branches and conditions to guarantee the workflow behaves as expected under different scenarios.\n- Use variables and conditional logic judiciously to maintain workflow clarity and simplicity.",
-          "citations": [
-            "Variable (Page 670)",
-            "If Do (Page 555)",
-            "Logical Operators (Page 559)",
-            "Boolean Operators (Page 562)",
-            "AFT - USING ENVIRONMENT VARIABLES (Page 677)",
-            "Operators (Page 583)",
-            "Test if True, if False (Page 565)",
-            "Is Element Present (Page 543)",
-            "Compare Values (Page 557)",
-            "Execute Python Code (Page 332)",
-            "Test Data (Page 848)",
-            "GitHub Actions Based Execution (Page 753)",
-            "IN (Page 566)",
-            "Get Local Variable (Page 553)",
-            "Element Information (Page 448)",
-            "No Code Automation (Page 252)"
-          ],
-          "images": [
-            "cache/images/page_0670_img_00.png",
-            "cache/images/page_0555_img_00.png",
-            "cache/images/page_0557_img_00.png",
-            "cache/images/page_0559_img_00.png",
-            "cache/images/page_0559_img_01.png",
-            "cache/images/page_0561_img_00.png",
-            "cache/images/page_0678_img_02.png",
-            "cache/images/page_0679_img_00.png",
-            "cache/images/page_0583_img_00.png",
-            "cache/images/page_0584_img_00.png",
-            "cache/images/page_0584_img_01.png",
-            "cache/images/page_0565_img_00.png",
-            "cache/images/page_0566_img_00.png",
-            "cache/images/page_0332_img_00.png",
-            "cache/images/page_0567_img_00.png",
-            "cache/images/page_0568_img_00.png",
-            "cache/images/page_0553_img_00.png",
-            "cache/images/page_0554_img_00.png",
-            "cache/images/page_0562_img_00.png",
-            "cache/images/page_0564_img_00.png",
-            "cache/images/page_0252_img_00.png",
-            "cache/images/page_0252_img_01.png",
-            "cache/images/page_0252_img_02.png"
-          ],
-          "tokens": 6213,
-          "time": 18.94684410095215,
-          "confidence": 0.85
-        },
-        "validation": {
-          "is_valid": false,
-          "overall_score": 0.85,
-          "completeness": 1.0,
-          "formatting": 1.0,
-          "citation": 0.5,
-          "issues": [
-            "Consider adding page number references"
-          ],
-          "warnings": []
-        },
-        "total_time": 35.91847085952759,
-        "success": true
-      },
-      "retrieval_metrics": {
-        "precision_at_10": 0.8,
-        "recall_at_10": 0.47058823529411764,
-        "mrr": 0.5,
-        "map": 0.7786972952379982,
-        "ndcg_at_10": 0.6851198693323691,
-        "coverage": 1.0,
-        "diversity": 1.0,
-        "total_retrieved": 19,
-        "relevant_retrieved": 17
-      },
-      "generation_metrics": {
-        "overall_score": 0.86341,
-        "completeness": 1.0,
-        "coherence": 0.09999999999999969,
-        "formatting": 1.0,
-        "citation": 1.0,
-        "length": 0.9841,
-        "keyword_coverage": 1.0,
-        "word_count": 553,
-        "has_headings": true,
-        "has_lists": true
-      },
-      "total_time": 35.920034885406494,
-      "success": true,
-      "error": ""
-    },
-    {
-      "query_id": 14,
-      "query": "What are the security features for conversation data, how do I enable encryption, and configure access control for team members?",
-      "query_type": "multi-topic_security",
-      "complexity": "high",
-      "pipeline_result": {
-        "query": "What are the security features for conversation data, how do I enable encryption, and configure access control for team members?",
-        "understanding": {
-          "type": "security",
-          "complexity": "very_complex",
-          "num_sub_questions": 3,
-          "strategy": "standard"
-        },
-        "retrieval": {
-          "total_retrieved": 30,
-          "final_chunks": 20,
-          "unique_sections": 0,
-          "time": 14.321416139602661
-        },
-        "answer": {
-          "text": "## Security Features for Conversation Data\nWatermelon provides several security features to protect conversation data, including encryption and access control. \n\n### Encryption\nTo enable encryption, Watermelon utilizes Keycloak for authentication, which seamlessly integrates with numerous Identity Provider (IDP) providers supporting SAML 2.0, OIDC 1.0, and OAuth 2.0 protocols (Section 9: User Management Tools, Page 54). Additionally, the \"Encrypt Text\" block can be used to encrypt sensitive information, such as passwords or personal data, by converting it into an unreadable format (Section 18: Encrypt Text, Page 638).\n\n### Access Control\nAccess control is managed through Watermelon's Role-Based Access Control (RBAC) mechanism, which facilitates a streamlined approach to managing user roles and permissions (Section 1: Role Based Access Control, Page 88). The RBAC system allows users to define and manage roles and permissions within Watermelon, ensuring that users have appropriate access levels based on their roles and responsibilities within the organization (Section 14: Configurations, Page 51).\n\n## Configuring Access Control for Team Members\nTo configure access control for team members, follow these steps:\n\n* Integrate Watermelon with your existing user management system, such as Active Directory, Okta, or other SAML/OIDC-based tools, via Watermelon's KeyCloak integration (Section 1: Role Based Access Control, Page 88).\n* Create user IDs, specifying details like User ID, First Name, Last Name, Email, and an initial password, and manage user access through the \"User Access Management\" feature within WM-Meta (Section 1: Role Based Access Control, Page 88).\n* Assign users to groups, which will be managed automatically through the \"User Access Management\" feature within WM-Meta (Section 1: Role Based Access Control, Page 88).\n* Define and manage roles and permissions within Watermelon using the RBAC system, ensuring that users have appropriate access levels based on their roles and responsibilities within the organization (Section 14: Configurations, Page 51).\n\n## Roles and Permissions\nWatermelon delineates various roles within its system to ensure a granular level of access control and operational efficiency. The available roles include:\n* SYSADMIN: This role is established during the setup phase and serves as a break-glass account, with its credentials needing secure storage (Section 20: Role Based Access Control, Page 88).\n* Application Owners and Application Administrators: These roles have specific permissions to manage their respective applications without compromising overall system security (Section 2: Getting Started with WM-Meta, Page 49).\n\nBy following these steps and utilizing Watermelon's RBAC system, you can ensure that access and permissions are configured accurately and securely across your organization, enhancing the security of your Watermelon deployment and aligning with best practices for user access management and control.",
-          "citations": [
-            "Role Based Access Control (Page 88)",
-            "Getting Started with WM-Meta (Page 49)",
-            "Active Directory Integration (Page 55)",
-            "Watermelon Grid (Browsers) (Page 78)",
-            "Global Tools (Page 52)",
-            "User Management Tools (Page 54)",
-            "MS Teams Integration (Page 70)",
-            "Test Data (Page 848)",
-            "Email Integration (Page 66)",
-            "Configurations (Page 51)",
-            "Onboarding Applications (Page 83)",
-            "Dynatrace (Page 2213)",
-            "No Code Automation (Page 252)",
-            "Encrypt Text (Page 638)",
-            "FAQs (Page 2254)"
-          ],
-          "images": [
-            "cache/images/page_0090_img_00.png",
-            "cache/images/page_0091_img_00.png",
-            "cache/images/page_0078_img_00.png",
-            "cache/images/page_0079_img_00.png",
-            "cache/images/page_0079_img_01.png",
-            "cache/images/page_0053_img_00.png",
-            "cache/images/page_0049_img_00.png",
-            "cache/images/page_0050_img_00.png",
-            "cache/images/page_0848_img_00.png",
-            "cache/images/page_0851_img_00.png",
-            "cache/images/page_0852_img_00.png",
-            "cache/images/page_0085_img_01.png",
-            "cache/images/page_0086_img_00.png",
-            "cache/images/page_2215_img_02.png",
-            "cache/images/page_2216_img_00.png",
-            "cache/images/page_0638_img_00.png",
-            "cache/images/page_0639_img_00.png"
-          ],
-          "tokens": 5912,
-          "time": 13.9212646484375,
-          "confidence": 0.85
-        },
-        "validation": {
-          "is_valid": true,
-          "overall_score": 1.0,
-          "completeness": 1.0,
-          "formatting": 1.0,
-          "citation": 1.0,
-          "issues": [],
-          "warnings": []
-        },
-        "total_time": 31.38153314590454,
-        "success": true
-      },
-      "retrieval_metrics": {
-        "precision_at_10": 0.8,
-        "recall_at_10": 0.47058823529411764,
-        "mrr": 1.0,
-        "map": 0.9058057320873749,
-        "ndcg_at_10": 0.8701249883466593,
-        "coverage": 1.0,
-        "diversity": 1.0,
-        "total_retrieved": 20,
-        "relevant_retrieved": 17
-      },
-      "generation_metrics": {
-        "overall_score": 0.99556,
-        "completeness": 1.0,
-        "coherence": 1.0,
-        "formatting": 1.0,
-        "citation": 1.0,
-        "length": 0.9556,
-        "keyword_coverage": 1.0,
-        "word_count": 426,
-        "has_headings": true,
-        "has_lists": true
-      },
-      "total_time": 31.38254189491272,
-      "success": true,
-      "error": ""
-    },
-    {
-      "query_id": 15,
-      "query": "How do I set up SLA policies, configure escalation rules, and monitor compliance across conversations?",
-      "query_type": "multi-topic_procedural",
-      "complexity": "high",
-      "pipeline_result": {},
-      "retrieval_metrics": {},
-      "generation_metrics": {},
-      "total_time": 24.008573055267334,
-      "success": false,
-      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j8h84a7ye6e9qqezrx8wwbrg` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 94867, Requested 5600. Please try again in 6m43.488s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-    },
-    {
-      "query_id": 16,
-      "query": "What's the process for creating a customer support ticketing system with Watermelon, including ticket assignment and status tracking?",
-      "query_type": "multi-topic_procedural",
-      "complexity": "very_high",
-      "pipeline_result": {
-        "query": "What's the process for creating a customer support ticketing system with Watermelon, including ticket assignment and status tracking?",
-        "understanding": {
-          "type": "single_topic",
-          "complexity": "moderate",
-          "num_sub_questions": 1,
-          "strategy": "standard"
-        },
-        "retrieval": {
-          "total_retrieved": 10,
-          "final_chunks": 10,
-          "unique_sections": 0,
-          "time": 2.087049722671509
-        },
-        "answer": {
-          "text": "## Introduction to Creating a Customer Support Ticketing System with Watermelon\nTo create a customer support ticketing system with Watermelon, it's essential to understand the integration process with incident and change management systems. As outlined in **Section 1: Integration with Incident and Change Management Systems (Page 2238)**, Watermelon allows for seamless integration with tools like Jira and ServiceNow. This integration enables the assignment of incident ticket groups and change ticket groups, ensuring that alerts and actions are directed to the appropriate teams for resolution.\n\n## Setting Up Incident and Change Management Systems\nWhen setting up these systems, it's crucial to associate the respective tools during the application onboarding process under WM-Meta. This process involves:\n* Assigning incident ticket groups to direct alerts and actions to the appropriate teams for incident resolution.\n* Assigning change ticket groups to correlate service performance with changes and notify relevant stakeholders of potential impacts.\n* Configuring engineering projects to track specific projects or initiatives within engineering or development teams.\n\n## Watermelon Issue Resolution Workflow\nThe **Watermelon Issue Resolution Workflow (Section 2: Watermelon Issue Resolution Workflow, Page 2242)** outlines the steps for requesting help and resolving issues encountered while using Watermelon. The workflow includes:\n1. Understanding the issue and ensuring it's consistent and can be replicated.\n2. Isolating the issue by identifying specific conditions or steps that lead to the problem.\n3. Gathering information using Watermelon's built-in logging features and capturing relevant data.\n4. Troubleshooting with common failures and tips.\n5. Reporting the issue using a provided template.\n6. Defect prioritization based on severity and business impact.\n7. Issue resolution by the support team, with progress updates and resolution confirmation.\n8. Additional assistance for further issues or concerns.\n\n## Project Mapping and Role-Based Access Control\n**Section 5: Project Mapper (Page 87)** explains how to map projects or create new projects within Watermelon by selecting the business unit, application, and ALM instance. **Section 6: Role Based Access Control (Page 88)** discusses the importance of role-based access control in Watermelon, with roles such as SYSADMIN, and the need for user access management through KeyCloak.\n\n## Test Case Execution and Error Budgets\n**Section 7: Test Case Execution (Page 768)** highlights the integration with requirements and defect management tools, allowing for bidirectional integration with Jira and Azure DevOps. **Section 8: Error Budgets (SLO Management) (Page 2124)** introduces Watermelon's SLO Manager, which tracks application reliability against tolerance goals for error rates, response times, and process completion timeliness.\n\n## Managing Alerts and Actions\n**Section 9: Managing Alerts and Actions (Page 2204)** explains how alerts can be configured while creating SLOs for services, groups, and journeys. Actions can be viewed by clicking on the \"Actions\" tab, and auto-ticketed incidents can be seen in the \"Incidents\" tab if SLOs are configured with incident management tools.\n\n## SLO Onboarding\n**Section 10: SLO Onboarding (Page 2136)** discusses setting the frequency of alerts to match specific time intervals and automating ticket creation in response to multiple consecutive alerts. This feature enables the seamless transition of alert notifications into actionable tickets within supported incident management tools.\n\nBy following these sections and procedures, organizations can create an effective customer support ticketing system with Watermelon, ensuring efficient incident resolution, change management, and SLO tracking.",
-          "citations": [
-            "Integration with Incident and Change Management Systems (Page 2238)",
-            "Watermelon Issue Resolution Workflow (Page 2242)",
-            "Help and Issue Resolution (Page 2241)",
-            "Project Mapper (Page 87)",
-            "Role Based Access Control (Page 88)",
-            "Test Case Execution (Page 768)",
-            "Error Budgets (SLO Management) (Page 2124)",
-            "Managing Alerts and Actions (Page 2204)",
-            "SLO Onboarding (Page 2136)"
-          ],
-          "images": [
-            "cache/images/page_0087_img_00.png"
-          ],
-          "tokens": 3557,
-          "time": 2.432424545288086,
-          "confidence": 0.75
-        },
-        "validation": {
-          "is_valid": true,
-          "overall_score": 1.0,
-          "completeness": 1.0,
-          "formatting": 1.0,
-          "citation": 1.0,
-          "issues": [],
-          "warnings": []
-        },
-        "total_time": 4.522008180618286,
-        "success": true
-      },
-      "retrieval_metrics": {
-        "precision_at_10": 0.9,
-        "recall_at_10": 1.0,
-        "mrr": 1.0,
-        "map": 0.9888888888888889,
-        "ndcg_at_10": 0.9971876401972103,
-        "coverage": 1.0,
-        "diversity": 1.0,
-        "total_retrieved": 10,
-        "relevant_retrieved": 9
-      },
-      "generation_metrics": {
-        "overall_score": 0.9464800000000001,
-        "completeness": 1.0,
-        "coherence": 0.6499999999999997,
-        "formatting": 1.0,
-        "citation": 1.0,
-        "length": 0.9898,
-        "keyword_coverage": 1.0,
-        "word_count": 534,
-        "has_headings": true,
-        "has_lists": true
-      },
-      "total_time": 4.5231122970581055,
-      "success": true,
-      "error": ""
-    },
-    {
-      "query_id": 17,
-      "query": "How do I integrate Facebook Messenger, set up quick replies, and implement persistent menu options?",
-      "query_type": "multi-topic_integration",
-      "complexity": "high",
-      "pipeline_result": {},
-      "retrieval_metrics": {},
-      "generation_metrics": {},
-      "total_time": 24.06041669845581,
-      "success": false,
-      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j8h84a7ye6e9qqezrx8wwbrg` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99553, Requested 6086. Please try again in 1h21m12.096s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-    },
-    {
-      "query_id": 18,
-      "query": "What are the options for sentiment analysis in conversations and how do I use it to prioritize urgent customer inquiries?",
-      "query_type": "multi-topic_conceptual",
-      "complexity": "medium",
-      "pipeline_result": {},
-      "retrieval_metrics": {},
-      "generation_metrics": {},
-      "total_time": 7.640562057495117,
-      "success": false,
-      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j8h84a7ye6e9qqezrx8wwbrg` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99542, Requested 6020. Please try again in 1h20m5.568s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-    },
-    {
-      "query_id": 19,
-      "query": "How do I create drip campaigns, schedule messages across multiple channels, and track engagement metrics?",
-      "query_type": "multi-topic_procedural",
-      "complexity": "high",
-      "pipeline_result": {},
-      "retrieval_metrics": {},
-      "generation_metrics": {},
-      "total_time": 8.429903030395508,
-      "success": false,
-      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j8h84a7ye6e9qqezrx8wwbrg` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99530, Requested 5685. Please try again in 1h15m5.76s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-    },
-    {
-      "query_id": 20,
-      "query": "What's the process for setting up A/B testing for chatbot responses, measuring performance, and implementing winning variations?",
-      "query_type": "multi-topic_experimental",
-      "complexity": "very_high",
-      "pipeline_result": {},
-      "retrieval_metrics": {},
-      "generation_metrics": {},
-      "total_time": 5.853379964828491,
-      "success": false,
-      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j8h84a7ye6e9qqezrx8wwbrg` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99522, Requested 3439. Please try again in 42m38.304s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-    },
-    {
-      "query_id": 21,
-      "query": "How do I configure business hours, set up out-of-office messages, and implement different workflows for different time periods?",
-      "query_type": "multi-topic_procedural",
-      "complexity": "medium",
-      "pipeline_result": {},
-      "retrieval_metrics": {},
-      "generation_metrics": {},
-      "total_time": 17.23882794380188,
-      "success": false,
-      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j8h84a7ye6e9qqezrx8wwbrg` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99504, Requested 5698. Please try again in 1h14m54.527999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-    },
-    {
-      "query_id": 22,
-      "query": "What are the API rate limits, how do I handle errors, and implement retry logic for failed requests?",
-      "query_type": "multi-topic_technical",
-      "complexity": "high",
-      "pipeline_result": {},
-      "retrieval_metrics": {},
-      "generation_metrics": {},
-      "total_time": 9.397817611694336,
-      "success": false,
-      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j8h84a7ye6e9qqezrx8wwbrg` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99491, Requested 5589. Please try again in 1h13m9.12s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-    },
-    {
-      "query_id": 23,
-      "query": "How do I create lead qualification workflows, score contacts based on engagement, and trigger sales notifications?",
-      "query_type": "multi-topic_procedural",
-      "complexity": "very_high",
-      "pipeline_result": {},
-      "retrieval_metrics": {},
-      "generation_metrics": {},
-      "total_time": 9.179275274276733,
-      "success": false,
-      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j8h84a7ye6e9qqezrx8wwbrg` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99478, Requested 5783. Please try again in 1h15m45.504s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-    },
-    {
-      "query_id": 24,
-      "query": "What's the process for bulk importing contacts, mapping custom fields, and avoiding duplicates?",
-      "query_type": "multi-topic_procedural",
-      "complexity": "medium",
-      "pipeline_result": {},
-      "retrieval_metrics": {},
-      "generation_metrics": {},
-      "total_time": 2.7314090728759766,
-      "success": false,
-      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j8h84a7ye6e9qqezrx8wwbrg` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99474, Requested 2902. Please try again in 34m12.864s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-    },
-    {
-      "query_id": 25,
-      "query": "How do I set up conversation assignment rules based on skills, implement load balancing, and handle agent unavailability?",
-      "query_type": "multi-topic_procedural",
-      "complexity": "high",
-      "pipeline_result": {},
-      "retrieval_metrics": {},
-      "generation_metrics": {},
-      "total_time": 4.818223714828491,
-      "success": false,
-      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j8h84a7ye6e9qqezrx8wwbrg` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99466, Requested 6139. Please try again in 1h20m42.72s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-    },
-    {
-      "query_id": 26,
-      "query": "What are the options for integrating CRM systems like Salesforce or HubSpot, syncing contact data, and tracking conversation history?",
-      "query_type": "multi-topic_integration",
-      "complexity": "very_high",
-      "pipeline_result": {},
-      "retrieval_metrics": {},
-      "generation_metrics": {},
-      "total_time": 9.233388662338257,
-      "success": false,
-      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j8h84a7ye6e9qqezrx8wwbrg` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99457, Requested 2501. Please try again in 28m11.712s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-    },
-    {
-      "query_id": 27,
-      "query": "How do I create interactive buttons and carousels in chatbot responses, handle button clicks, and track user interactions?",
-      "query_type": "multi-topic_procedural",
-      "complexity": "high",
-      "pipeline_result": {},
-      "retrieval_metrics": {},
-      "generation_metrics": {},
-      "total_time": 13.38653039932251,
-      "success": false,
-      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j8h84a7ye6e9qqezrx8wwbrg` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99439, Requested 4994. Please try again in 1h3m50.112s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-    },
-    {
-      "query_id": 28,
-      "query": "What's the process for setting up conversation queues, implementing priority routing, and monitoring queue metrics?",
-      "query_type": "multi-topic_procedural",
-      "complexity": "high",
-      "pipeline_result": {},
-      "retrieval_metrics": {},
-      "generation_metrics": {},
-      "total_time": 3.3080532550811768,
-      "success": false,
-      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j8h84a7ye6e9qqezrx8wwbrg` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99434, Requested 2663. Please try again in 30m11.808s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-    },
-    {
-      "query_id": 29,
-      "query": "How do I implement knowledge base integration, enable self-service options, and track article performance?",
-      "query_type": "multi-topic_procedural",
-      "complexity": "high",
-      "pipeline_result": {},
-      "retrieval_metrics": {},
-      "generation_metrics": {},
-      "total_time": 15.564807176589966,
-      "success": false,
-      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j8h84a7ye6e9qqezrx8wwbrg` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99416, Requested 5412. Please try again in 1h9m31.392s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-    },
-    {
-      "query_id": 30,
-      "query": "What are the disaster recovery options, how do I backup conversation data, and restore data in case of system failure?",
-      "query_type": "multi-topic_security",
-      "complexity": "high",
-      "pipeline_result": {},
-      "retrieval_metrics": {},
-      "generation_metrics": {},
-      "total_time": 10.764482975006104,
-      "success": false,
-      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j8h84a7ye6e9qqezrx8wwbrg` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99401, Requested 4582. Please try again in 57m21.312s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
     }
   ]
 }

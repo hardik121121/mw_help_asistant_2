@@ -108,8 +108,8 @@ class HybridSearch:
                query: str,
                query_embedding: List[float],
                top_k: Optional[int] = None,
-               vector_weight: float = 0.5,
-               bm25_weight: float = 0.5,
+               vector_weight: Optional[float] = None,
+               bm25_weight: Optional[float] = None,
                filter_toc: bool = True,
                metadata_filter: Optional[Dict] = None) -> List[Dict]:
         """
@@ -128,6 +128,8 @@ class HybridSearch:
             List of ranked chunks with scores
         """
         top_k = top_k or self.settings.vector_top_k
+        vector_weight = vector_weight if vector_weight is not None else self.settings.vector_weight
+        bm25_weight = bm25_weight if bm25_weight is not None else self.settings.bm25_weight
 
         logger.info(f"Hybrid search for query: '{query[:50]}...'")
         logger.info(f"  Vector weight: {vector_weight}, BM25 weight: {bm25_weight}")
@@ -175,8 +177,8 @@ class HybridSearch:
                              embedding_generator,
                              top_k: Optional[int] = None,
                              max_expansions: int = 2,
-                             vector_weight: float = 0.5,
-                             bm25_weight: float = 0.5,
+                             vector_weight: Optional[float] = None,
+                             bm25_weight: Optional[float] = None,
                              filter_toc: bool = True,
                              metadata_filter: Optional[Dict] = None) -> List[Dict]:
         """
@@ -200,6 +202,8 @@ class HybridSearch:
             Combined and ranked results from all query variations
         """
         top_k = top_k or self.settings.vector_top_k
+        vector_weight = vector_weight if vector_weight is not None else self.settings.vector_weight
+        bm25_weight = bm25_weight if bm25_weight is not None else self.settings.bm25_weight
 
         # Expand query
         query_variations = self.query_expander.expand_query(query, max_expansions=max_expansions)
